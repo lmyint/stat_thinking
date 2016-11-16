@@ -1,0 +1,81 @@
+---
+title: "Introduction to association studies"
+output: ioslides_presentation
+---
+
+## Association studies
+
+How are various factors related to an outcome?
+
+<div class="notes">
+Emphasize the variability that manifests at every stage
+</div>
+
+## Research question in the press
+
+How does influenza strain exposure in childhood affect the risk of being infected with and dsevere H5N1 or H7N9 in adulthood and its severity?
+
+## Research question from initial investigation
+
+Starts with an observation: unexplained difference in age distributions of two influenza A viruses (H5N1 and H7N9)
+
+Why are older people more likely to be infected with one strain and younger people more likely to be infected with the other strain?
+
+## Thought process
+
+What are the characteristics of the older people (who tended to be infected with H7) and of the younger people (who tended to be infected with H5)?
+
+What characteristics can we look at?
+
+<div class="notes">
+Prompt the class to think of characteristics that might explain this differential infection. Can include it in the assignment so that they are better prepared.
+</div>
+
+## Key domain-specific knowledge
+
+Recent research suggests the existence of cross-immunity groups. Immunity to one subtype in a group seems to confer immunity to the other subtypes in the group.
+
+    - Group 1: seasonal H1 and H2; avian H5
+    - Group 2: seasonal H3; avian H7
+
+This knowledge prompted the researchers to ask: does the subtype of an individual's first influenza exposure affect immunity to avian flus H5 and H7?
+
+Does data on this exist?
+
+<div class="notes">
+What if the researchers had not known about this recent research?
+</div>
+
+## Points to evaluate
+
+- Outcome
+- Subjects
+- Predictors
+- Analysis
+- Conclusions
+
+## Outcome
+
+- Is it continuous, binary, categorical? Answer determines what types of models can be fit
+- How many outcomes are being studied?
+- Ideal outcome or an outcome of convenience?
+
+----
+
+### Outcome variable type
+
+Introduce GLMs
+
+What type of variable is used to measure immunity?
+
+----
+
+### Number of outcomes
+
+One approach to analyzing multiple outcomes is to combine them into a score.
+
+When should a variable be a covariate and when should it define multiple levels over which to fit separate models?
+
+## Study subjects
+
+- How were subjects selected?
