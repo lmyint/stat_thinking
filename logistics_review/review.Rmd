@@ -1,0 +1,26 @@
+---
+title: "Review of statistical concepts"
+output: ioslides_presentation
+---
+
+## Random variables
+
+What is the difference between these two types of variables?
+
+X = age of next person who walks through the door
+
+Age when finished grad school = age now + x
+
+## Random variables
+
+Distribution function
+
+Expected value
+
+Variance
+
+## Expectation
+
+Statistical expectation/expected value has a precise meaning.
+
+Using the word "expect" has a fuzzier meaning.
