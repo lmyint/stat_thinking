@@ -7,6 +7,12 @@ output: ioslides_presentation
 
 How are various factors related to an outcome?
 
+- Small number of measured covariates believed to be important in predicting outcome
+
+What factors are related to an outcome?
+
+- Large number of measured covariates, many of which have uncertain link to outcome
+
 <div class="notes">
 Emphasize the variability that manifests at every stage
 </div>
@@ -17,7 +23,9 @@ How does influenza strain exposure in childhood affect the risk of being infecte
 
 ## Research question from initial investigation
 
-Starts with an observation: unexplained difference in age distributions of two influenza A viruses (H5N1 and H7N9)
+From the Science editorial:
+
+> "This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases areconcentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 (2) and previous immunity to the neuraminidase surface protein for A/H5N1 (3)."
 
 Why are older people more likely to be infected with one strain and younger people more likely to be infected with the other strain?
 
@@ -28,15 +36,17 @@ What are the characteristics of the older people (who tended to be infected with
 What characteristics can we look at?
 
 <div class="notes">
-Prompt the class to think of characteristics that might explain this differential infection. Can include it in the assignment so that they are better prepared.
+Prompt the class to think of characteristics that might explain this differential infection. Write these on the board. These covariates are good candidates for variables that should be adjusted for in the statistical analysis. Prompt the students to recall the uses of regression.
 </div>
 
 ## Key domain-specific knowledge
 
-Recent research suggests the existence of cross-immunity groups. Immunity to one subtype in a group seems to confer immunity to the other subtypes in the group.
+From the original Science paper:
 
-    - Group 1: seasonal H1 and H2; avian H5
-    - Group 2: seasonal H3; avian H7
+> "recent experiments have revealed that broadly protective immune responses can provide cross-immunity between different HA subtypes, particularly subtypes in the same phylogenetic group"
+
+Group 1: seasonal H1 and H2; avian H5
+Group 2: seasonal H3; avian H7
 
 This knowledge prompted the researchers to ask: does the subtype of an individual's first influenza exposure affect immunity to avian flus H5 and H7?
 
@@ -55,21 +65,24 @@ df <- data.frame(id = 1:10, diedFromH5 = sample(c("died", "lived"), 10, replace 
 df
 ```
 
-----
-
 But `firstFluExp` is not available...directly.
 
-The authors used existing information on
+## What needed to be done?
 
+From the Science editorial:
 
+> "Using historical influenza epidemiological records, Gostic et al. carefully reconstruct the susceptibility of each birth cohort based on the likelihood that their primary infection was with group 1 or 2 HA influenza"
 
+<div class="notes">
+The CNN article doesn't give a lot of detail. It is almost always necessary to go back to the original study.
+</div>
+
+<div class="notes">
 For the p_yci
 
 - strain prevalence by year and country
 - age-specific poultry exposure rates by year
-- 
 
-<div class="notes">
 y = calendar year in which H5 or H7 infection occurred
 c = country
 i = birth cohort (calendar year of birth)
@@ -94,12 +107,14 @@ birth_year(i) num_H5_infects(outcome) demography poultry_exposure age_risk frac_
 - Predictors
 - Analysis
 - Conclusions
+- What the study did not do
 
 ## Outcome
 
 - Is it continuous, binary, categorical? Answer determines what types of models can be fit
 - How many outcomes are being studied?
 - Ideal outcome or an outcome of convenience?
+- Is there a chance that the outcome was ascertained with error?
 
 ## Outcome variable type
 
@@ -132,11 +147,19 @@ Data for some types of outcomes are more readily availble than others
 - Medical information: physician diagnosis rather than patient report
 - Extreme events rather than more typical ones
 
+Somtimes researchers categorize a continuous variable
+
 ## Choice of outcome studied {.build}
 
 Researchers only had access to severe cases of flu ("clinical and fatal cases of H5N1 and H7N9").
 
 So really they were studying the relationship between immunity to **extreme** H5/H7 and first influenza exposure.
+
+## Outcome ascertainment
+
+- Did outcome ascertainment require subjects to rely on memory? (recall bias)
+- What are the accuracy characteristics of the technologies measuring the outcomes?
+- How complete/accurate is the historical data being used to obtain outcomes?
 
 ## Number of outcomes
 
@@ -179,6 +202,12 @@ An example of such thinking in action: [Hillary Clinton set to receive more vote
 
 ## Conclusions
 
-Can you identify any conclusions with associated estimates?
+Can you identify any conclusions that should have associated estimates of uncertainty?
 
-Do those conclusions also mention the uncertainty of the estimate?
+From CNN:
+
+> "If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75%"
+
+## Conclusions
+
+Are appropriate reference/control conditions provided to give context for what we should expect?
