@@ -25,3 +25,12 @@ Answer the following in well-written paragraphs:
 Let's say that we wished to determine the effect of a gun policy on crime rates. This policy was adopted statewide in each of 10 states one year ago. Can we compare crime rates between these ten states and the other states that did not adopt the policy to determine if the gun policy causes a drop in violence? Why or why not?
 
 After thinking about this question, watch the following [YouTube video](https://www.youtube.com/watch?v=LrmrH26EhSo) for an introduction to an important model in the field of causal inference.
+
+## Class ???
+
+### Pre-class assignment
+
+Read the following references on vaccines and autism:
+
+1. [CDC article](https://www.cdc.gov/vaccinesafety/concerns/autism.html)
+2. [Vaccines and Autism: A Tale of Shifting Hypotheses](http://cid.oxfordjournals.org/content/48/4/456.full)
