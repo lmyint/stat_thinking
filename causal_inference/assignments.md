@@ -1,6 +1,6 @@
 # Module: Causal Inference
 
-## Class 1
+## Class ???
 
 ### Pre-class assignment
 
@@ -17,3 +17,11 @@ Answer the following in well-written paragraphs:
 3. What conclusions were reported?
 4. Comment on why these conclusions seem believable to you or not. Is there information absent from the article that would have been useful in helping you decide?
 5. Comment on the utility of these conclusions. To whom are they useful and to what extent?
+
+## Class 1
+
+### Pre-class assignment
+
+Let's say that we wished to determine the effect of a gun policy on crime rates. This policy was adopted statewide in each of 10 states one year ago. Can we compare crime rates between these ten states and the other states that did not adopt the policy to determine if the gun policy causes a drop in violence? Why or why not?
+
+After thinking about this question, watch the following [YouTube video](https://www.youtube.com/watch?v=LrmrH26EhSo) for an introduction to an important model in the field of causal inference.
