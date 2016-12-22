@@ -17,9 +17,50 @@ If we want to study the relationship between X and Y, we say that C is a confoun
 
 Does smoking cause lung cancer?
 
-We would like to have a person who doesn't smoke and observe if he develops lung cancer and ideally compare to the same man in a parallel universe where he does smoke. Such a pair of outcomes is called a set of **potential outcomes**.
+Alternatively, what is the effect of smoking on the risk of developing lung cancer? We have some cause, smoking, and want to know its effect on an outcome, the risk of developing lung cancer.
+
+One approach: obtain lung cancer rates in a set of people who smoke and in a set of people who do not smoke. What is wrong with this approach?
+
+## Ideal situation: observing parallel universes
+
+We would like to have a person who doesn't smoke and observe if he develops lung cancer and ideally compare to the same man in a parallel universe where he does smoke. Such a pair of outcomes is called a set of **potential outcomes**. The outcome in the parallel universe is called a **counterfactual outcome**.
+
+## Rubin causal model
+
+A framework for precise formulation of causal effects
+
+- Treatment
+- Units
+- Potential outcomes
+
+## Treatment
+
+- Must be able to be administered as an intervention
+- Non-examples:
+    - BMI: "having a high BMI"
+    - Sex: "being female"
+    - Preferences: "liking Pepsi"
+- Examples:
+    - Weight loss program
+    - Gender partial policies
+    - Advertising campaigns for Pepsi
+
+## Units
+
+- Entities to which we can administer treatment or withhold treatment
+- Units are also defined to be different at different times
+    - For example, me right now is a different unit than me one hour from now
 
 ## Potential outcomes
 
+Outcomes that could be observed for each unit under the different levels of the treatment (typically two levels):
+
 $Y_i(0)$ is the potential outcome for study unit $i$ under the control condition
 $Y_i(1)$ is the potential outcome for study unit $i$ under the treatment condition
+
+## Causal effects
+
+
+
+## Fundamental problem of causal inference
+
