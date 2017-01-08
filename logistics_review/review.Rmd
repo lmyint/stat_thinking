@@ -24,3 +24,11 @@ Variance
 Statistical expectation/expected value has a precise meaning.
 
 Using the word "expect" has a fuzzier meaning.
+
+## Causal diagrams and confounding
+
+## Generalizability
+
+Target, accessible, and study population
+
+[ref](http://www.socialresearchmethods.net/kb/sampterm.php)
