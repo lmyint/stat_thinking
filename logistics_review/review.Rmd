@@ -32,3 +32,7 @@ Using the word "expect" has a fuzzier meaning.
 Target, accessible, and study population
 
 [ref](http://www.socialresearchmethods.net/kb/sampterm.php)
+
+## Regression
+
+What does it mean to "fit" a model? Obtain coefficients
