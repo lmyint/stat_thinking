@@ -5,6 +5,10 @@ output: ioslides_presentation
 
 # Introduction to causal inference ideas
 
+## Slide credits
+
+Much of the material draws upon or is adapted from [Elizabeth Stuart's](http://www.biostat.jhsph.edu/~estuart/index.html) slides from her [causal inference class](https://courseplus.jhu.edu/core/index.cfm/go/syl:syl.public.view/catalogID/23321)
+
 ## Correlation does not imply causation
 
 ![](images/divorce_margarine.png)
@@ -93,6 +97,10 @@ $$ATT = \frac{1}{N}\sum_{i \in T} (Y_i(1) - Y_i(0))$$
 
 where $T$ is the set of people who received the treatment ($T_i = 1$)
 
+## SUTVA (finish)
+
+## Assignment mechanism (finish)
+
 ## Exercise: comparing two groups
 
 "A large university is interested in investigating the effects on the students of the diet provided in the university dining halls and any sex differences in these effects. Various types of data are gathered. In particular, the weight of each student at the time of his arrival in September and his weight the following June are recorded." (Frederic Lord 1967, p. 304)
@@ -136,7 +144,7 @@ Draw a table with columns: units, sex, Yi(1), and Yi(0). Yi(1) is filled in but 
 
 A student wishes to study the impact of feeding coffee to his soybean plants. He has 5 plants and gives each of them 2 oz of coffee each night for 2 weeks. He records the plant heights before the experiment and after the two weeks. He concludes that coffee administration resulted in plants growing an average of 3.7 cm in the 2 weeks.
 
-# Estimating causal effects
+# Estimating causal effects: randomized trials
 
 ## Worrying about confounding {.build}
 
@@ -149,3 +157,53 @@ Why is confounding a worry when trying to ascertain causal effects? Consider a s
 In RCTs, study units are randomly assigned to the treatment or control condition. What does this imply about the links in the causal diagram?
 
 ![](images/causal_diagram_treatment.png)
+
+For this reason, RCTs are said to be the gold standard for assessing causal effects. However, RCTs are not so clean in real life (see later slides).
+
+## Analyzing RCTs
+
+- Regression analysis
+- Permutation testing
+- Tests for comparing means in two groups
+
+## Different types of RCTs
+
+- Efficacy
+- Effectiveness
+- Pragmatic
+
+## Efficacy trials
+
+## Effectiveness trials
+
+## Pragmatic trials
+
+## Complications in RCTs
+
+- Noncompliance
+- Missing data
+- Small sample sizes
+- Interference between units
+- Infeasible or unethical
+
+## Interpretation of RCTs
+
+- How representative was the study population of the target population?
+- Does randomization itself change the nature of the effect being studied?
+    - Is there a difference between being randomized to treatment vs. selecting the treatment?
+- Does the implementation of the trial generalizable to standard practice?
+    - How much skill is required in administering the treatment?
+    - How much optimization is required of the treatment in the general population?
+
+# Estimating causal effects: nonexperimental studies
+
+## Types of nonexperimental studies
+
+- Matching studies
+    - As much as possible, replicate a randomized trial by comparing units that are as similar as possible other than the treatment
+- Natural experiments
+    - Take advantage of some chance event in life that affects who gets treatments
+- Regression dicontinuity
+    - Take advantage of some cutoff that determines who gets treated
+- Interrupted time series
+    - Take advantage of the introduction of a policy to compare outcomes before and after
