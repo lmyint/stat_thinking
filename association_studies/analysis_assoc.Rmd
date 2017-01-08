@@ -1,0 +1,68 @@
+---
+title: "Analysis of association studies"
+output: ioslides_presentation
+---
+
+## Analytical approaches
+
+- Regression
+- Penalized regression
+- Nonparametric comparisons of groups
+
+## Linear regression
+
+$$ E[\mathrm{continuous\:outcome}] = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Model-fitting: least squares
+
+## Linear regression: assumptions
+
+- Linearity
+    - Expected outcome is a linear combination of predictors
+- Correct model specification
+    - No omitted or extraneous variables
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+- Statistical independence of the observations
+- Constant variance of the error terms
+- Normally-distributed errors
+- Independent variables are not linear combinations of each other
+    - Not so much an assumption rather than a computational issue
+    - High correlation between independent variables inflates standard errors
+
+<div class="notes">
+Ask students how we check these assumptions
+</div>
+
+## Logistic regression
+
+$$ log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Model-fitting: maximum likelihood by numerical optimization
+
+<div class="notes">
+Perhaps prompt "why not ML for linear regression?" Turns out that ML for linear regression with the assumption of normality gives the least squares estimate.
+</div>
+
+## Logistic regression: assumptions
+
+- Linearity
+    - Logit (log odds) of expected outcome is a linear combination of predictors
+- Correct model specification
+    - No omitted or extraneous variables
+    - Functional form of variables is correct
+- Statistical independence of the observations
+- Independent variables are not linear combinations of each other
+
+## Conditional logistic regression
+
+## Generalized linear model
+
+$$ \mathrm{function}(E[\mathrm{other\:type\:of\:outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+## Weighted regression
+
+Now that I know what model I intend to fit, do I have **correct** information about the relative reliability of my observations?
+
+## What if my observations are correlated?
+
+## Hierarchical modeling
