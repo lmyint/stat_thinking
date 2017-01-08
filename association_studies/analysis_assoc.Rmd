@@ -55,14 +55,148 @@ Perhaps prompt "why not ML for linear regression?" Turns out that ML for linear 
 
 ## Conditional logistic regression
 
+For matched case-control studies, a special type of logistic regression is more appropriate
+
+In a matched case-control study:
+
+- $N$ sets of individuals
+- Each set usually consists of one case and one or more controls
+- Reasonable to believe that there is a set-specific log odds. This parameter is not of interest - often called a nuisance parameter.
+    - Of interest: difference in log odds between cases and controls
+
+**Thought exercise:** It might be attractive to say that the difference should be set-specific too. What is the problem with allowing this?
+
+## Conditional logistic regression
+
+Including a dummy variable for each stratum (case-control set) in a standard unconditional logistic regression leads to biased estimates of the log odds ratio. (Chapter 7 of [Statistical Methods in Cancer Research. Volume I - The analysis of case-control studies](http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/))
+
+Instead, conditional logistic regression finds the coefficients that maximize the conditional likelihood (conditional on the total number of cases in a stratum). These estimates are unbiased.
+
 ## Generalized linear model
 
-$$ \mathrm{function}(E[\mathrm{other\:type\:of\:outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+$$ \mathrm{link\:function}(E[\mathrm{other\:type\:of\:outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Model-fitting: maximum likelihood by numerical optimization
+
+Most common forms:
+
+Type of data | Link function | Name of model(s)
+--------------------------------------------
+Continuous | Identity | Linear regression
+Binary | Logit | Logistic regression
+Categorical | Logit | Multinomial, ordinal logistic regression
+Counts | Log | Log-linear models 
 
 ## Weighted regression
 
-Now that I know what model I intend to fit, do I have **correct** information about the relative reliability of my observations?
+Now that I know what model I intend to fit, do I have **correct** information about the relative importance/reliability of my observations?
 
 ## What if my observations are correlated?
 
+Observations can be thought of as pieces of information. Correlation reduces the amount of information available.
+
+ex) "Where is the ship?"
+
+Pirate: "North"
+Parrot: "North"
+
+versus
+
+Pirate 1: "North"
+Pirate 2: "North"
+
 ## Hierarchical modeling
+
+Correlation between observations often arises due to different levels of grouping.
+
+Healthcare example:
+
+1. Patients
+2. Doctor
+3. Hospital
+4. Hospital system
+
+Also known as multilevel, mixed effects, random effects, random components, variance components modeling.
+
+## Hierarchical modeling
+
+Medical expenditures for patient $p$, seeing doctor $d$, in hospital $h$ could be modeled as
+
+$$ y_{pdh} = \alpha_0 + \beta_{dh} + a_{dh} + \gamma_h + b_h + \epsilon_{pdh} $$
+
+## I don't know what predictors to include
+
+Studies using databases or collections of biological assays tend to have many potential predictors. Which ones are actually important in predicting my outcome?
+
+## Penalized regression
+
+In regression we either want to minimize error
+
+$$ \min \mathrm{Error}(\beta) $$
+
+or maximize a likelihood
+
+$$ \max L(\beta) $$
+
+## Penalized regression
+
+If we want to penalize extreme (high) coefficient values, we may instead minimize
+
+$$ \min \mathrm{Error}(\beta) + P_1(\beta) $$
+
+or maximize a likelihood
+
+$$ \max L(\beta) - P_2(\beta) $$
+
+The $P$ functions penalize unlikely/extreme coefficient values and come with at least one tuning parameter.
+
+## Common types of penalized regression
+
+- Ridge regression
+- LASSO regression (least absolute shrinkage and selection operator)
+- Elastic net regression
+
+## Unpenalized regression
+
+The least squares criterion for linear regression looks like:
+
+$$ SSE(\beta) = \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 $$
+
+where
+
+$Y_i$ are the outcomes for the $n$ subjects
+$X_{ij}$ is the value of the $j$th covariate for subject $i$
+
+## Ridge regression
+
+Minimize
+
+$$ SSE_\lambda(\beta) = \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 + \lambda\sum_{j=1}^p \beta_j^2 $$
+
+Features
+
+- Truly larger coefficients are biased towards zero
+- Unimportant variables still remain in the model with very small coefficients
+
+## LASSO regression
+
+Minimize
+
+$$ SSE_\lambda(\beta) = \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 + \lambda\sum_{j=1}^p \|\beta_j\| $$
+
+Features
+
+- Unimportant variables will have coefficients set to zero
+- Within a group of correlated predictors, tends to select just one
+- If more predictors than observations ($p > n$), only $n$ predictors can be selected
+
+## Elastic net regression
+
+Minimize
+
+$$ SSE_\lambda(\beta) = \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 + \lambda_1\sum_{j=1}^p \|\beta_j\| + \lambda_2\sum_{j=1}^p (\beta_j)^2 $$
+
+Features
+
+- Unimportant variables will have coefficients set to zero
+- Shortcomings of LASSO are overcome by combining the ridge and LASSO penalty terms
