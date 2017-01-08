@@ -22,3 +22,9 @@ Based on discussions from class, comment on the following:
 1. The authors used historical records to estimate the fraction of each birth-year cohort whose first influenza A virus exposure was to H1, H2, or H3 and the fraction unexposed to influenza A. What are the pros and cons of using such data? Do you think this was appropriate?
 2. What data was used to link patterns of first exposure to patterns of modern day avian flu (H5 and H7) illness? Do you think this was appropriate?
 3. Comment on the conclusions presented in the CNN article. What are the public health implications?
+
+## Class 2
+
+### Pre-class assignment
+
+Read the following [research article](http://jamanetwork.com/journals/jamapediatrics/fullarticle/2545827) on birth defects in children with mothers possibly exposed to Zika virus.
