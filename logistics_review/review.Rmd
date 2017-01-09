@@ -36,3 +36,7 @@ Target, accessible, and study population
 ## Regression
 
 What does it mean to "fit" a model? Obtain coefficients
+
+## Likelihood
+
+## Conditional probability
