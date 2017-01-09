@@ -158,6 +158,8 @@ In RCTs, study units are randomly assigned to the treatment or control condition
 
 ![](images/causal_diagram_treatment.png)
 
+$$ P(T \mid X, Y(0), Y(1)) = P(T \mid X) $$
+
 For this reason, RCTs are said to be the gold standard for assessing causal effects. However, RCTs are not so clean in real life (see later slides).
 
 ## Analyzing RCTs
@@ -207,3 +209,37 @@ For this reason, RCTs are said to be the gold standard for assessing causal effe
     - Take advantage of some cutoff that determines who gets treated
 - Interrupted time series
     - Take advantage of the introduction of a policy to compare outcomes before and after
+
+## Matching methods
+
+- Exact matching
+- Propensity scores
+
+## Exact matching
+
+- For each treated individual, find a control who matches on all other covariates.
+- Very difficult even with a moderate number of covariates
+
+## Propensity scores
+
+- Probability of receiving the treatment given the covariates
+
+$$ \mathrm{Propensity\:score} = P(T_i = 1 | X_i) $$
+
+- Want to match treated and untreated individuals with similar propensity scores
+    - Given their characteristics, they had almost the same chance to receive the treatment
+    - Almost as if the treatment were randomly assigned
+    - At each value of the propensity score, treatment and control groups have the same distribution of each covariate
+
+## Using propensity scores
+
+- $k$-nearest neighbor matching
+    - For each treated subject, find the $k$ controls with the closest propensity score
+- Subclassification/stratification
+    - Make a small number of groups where all units in a group fall into the same propensity score range
+- Use propensity scores as weights
+
+## Estimating propensity scores
+
+- Any method for modeling the probability of a categorical event (treatment is usually binary)
+- Logistic regression is most commonly used
