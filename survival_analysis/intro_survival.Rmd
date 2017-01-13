@@ -1,0 +1,10 @@
+---
+title: "Reporting of studies of morbidity and mortality"
+output: ioslides_presentation
+---
+
+## Survival analysis
+
+Studies in which patient outcomes are followed over time are part of a statistical area known as survival analysis.
+
+Key feature: outcome is the time to an event
