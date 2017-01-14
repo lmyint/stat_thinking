@@ -3,8 +3,143 @@ title: "Reporting of studies of morbidity and mortality"
 output: ioslides_presentation
 ---
 
-## Survival analysis
+## Studying long-term disease
 
-Studies in which patient outcomes are followed over time are part of a statistical area known as survival analysis.
+We enroll people in a study with and without an exposure (history of obesity)
 
-Key feature: outcome is the time to an event
+We want to see who develops an outcome of interest (cancer)
+
+What complications may arise when collecting data?
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = 0, y0 = 5:3, x1 = 1, lwd = 4)
+points(x = c(0,0,0,1), y = 5:2, pch = 16, cex = 2)
+abline(v = c(1,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1), y0 = 5:2, x1 = 2, lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+abline(v = c(2,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = 3, lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = 3, y = 5, pch = 1, cex = 2)
+abline(v = c(3,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,rep(4,4)), lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = 3, y = 5, pch = 1, cex = 2)
+points(x = rep(4,2), y = c(4,3), pch = "X", cex = 2)
+abline(v = c(4,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,4,4,5,5), lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = 3, y = 5, pch = 1, cex = 2)
+points(x = c(rep(4,2),5), y = c(4,3,1), pch = "X", cex = 2)
+abline(v = c(5,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,4,4,6,5), lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = 3, y = 5, pch = 1, cex = 2)
+points(x = c(rep(4,2),5), y = c(4,3,1), pch = "X", cex = 2)
+abline(v = c(6,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,4,4,7,5), lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = 3, y = 5, pch = 1, cex = 2)
+points(x = c(rep(4,2),5), y = c(4,3,1), pch = "X", cex = 2)
+abline(v = c(7,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,4,4,8,5), lwd = 4)
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = c(3,8), y = c(5,2), pch = 1, cex = 2)
+points(x = c(rep(4,2),5), y = c(4,3,1), pch = "X", cex = 2)
+abline(v = c(8,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+----
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,4,4,8,5), lwd = 4)
+segments(x0 = 8, y0 = 2, x1 = 10, lwd = 4, lty = "dashed", col = "gray50")
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = c(3,8), y = c(5,2), pch = 1, cex = 2)
+points(x = c(rep(4,2),5,10), y = c(4,3,1,2), pch = "X", cex = 2)
+abline(v = c(8,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+```
+
+## Time-to-event data
+
+Studies in which patient outcomes are followed over time tend to use analysis methods in a statistical area known as survival analysis.
+
+Key feature: outcome is the time to an event (often called a failure)
+
+- One event is of primary interest -> traditional survival analysis
+- Multiple events of interest -> competing risks
+- Data collected from such studies almost always exhibit **censoring**
+
+## Survival analysis vs. other approaches
+
+Why not treat failure as a binary event and use logistic regression?
+
+- Ignores time information
+
+Wny not treat the time-to-event as a continous variable and use linear regression?
+
+- Ignores censoring information
+
+## Competing risks
