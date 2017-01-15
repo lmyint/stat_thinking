@@ -19,6 +19,10 @@ Expected value
 
 Variance
 
+## Fixed values vs random variables
+
+Key idea: when do we implicity assume that a quantity is fixed versus a random variable? Why is this important conceptually? In what situations does it matter mathematically?
+
 ## Expectation
 
 Statistical expectation/expected value has a precise meaning.
