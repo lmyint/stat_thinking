@@ -126,7 +126,7 @@ text(x = 2.25, y = 5.25, labels = "Dropout")
 
 Studies in which patient outcomes are followed over time tend to use analysis methods in a statistical area known as survival analysis.
 
-Key feature: outcome is the time to an event (often called a failure)
+Key feature: outcome is the time to an event. This time is called a **survival time**, and the event is typically called a **failure**.
 
 - One event is of primary interest -> traditional survival analysis
 - Multiple events of interest -> competing risks
@@ -142,4 +142,127 @@ Wny not treat the time-to-event as a continous variable and use linear regressio
 
 - Ignores censoring information
 
+## Types of censoring
+
+- Right-censoring
+- Left-censoring
+- Interval-censoring
+- Type I censoring
+- Type II censoring
+
+## Right-censoring
+
+True survival time is greater than or equal to the observed survival time.
+
+- Data collection stops at a prespecified time.
+- Subject withdraws from study or is lost to follow-up before the failure.
+- Subject reports failure after experiencing symptoms
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,6), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = c(0,0,0,1,2), y0 = 5:1, x1 = c(3,4,4,8,5), lwd = 4)
+segments(x0 = 8, y0 = 2, x1 = 10, lwd = 4, lty = "dashed", col = "gray50")
+points(x = c(0,0,0,1,2), y = 5:1, pch = 16, cex = 2)
+points(x = c(3,8), y = c(5,2), pch = 1, cex = 2)
+points(x = c(rep(4,2),5,10), y = c(4,3,1,2), pch = "X", cex = 2)
+abline(v = c(8,8), col = c("red", "blue"), lty = "dashed")
+text(x = 7, y = 0.25, labels = "End of study", col = "blue")
+text(x = 2.25, y = 5.25, labels = "Dropout")
+text(x = c(1.75,6.75), y = c(4.75,1.75), labels = "Right-censored", col = "red")
+```
+
+## Left-censoring
+
+True survival time is less than or equal to the observed survival time.
+
+- Disease detection occurs after physiological onset
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,2), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = 0, x1 = 7, y0 = 1, lwd = 4)
+points(x = c(5,7), y = c(1,1), pch = "X", cex = 2, col = c("red", "black"))
+text(x = c(5,7), y = c(0.75,1.25), labels = c("Infection onset", "Infection detection"), col = c("red", "black"))
+```
+
+## Interval censoring
+
+True survival time is between two known times
+
+- Disease is detected between regular follow up visits
+
+```{r}
+plot(1, type = "n", xlim = c(0,10), ylim = c(0,2), yaxt = "n", xlab = "Year", ylab = "Individuals")
+segments(x0 = 0, x1 = 7, y0 = 1, lwd = 4)
+points(x = c(3,5,7), y = rep(1,3), pch = "X", cex = 2, col = c("black", "red", "black"))
+text(x = c(3,5,7), y = c(1.25,0.75,1.25), labels = c("No infection detection", "Infection onset", "Infection detection"), col = c("black", "red", "black"))
+```
+
+## Type I censoring
+
+True survival time is greater than a predetermined cutoff
+
+- Special case of right censoring
+- Also called administrative censoring (administrative end of the study)
+
+## Type II censoring
+
+Study stops when the $k$ subjects experience failure. The remaining subjects are censored
+
+- Can occur in product testing
+
+## Censoring in WHI study
+
+What types of censoring mechanisms might be at work in the Women's Health Initiative study on obesity duration and cancer risk?
+
+## Assumptions about censoring
+
+Typical survival analyses make the following assumptions regarding censoring:
+
+- Random
+- Independent
+- Non-informative
+
+## Random censoring
+
+- Survival times are independent of censoring times
+- "Subjects who are censored at time $t$ should be representative of all the study subjects who remained at risk at time $t$ with respect to their survival experience." (Kleinbaum & Klein 2012)
+- Split your subjects randomly into any number of groups. We expect the failure rates to be the same in these groups
+- Stronger assumption than independent censoring
+
+## Independent censoring
+
+- If we have random censoring within each level of any covariate, we say that we have independent censoring
+- "Within any subgroup of interest, the subjects who are censored at time $t$ should be representative of all the subjects in that subgroup who remained at risk at time $t$ with respect to their survival experience." (Kleinbaum & Klein 2012)
+- Random censoring implies independent censoring but not vice-versa
+
+## Non-informative censoring
+
+- Given the subjects' covariates, survival times are independent of failure times
+- Distribution of censoring times does not depend on factors related to the study***
+- "The assumption of non-informative censoring is often justifiable when censoring is independent and/or random; nevertheless, these three assumptions are not equivalent." (Kleinbaum & Klein 2012)
+- Usually we worry about informative censoring in that the characteristic that drives the informativeness results in the breakdown of independent censoring
+
+## Example: random and independent, but informative
+
+When a subject experiences the failure event, another subject drops out (information scare). $\Rightarrow$ informative censoring
+
+Assume that this dropout subject's survival probability is representative of those who stayed in the study. $\Rightarrow$ independent and random censoring
+
+## Importance of independent censoring
+
+Usually survival analyses compare the survival of two or more groups. In this case, independent censoring allows for unbiased estimates of these differences. Why?
+
+ex) Clinical trial of a new drug vs placebo
+
+Placebo users might drop out if they do not see their health changing. These censored subjects may be healthier than the other subjects. If we assume independent censoring, we would assume that these censored subjects are more unhealthy than they truly are and underestimate the difference in survival.
+
+## Censoring assumptions in the WHI study
+
+Are there any subject characteristics that might break the independent censoring assumption? In what direction would the effects be biased if this were the case?
+
 ## Competing risks
+
+
+## References
+
+David G Kleinbaum, Mitchel Klein. Survival Analysis: A Self-Learning Text. 3rd Edition. Springer. 2012.
