@@ -1,5 +1,5 @@
 ---
-title: "Reporting of studies of morbidity and mortality"
+title: "Introduction to studies of morbidity and mortality"
 output: ioslides_presentation
 ---
 
@@ -7,7 +7,7 @@ output: ioslides_presentation
 
 We enroll people in a study with and without an exposure (history of obesity)
 
-We want to see who develops an outcome of interest (cancer)
+We want to see whether this exposure affects development of an outcome of interest (cancer)
 
 What complications may arise when collecting data?
 
@@ -141,6 +141,11 @@ Why not treat failure as a binary event and use logistic regression?
 Wny not treat the time-to-event as a continous variable and use linear regression?
 
 - Ignores censoring information
+
+## Goals of survival analysis
+
+- Estimate and compare survival over time (survival functions) for groups of interest
+- Estimate the effect of covariates on survival
 
 ## Types of censoring
 
