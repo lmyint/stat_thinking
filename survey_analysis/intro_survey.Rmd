@@ -1,0 +1,142 @@
+---
+title: "Introduction to survey-based studies"
+output: ioslides_presentation
+---
+
+## Themes: evaluating surveys
+
+Background
+
+- What is the point of the survey?
+
+Response rate
+
+- How many people were included in the survey?
+- How many ended up responding?
+- What were the characteristics of (non-)responders?
+
+Survey design
+
+- How were people sampled?
+- What information was collected and how?
+
+## Survey goals
+
+NIH: "The survey, offered in English and in Spanish, included questions to gauge public interest in the program and to learn about individuals' preferences concerning data collection, data sharing and involvement in various aspects of the program."
+
+Politico: "NIH conducted the survey to help it better design the PMI study, which aims to track 1 million or more U.S. participants."
+
+## Precision Medicine Initiative
+
+- [https://www.nih.gov/research-training/allofus-research-program](https://www.nih.gov/research-training/allofus-research-program)
+- [https://ghr.nlm.nih.gov/primer/precisionmedicine/initiative](https://ghr.nlm.nih.gov/primer/precisionmedicine/initiative)
+
+SURVEY SAYS: YAY PRECISION MEDICINE: The attitudes of regular folks across the nation are of fundamental importance to the Precision Medicine Initiative: the project envisions lots and lots of participants signing up and contributing data, often without needing to join a more formal research architecture. People need to be excited.
+
+And a NIH survey released Wednesday shows that people are indeed excited. If asked, a majority of Americans (54 percent) said they would definitely or probably participate in the NIH’s Precision Medicine cohort program.
+
+NIH conducted the survey to help it better design the PMI study, which aims to track 1 million or more U.S. participants. The 2,600-person survey found consistent support across racial and ethnic groups, including demographic groups that have been historically understudied in research. Younger, college-educated and those who identified as lesbian, gay bisexual or transgender were more willing to take part than Americans over age 60 and those with less education. About three-quarters of those surveyed or more said they would be willing to share personal data such as blood samples, genetic information, family medical history, soil and water samples from their home, as well as data on their lifestyle, diet and exercise.
+
+PMI officials have been at pains to note that the study will be a new, different kind of trial – one in which data is routinely returned to participants. Survey respondents seemed to find that idea appealing: the most important incentive for participation was the receipt of personal health information. Many wanted access to lab results, genetic information and a copy of their medical records as part of participation.
+
+<div class="notes">
+Given what we know about the goals of the survey and the PMI, how does this shape our reading of the rest of the article?
+</div>
+
+## Response rate
+
+NIH: "The study authors analyzed responses of 2,601 people, selected randomly from a representative sample of the U.S. population."
+
+Politico: "The 2,600-person survey found consistent support across racial and ethnic groups, including demographic groups that have been historically understudied in research."
+
+## Response rate
+
+- Is the number of respondents high enough to represent a spread of demographic variables?
+- We know how many people responded to the survey, but we don't know how many people were asked to take the survey. Why is this important?
+
+<div class="notes">
+Probably
+Non-response bias
+</div>
+
+## Non-response rates
+
+How would we judge reliability of the survey results under these two situations?
+
+- 10,000 asked to take the survey. 2,601 respond
+- 3,000 asked to take the survey. 2,601 respond
+
+What are some reasons that people would not take the survey?
+
+## Non-response bias
+
+Those who don't take the survey could be systematically different from those who do.
+
+Notable example: The Literary Digest poll during the 1936 presidential election between Franklin D. Roosevelt and Alf Landon ([Wikipedia](https://en.wikipedia.org/wiki/United_States_presidential_election,_1936#Pre-election_polling))
+
+## Evaluating non-response
+
+- Compare covariates of responders and non-responders
+- Sometimes this information is not available
+    - e.g. Internet surveys
+
+## Sampling plan
+
+NIH: "The study authors analyzed responses of 2,601 people, selected randomly from a representative sample of the U.S. population."
+
+What does "selected randomly from a representative sample of the U.S. population" mean? Brainstorm some ideas about how we might actually do this.
+
+<div class="notes">
+Ask students to explain precisely how this might be done to highlight the ambiguity. e.g. Randomly selecting SSNs?
+Another example: I use a RNG to select 5 numbers and go out to the park to conduct a survey. I ask those numbered people. What's wrong with this?
+</div>
+
+## Importance of the sampling plan
+
+Carefully making the sampling plan can help reduce both
+
+- Sampling errors: errors in estimates due to not surveying the entire population
+    - Related to the inherent variability of what we are trying to measure
+- Nonsampling errors: errors in estimates due to other factors
+    - Nonresponse
+    - Measurement error
+    - Self-report bias
+
+## Biases from collecting information from humans
+
+Self-report bias occurs when people tend to be untruthful when reporting on certain information
+
+- Health behaviors (e.g. level of exercise, diet)
+- Income
+
+Recall bias occurs when people systematically remember information incorrectly
+
+- Health events from childhood
+- Feelings before an event
+
+## Using surveys to measure abstract ideas
+
+Let's say we would like to conduct a survey to assess the tendency towards different types of work behaviors among employees at different companies.
+
+We would first need to have an idea of what categories of behaviors exist. For example:
+
+- Self-motivated
+- Motivated by income
+- Motivated by perks
+- Motivated by recognition
+
+We would then use these categories to guide questionnaire design.
+
+## Using surveys to measure abstract ideas
+
+We then need to evaluate how much our questions truly measure the types of behaviors that we were interested in. For example:
+
+- How many days per week do you willingly work from home?
+- Do you feel pride in your work?
+
+## Generalizability of surveys
+
+- Statistical considerations:
+    - Considering the quantity and characteristics of the subjects that took the survey and the analysis of the survey, will the responses generalize to my population of interest?
+- Implementation considerations:
+    - Was there something about the survey itself that influenced respondents to answer in a particular way that doesn't translate to real life?
