@@ -6,7 +6,7 @@
 
 Read the following two articles that report on a study that surveyed adults in the United States on their willingness to particpate in the Precision Medicine Initiative Cohort Program.
 
-1. [Science Daily: Survey shows broad support for national precision medicine study](https://www.sciencedaily.com/releases/2016/08/160817142746.htm)
+1. [NIH: Survey shows broad support for national precision medicine study](https://www.nih.gov/news-events/news-releases/survey-shows-broad-support-national-precision-medicine-study)
 2. [Politico: Survey says: yay precision medicine!](http://www.politico.com/tipsheets/morning-ehealth/2016/08/survey-says-yay-precision-medicine-focus-on-cybersecurity-and-privacy-first-of-its-kind-study-from-va-to-commence-215951)
 
 ## Class 2
