@@ -31,14 +31,6 @@ Politico: "NIH conducted the survey to help it better design the PMI study, whic
 - [https://www.nih.gov/research-training/allofus-research-program](https://www.nih.gov/research-training/allofus-research-program)
 - [https://ghr.nlm.nih.gov/primer/precisionmedicine/initiative](https://ghr.nlm.nih.gov/primer/precisionmedicine/initiative)
 
-SURVEY SAYS: YAY PRECISION MEDICINE: The attitudes of regular folks across the nation are of fundamental importance to the Precision Medicine Initiative: the project envisions lots and lots of participants signing up and contributing data, often without needing to join a more formal research architecture. People need to be excited.
-
-And a NIH survey released Wednesday shows that people are indeed excited. If asked, a majority of Americans (54 percent) said they would definitely or probably participate in the NIH’s Precision Medicine cohort program.
-
-NIH conducted the survey to help it better design the PMI study, which aims to track 1 million or more U.S. participants. The 2,600-person survey found consistent support across racial and ethnic groups, including demographic groups that have been historically understudied in research. Younger, college-educated and those who identified as lesbian, gay bisexual or transgender were more willing to take part than Americans over age 60 and those with less education. About three-quarters of those surveyed or more said they would be willing to share personal data such as blood samples, genetic information, family medical history, soil and water samples from their home, as well as data on their lifestyle, diet and exercise.
-
-PMI officials have been at pains to note that the study will be a new, different kind of trial – one in which data is routinely returned to participants. Survey respondents seemed to find that idea appealing: the most important incentive for participation was the receipt of personal health information. Many wanted access to lab results, genetic information and a copy of their medical records as part of participation.
-
 <div class="notes">
 Given what we know about the goals of the survey and the PMI, how does this shape our reading of the rest of the article?
 </div>
