@@ -1,0 +1,18 @@
+---
+title: "Analysis of survey-based studies"
+output: ioslides_presentation
+---
+
+## Survey designs
+
+- Simple random sampling
+- Stratified random sampling
+- Cluster sampling
+- Systematic sampling
+- Multi-stage sampling
+
+## Pre-survey analysis
+
+How do we design and analyze a pilot survey to better inform the actual survey?
+
+## Survey weights
