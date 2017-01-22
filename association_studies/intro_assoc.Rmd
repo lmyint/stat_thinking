@@ -111,32 +111,9 @@ birth_year(i) num_H5_infects(outcome) demography poultry_exposure age_risk frac_
 
 ## Outcome
 
-- Is it continuous, binary, categorical? Answer determines what types of models can be fit
-- How many outcomes are being studied?
 - Ideal outcome or an outcome of convenience?
+- How many outcomes are being studied?
 - Is there a chance that the outcome was ascertained with error?
-
-## Outcome variable type
-
-Generalized linear models (GLMs) represent a broad framework of regression models where many different types of outcomes can be studied.
-
-**Linear regression**
-
-$$ E[\mathrm{continuous\:outcome}] = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
-
-**Logistic regression**
-
-$$ log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
-
-**Generalized linear model**
-
-$$ \mathrm{function}(E[\mathrm{other\:type\:of\:outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
-
-What type of variable is used to measure immunity?
-
-<div class="notes">
-A binary variable - presence or absence of infection
-</div>
 
 ## Choice of outcome studied
 
@@ -155,11 +132,23 @@ Researchers only had access to severe cases of flu ("clinical and fatal cases of
 
 So really they were studying the relationship between immunity to **extreme** H5/H7 and first influenza exposure.
 
+How might conclusions have been different if the authors also had information about non-severe cases of avian flu?
+
+<div class="notes">
+Consider different situations:
+- Non-severe cases show the same effect as severe cases. This likely would have made the effect more precise. Why? Higher sample size
+- Non-severe cases don't show the same effect as severe cases. This would have diminished the effect size
+</div>
+
 ## Outcome ascertainment
+
+Systematic inaccuracies in measuring the outcome can bias effect estimates.
 
 - Did outcome ascertainment require subjects to rely on memory? (recall bias)
 - What are the accuracy characteristics of the technologies measuring the outcomes?
 - How complete/accurate is the historical data being used to obtain outcomes?
+
+What inaccuracies might be associated with measuring the number of severe avian flu cases?
 
 ## Number of outcomes
 
@@ -174,19 +163,24 @@ How were subjects selected?
 - Was the study observational or randomized?
 - Enrollment criteria
 
-Often there is bias in the type of people who end up in the study. We can try to
+If there is bias in the type of people who end up in the study, we can try to
 
 - limit the generalizability we perceive
 - create a lower or upper bound on the overall effect
 
 <div class="notes">
-In observational studies, we don't control which subjects experience the exposure.
+Create a lower or upper bound on the overall effect: if most people who enroll are extremely sick, we might guess that the effect is at most what is reported
 </div>
 
 ## Predictors
 
-- Do the predictors encompass the set of variables that should reasonably be associated with the outcome?
-- How well are the predictors measured/ascertained?
+Do the predictors encompass the set of variables that should reasonably be associated with the outcome?
+
+- In the flu study: 
+
+How well are the predictors measured/ascertained?
+
+- 
 
 ## Analysis
 
