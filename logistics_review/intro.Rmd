@@ -1,0 +1,110 @@
+---
+title: "What does it mean to think statistically?"
+output: ioslides_presentation
+---
+
+## From research to media
+
+[Scientific Studies: Last Week Tonight with John Oliver](https://www.youtube.com/watch?v=0Rnq1NpHdmw)
+
+## Points from the video
+
+Scientific studies may be subtly biased because scientists feel pressured to come up with eye-catch positive results
+
+This is known as **publication bias**.
+
+## Points from the video
+
+It is possible to tweak your study and analysis to get the desired results:
+
+- Adjust length of the study
+- Collect a sample that is too small to be reliable
+- "p-hacking": fiddling with your modeling approach to get a statistically significant result
+    - [Interactive demo on FiveThirtyEight](https://fivethirtyeight.com/features/science-isnt-broken/)
+    - [Research article: The Extent and Consequences of P-Hacking in Science](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002106)
+
+## Points from the video
+
+Even well-designed studies can give incorrect results
+
+- We protect against the impact of this with replication studies
+- It is never one study that proves an idea. Evidence 
+    - [How do we know that smoking causes cancer?](http://www.cancer.org/latest-news/the-study-that-helped-spur-the-us-stop-smoking-movement.html)
+- "There's no Nobel prize for fact checking"
+    - With the way science is set up now, replication studies are not incentivized
+
+## Points from the video
+
+Original research is often distorted by the time we hear about it
+
+- Press releases can exaggerate findings of a study
+- Translating results on animal models to conclusions for humans
+- Even though there may be disagreement in the scientific literature, the media reports on a study with exciting results and doesn't give context about the state of the literature
+
+<div class="notes">
+"A new study says..." - we should have ready in the back of our minds: "Yes, but are there other related studies that say the same thing?"
+
+What happens if news agencies report just based on press release contents?
+
+What factors might contribute to what authors write in press releases and what journalists take from press releases to put in an article?
+</div>
+
+## Points from the video
+
+Part of the blame may be on us, the news consumers
+
+- It's more interesting to read about something unexpected
+
+Scientists and journalists don't always do a good job of framing expectations
+
+- "Anyone is more open to anything when they're not hungry"
+- Idea of having a control
+
+## Points from the video
+
+Statistical issues
+
+- Low sample sizes make for unreliable estimates
+
+Conflict of interest
+
+- If a company funds certain research, we should be wary of ulterior motives
+
+## Statistical thinking
+
+Thinking like a scientist about to conduct a study
+
+- Acknowledging the pitfalls at every stage of the study
+
+Being aware of statistical ideas to know what methods are appropriate and why
+
+- Our interest is usually in estimating effects. Estimation falls under the realm of statistics.
+- What assumptions do we make when using different methods? Are they reasonable?
+- Many different ways to analyze data. Want to be able to defend our approach(es).
+
+## Course structure: class sessions
+
+Organized into modules that are either 1 or 2 weeks long. Each module will focus on one field within statistics
+
+1 week modules
+
+- Introduction to a particular field of statistics
+- Survey of statistical methods
+
+2 week modules
+
+- Class 1: Introduction to the field. Discussion of news articles
+- Class 2: Survey of statistical methods used in this field
+- Class 3: Simulation work in R to understand statistical methods and analysis choices
+- Class 4: Student-led discussions of news articles related to this field
+    - Dicussions should tie in topics covered in classes 1-3
+    - Typically 2-3 sets of articles. Each set is covered by one group of students
+
+<div>
+Think about when the students should read the primary research article. Before class 2 - they will be confused. After 2, when will we go over it? If before 2, I need to add lecture material in class 1 so that they will be able to get through it.
+</div>
+
+## Course structure: weekly assignments
+
+
+## Final project
