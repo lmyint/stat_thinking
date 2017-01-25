@@ -100,11 +100,27 @@ Organized into modules that are either 1 or 2 weeks long. Each module will focus
     - Dicussions should tie in topics covered in classes 1-3
     - Typically 2-3 sets of articles. Each set is covered by one group of students
 
-<div>
-Think about when the students should read the primary research article. Before class 2 - they will be confused. After 2, when will we go over it? If before 2, I need to add lecture material in class 1 so that they will be able to get through it.
-</div>
-
 ## Course structure: weekly assignments
 
+Weekly journal (70% of grade)
+
+- Word document where you write responses to questions provided on Blackboard
+- One section for each set of questions (e.g. pre-class 1, post-class 1, pre-class 2, post-class 2)
+- Not a formal report - writing should resemble a blog post
+    - Can indicate that you were confused by something but you need to explain
+- Questions form the rubric that I will used to grade these journals (weekly)
 
 ## Final project
+
+Choose a news area that interests you and perform an evaulation of media reporting and primary research (20 % of grade)
+
+- Collection of at least 10 news articles and 3 primary research papers
+- For those articles and papers, summarize their content and critically evaluate their methods and findings
+- Proposed data analysis
+    - Locate where data related to the topic can be found
+    - Summarize the features of the available data
+    - Formulate a research question, propose an analysis plan to
+    answer that question, and defend this plan
+    - You do not need to actually perform the analysis
+
+Deliverables: (1) in-class presentation and (2) written report

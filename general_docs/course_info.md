@@ -123,8 +123,7 @@ to focus students' attention on the readings and to clearly express
 ideas discussed in class.
 
 Responses will be graded weekly on content, clarity of writing, and
-appropriate use of statistics and terminology. A rubric will be 
-provided for each week's assignment.
+appropriate use of statistics and terminology.
 
 **Final project: News topic synthesis – 20%**
 
@@ -148,8 +147,11 @@ following:
     answer that question, and defend this plan. Students do not actually
     have to perform the analysis.
 
-5.  In-class presentation (approximately 10 minutes) on the above
-    4 requirements.
+5.  In-class presentation (approximately 10 minutes) giving a brief overview
+    of the subject area, news article coverage, primary research findings, 
+    and proposed data analysis (items 2-4).
+
+6.  Written report on items 2-4
 
 ## Attendance Policies
 
