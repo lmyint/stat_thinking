@@ -107,11 +107,10 @@ include:
 
 **Class participation - 10%**
 
-Students are expected to participate in class by asking questions, 
-answering questions, contributing to discussions, and presenting 
-findings from small group work in class. I will be marking each time 
-you participate and tallying this information at the end of the 
-semester.
+Students are expected to actively pay attention and to participate 
+in class by asking questions, answering questions, and contributing 
+to discussions. I will be making note of participation and post 
+participation grades approximately every two weeks.
 
 **Weekly journal: Synthesis of class topics – 70%**
 
@@ -155,10 +154,9 @@ following:
 
 ## Attendance Policies
 
-Because participation is an important part of the class and a component 
-of the final grade, only two free absences are permitted for the 
-semester. For any additional absences due to sickness or extenuating 
-circumstances, students should provide appropriate documentation.
+Because participation is tracked, excess absences will detract from 
+your participation grade unless you provide documentation for illness 
+or extenuating circumstances.
 
 ## Electronics
 
