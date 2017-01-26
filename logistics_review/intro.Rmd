@@ -1,6 +1,9 @@
 ---
 title: "What does it mean to think statistically?"
-output: ioslides_presentation
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
 ---
 
 ## From research to media
@@ -58,7 +61,7 @@ Part of the blame may be on us, the news consumers
 Scientists and journalists don't always do a good job of framing expectations
 
 - "Anyone is more open to anything when they're not hungry"
-- Idea of having a control
+- Idea of having controls in a scientific experiment
 
 ## Points from the video
 
@@ -91,6 +94,8 @@ Organized into modules that are either 1 or 2 weeks long. Each module will focus
 - Introduction to a particular field of statistics
 - Survey of statistical methods
 
+## Course structure: class sessions
+
 2 week modules
 
 - Class 1: Introduction to the field. Discussion of news articles
@@ -112,7 +117,7 @@ Weekly journal (70% of grade)
 
 ## Final project
 
-Choose a news area that interests you and perform an evaulation of media reporting and primary research (20 % of grade)
+Choose a news area that interests you and perform an evaulation of media reporting and primary research (20% of grade)
 
 - Collection of at least 10 news articles and 3 primary research papers
 - For those articles and papers, summarize their content and critically evaluate their methods and findings
@@ -123,4 +128,28 @@ Choose a news area that interests you and perform an evaulation of media reporti
     answer that question, and defend this plan
     - You do not need to actually perform the analysis
 
+## Final project
+
 Deliverables: (1) in-class presentation and (2) written report
+
+The written report should be completed individually.
+
+If possible, I will try to group students who have picked the same topic to do the in-class presentation together.
+
+Part of the final project grade will be based on progress milestones throughout the semester
+
+## Class participation
+
+I will be making a note of your participation in class as well as whether you are actively paying attention.
+
+A participation grade will be posted on Blackboard about every 2 weeks.
+
+This is worth 10% of your grade.
+
+## Next class
+
+Review of statistical concepts from previous classes
+
+- Random variables
+- Estimators and their properties
+- Regression
