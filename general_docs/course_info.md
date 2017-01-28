@@ -156,6 +156,17 @@ Throughout the semester, you will be required to turn in a document showing
 how you have met certain milestones. These will form a small portion of the 
 final project grade.
 
+Milestone 1: Choose topic. Find 4 news articles and 1 primary research paper. 
+Write a short summary of the news articles and research paper.
+
+Milestone 2: Find at least 6 more news articles and 1 more primary research 
+paper. Write a short summary of the new material. Find and briefly discuss a 
+source of data on your topic.
+
+Milestone 3: Find the last research paper and begin planning your proposed 
+data analysis. Write a short summary of the paper and outline your data 
+analysis plan.
+
 ## Attendance Policies
 
 Because participation is tracked, excess absences will detract from 
