@@ -152,6 +152,10 @@ following:
 
 6.  Written report on items 2-4
 
+Throughout the semester, you will be required to turn in a document showing 
+how you have met certain milestones. These will form a small portion of the 
+final project grade.
+
 ## Attendance Policies
 
 Because participation is tracked, excess absences will detract from 
@@ -163,5 +167,7 @@ or extenuating circumstances.
 Laptops will be permitted during class in order to take notes, reference 
 the articles being discussed, and to perform in-class exercises with R.
 
-## Schedule
+## Exams
 
+There will be no midterm or final examinations. The final project paper 
+will be due at the end of our final exam slot: Wednesday, May 17 at 5PM.
