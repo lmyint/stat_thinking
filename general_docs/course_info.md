@@ -182,3 +182,18 @@ the articles being discussed, and to perform in-class exercises with R.
 
 There will be no midterm or final examinations. The final project paper 
 will be due at the end of our final exam slot: Wednesday, May 17 at 5PM.
+
+## Academic Integrity
+
+The strength of the university depends on academic and personal integrity. 
+In this course, you must be honest and truthful. Ethical violations include 
+cheating on exams, plagiarism, reuse of assignments, improper use of the 
+Internet and electronic devices, unauthorized collaboration, alteration of 
+graded assignments, forgery and falsification, lying, facilitating academic 
+dishonesty, and unfair competition.
+
+Report any violations you witness to the instructor. You may consult the 
+associate dean of student affairs and/or the chairman of the Ethics Board 
+beforehand. See the guide on “Academic Ethics for Undergraduates” and the 
+[Ethics Board Web site](http://e-catalog.jhu.edu/undergrad-students/student-life-policies/#UAEB) 
+for more information.
