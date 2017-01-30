@@ -6,6 +6,10 @@ output:
     css: ../styles/styles.css
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, fig.width=10)
+```
+
 ## Goal: learning about the world
 
 Our understanding about the world is all about understanding inputs and outputs.
@@ -56,7 +60,7 @@ Important to keep in mind: what parts of our data do we represent as random vari
 
 ## Mean and variance
 
-Using the distribution function, we can compute important properties such as the mean:
+With the distribution function, we can calculate the mean:
 
 $$
 \begin{align}
@@ -76,23 +80,32 @@ $$
 
 where $S$ is the set of values that the random variable $X$ can take.
 
-## Binomial distribution
+## Example: binomial distribution
 
 $$ X \sim \mathrm{Binomial}(n,p) $$
 $$ p(x) = P(X = x) = \binom{n}{x}p^x (1-p)^{n-x} $$
-$$ E[X] = np $$
-$$ \mathrm{Var}(X) = np(1-p) $$
+$$ E[X] = np \qquad \mathrm{Var}(X) = np(1-p)$$
+
+```{r fig.width=6, fig.height=3.8}
+par(mar = c(5,4,0.1,2))
+barplot(dbinom(0:10, size = 10, prob = 0.3), xlab = "x", ylab = "p(x)")
+```
 
 <div class="notes">
 Ask if p(1-p) looks familiar
 </div>
 
-## Normal distribution
+## Example: normal distribution
 
-$$ X \sim \mathrm{Normal}(\mu, \sigma) $$
+$$ X \sim N(\mu, \sigma) $$
 $$ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right) $$
-$$ E[X] = \mu $$
-$$ \mathrm{Var}(X) = \sigma^2 $$
+$$ E[X] = \mu \qquad \mathrm{Var}(X) = \sigma^2 $$
+
+```{r fig.width=6, fig.height=3.8}
+par(mar = c(5,4,0.1,2))
+x <- seq(-4,4,0.01)
+plot(x, dnorm(x, mean = 0, sd = 1), type = "l", xlab = "x", ylab = "f(x)")
+```
 
 ## Important distributions
 
@@ -116,7 +129,7 @@ These distributions are well known and useful because they serve as useful **mod
 
 Distributions of real quantities can be arbitrarily messy. We use known distributions as building blocks to model real world data.
 
-```{r echo=FALSE}
+```{r}
 set.seed(1)
 x <- c(rnorm(100), rbeta(400, 0.5, 0.5), runif(300, -3, 2), rnorm(200, -1.5))
 plot(density(x), xlab = "x", main = "Probability distribution function")
@@ -143,11 +156,11 @@ Two caveats with using known distributions
 
 When we are able to write that our data observations come from a combination of known distributions, we are able to write the **likelihood function** for our data:
 
-$$ L(x_1,\ldots,x_n; \theta) = \prod_{i=1}^n f(x_i; \theta) $$
+$$ L(y_1,\ldots,y_n; \theta) = \prod_{i=1}^n f(y_i; \theta) $$
 
 For mathematical reasons, we often work with the **log-likelihood function**:
 
-$$ l(x_1,\ldots,x_n; \theta) = \sum_{i=1}^n \log f(x_i; \theta) $$
+$$ l(y_1,\ldots,y_n; \theta) = \sum_{i=1}^n \log f(y_i; \theta) $$
 
 The "; $\theta$" is notation to indicate that the density function, and thus the likelihood, depend on a parameter $\theta$.
 
@@ -157,23 +170,21 @@ In statistics, we often refer to "the likelihood under a model." What does that 
 
 - [Blog post](https://lesliemyint.wordpress.com/2016/02/09/what-is-likelihood/)
 - To write the likelihood function on the last slide, we needed the density function $f$
-- If we know $f$ then we're assuming a model for our data
+- If we know $f$, then we're assuming a model for our data
 
 ## Uses of likelihood
 
 **Maximum likelihood estimation**:
 
-$$ \frac{d}{d\theta} l(x_1,\ldots,x_n; \theta) = 0 $$
+$$ \frac{d}{d\theta} l(y_1,\ldots,y_n; \theta) = 0 $$
 
 Solve for $\theta$ to get an **estimator** for $\theta$ that is a function of the data:
 
-$$ \hat\theta = \mathrm{function}(x_1,\ldots,x_n) $$
-
-## Uses of likelihood
+$$ \hat\theta = \mathrm{function}(y_1,\ldots,y_n) $$
 
 **Likelihood ratios**: If you have two models in the same family (say two binomial models with different success probabilities $p_1$ and $p_2$), you can compare their appropriateness for the data using a likelihood ratio
 
-$$ \frac{L(x_1,\ldots,x_n)}{} $$
+$$ \frac{L(y_1,\ldots,y_n; \theta_1)}{L(y_1,\ldots,y_n; \theta_2)} $$
 
 ## Estimators
 
@@ -181,7 +192,7 @@ $$ \frac{L(x_1,\ldots,x_n)}{} $$
 - Examples
     - Maximum likelihood estimators
     - Sample mean
-$$ \bar{X} = \sum_{i=1}^n X_i $$
+$$ \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i $$
     - Sample variance
 $$ s^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2 $$
 
@@ -192,7 +203,7 @@ Estimators themselves are random variables and thus have a distribution. When we
 - Bias: $E[\hat\theta]-\theta$
 - Mean squared error: $E[(\hat\theta-\theta)^2]$
 - Variability: $\mathrm{Var}(\hat\theta)$ or $\mathrm{SD}(\hat\theta)$
-    - $\mathrm{SD}(\hat\theta)$ is also called the standard error of $\hat\theta$
+    - $\mathrm{SD}(\hat\theta)$ is also called the **standard error** of $\hat\theta$
 - Classification/prediction accuracy
     - Fraction of the time the correct class is predicted
     - Receiver operating characteristic (ROC) curves and area under the curve (AUC)
@@ -209,16 +220,21 @@ $$ \mathrm{MSE}(\hat\theta) = \mathrm{Var}(\hat\theta) + \mathrm{Bias}(\hat\thet
 
 ## Distribution of estimators
 
-The distribution of the random variable $\bar{X}$ is also called the **sampling distribution** of the sample mean. Interested in how this distribution changes as sample size increases:
+The distribution of the random variable $\bar{X}$ is also called the **sampling distribution** of the sample mean. How does this distribution change as sample size increases?
 
 ```{r}
 par(mfrow = c(1,3))
+set.seed(1)
 lambda <- 2
 pop <- rexp(1e6, rate = lambda)
 numSamples <- 5000
-for (n in c(10,100,1000)) {
-	sampMeans <- sapply(seq_len(5000), function(i) { mean(sample(pop, size = n)) })
-	hist(sampMeans, xlab = "Sample mean", main = paste("Distribution of", numSamples, "sample means\nof size", n))
+nvec <- c(10,100,1000)
+sampMeansList <- lapply(nvec, function(n) {
+	sapply(seq_len(numSamples), function(i) { mean(sample(pop, size = n)) })
+})
+for (i in seq_along(nvec)) {
+	hist(sampMeansList[[i]], xlab = "Sample mean", main = paste("Distribution of", numSamples, "sample\nmeans of size", n), xlim = c(0,1.5))
+	abline(v = 1/lambda, col = "red", lwd = 2, lty = "dashed")
 }
 ```
 
@@ -228,7 +244,7 @@ We have data observations $X_1, X_2, \ldots$. Let $n$ denote the sample size, $\
 
 $$ \sqrt n (\bar X - \mu) $$
 
-approaches a $\mathrm{Normal}(0,\sigma^2)$ distribution.
+approaches a $N(0,\sigma^2)$ distribution.
 
 This is the main theoretical result that allows us to construct **confidence intervals**.
 
@@ -240,20 +256,107 @@ $$ \mathrm{estimate} \pm 2 \mathrm{SE}(\mathrm{estimate}) $$
 
 More specifically this should be
 
-$$ \mathrm{estimate} \pm z_{0.975} \mathrm{SE}(\mathrm{estimate}) $$
+$$ \mathrm{estimate} \pm q_{0.975} \mathrm{SE}(\mathrm{estimate}) $$
 
-where $z_{0.975}$ is the value at which the area under the Normal(0,1) density up to that value is 0.975.
+where $q_{0.975}$ is the 97.5th percentile of the distribution of the estimator.
 
 ## Law of large numbers
 
 The law of large numbers is the theoretical result underlying our greater trust in larger samples. It says that as the sample size $n \to \infty$, the sample mean approaches the true mean.
 
+```{r}
+set.seed(1)
+nvec <- seq(10, 1e4)
+sampMeans <- sapply(nvec, function(n) { mean(rexp(n, rate = 0.5)) })
+plot(nvec, sampMeans, pch = ".", xlab = "Sample size", ylab = "Sample mean")
+abline(h = 2, col = "red", lwd = 2, lty = "dashed")
+```
+
 ## Estimation framework: regression
 
-Regression is a class of tools used to estimate effects of covariates on an outcome
+Regression is a class of tools used to estimate effects of covariates on an outcome.
 
-What does it mean to "fit" a model? Obtain coefficients
+**Linear regression**
 
-## Causal diagrams and confounding
+$$
+\begin{align*}
+E[\mathrm{continuous\:outcome}] &= \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p \\
+E[Y_i] &= \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}
+\end{align*}
+$$
 
-## Conditional probability
+$$ E[Y] = X\beta \qquad\qquad Y \sim N(X\beta, \sigma^2) $$
+
+**Logistic regression**
+
+$$
+\begin{align*}
+\log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) &= \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p \\
+\log \left( \frac{E[Y_i]}{1 - E[Y_i]} \right) &= \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}
+\end{align*}
+$$
+
+## Regression: estimating coefficients
+
+Obtaining numerical estimates for the coefficients is called **fitting** the regression model.
+
+**Linear regression**: least squares
+
+$$ \min_\beta \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 $$
+
+**Logistic regression**: maximum likelihood
+
+$$ L(y_1,\ldots,y_n; p) = p^{\sum_i y_i} (1-p)^{n-\sum_i y_i} \qquad p = \frac{e^{X\beta}}{1+e^{X\beta}} $$
+
+## Regression: coefficient interpretation
+
+Coefficients are interpreted as the expected change in outcome per unit increase in the predictor **holding all other variables constant**
+
+Intercept is the expected outcome when all covariates are zero
+
+**Interaction terms** represent a difference in slope between different groups of people. Also called **effect modification**
+
+## Regression: coefficient hypothesis testing
+
+The null hypothesis $H_0: \beta_j = 0$ indicates that covariate $j$ has no effect on the outcome.
+
+We can test this hypothesis by looking at uncertainty measures from the regression output.
+
+<div style="text-align: center">
+![](images/error_types.png)
+</div>
+
+Source: [Wiki](https://en.wikipedia.org/wiki/Type_I_and_type_II_errors#Table_of_error_types)
+
+## Regression: coefficient hypothesis testing
+
+Set an acceptable type I error rate
+
+- Usually 5% for arbitrary historical reasons: "The value for which P = .05, or 1 in 20, is 1.96 or nearly 2 ; it is convenient to take this point as a limit in judging whether a deviation is to be considered significant or not." (Ronald Fisher. Statistical Methods for Research Workers. [Wiki](https://en.wikipedia.org/wiki/1.96#History))
+- This 5% type I error probability is associated with the 95% confidence interval
+    - Construction of the interval is a **procedure** where we **expect** to incorrectly reject the null hypothesis 5% of the time
+    - 95% chance that the interval contains the true value **GIVEN** that we used a particular procedure to construct the interval
+
+Different CI construction procedures will give different intervals!
+
+## Regression: coefficient hypothesis testing {.smaller}
+
+```{r}
+set.seed(1)
+n <- 1000
+x1 <- rt(n, df = 1)
+x2 <- rexp(n)
+y <- 2 + 0.05*sqrt(abs(x1)) - 0.5*log(abs(x2)) + rnorm(n, 0, 5)
+df <- data.frame(y = y, x1 = x1, x2 = x2)
+summary(lm(y ~ x1+ x2, data = df))
+```
+
+## Confounding
+
+- Interested in the relationship between $X$ and $Y$ but $C$ **confounds** the relationship if it affects both $X$ and $Y$.
+- Coefficient for $X$ will change noticeably when $C$ is included in the model
+- Well-known example: [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox)
+
+<div style="text-align: center">
+![](images/confounding.png)
+</div>
