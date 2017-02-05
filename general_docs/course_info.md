@@ -6,7 +6,7 @@
   ---------------------- ------------------------------------------------------------
   Meeting times:         Tuesdays and Thursdays. 12:00-1:15.
   Room:                  Homewood Campus, Maryland 109
-  Office Hours:          TBA
+  Office Hours:          Thursdays 10:30-11:40. First floor - Brody Learning Commons
   Instructor:            Leslie Myint
   Contact information:   <lmyint1@jhu.edu>
   Office:                Welch Medical Library, Room 117
@@ -166,6 +166,13 @@ source of data on your topic.
 Milestone 3: Find the last research paper and begin planning your proposed 
 data analysis. Write a short summary of the paper and outline your data 
 analysis plan.
+
+## Late assignments
+
+For each day late that an assignment is submitted, 10% of the total points 
+for that assignment will be deducted. Because a lot of class activity depends 
+on doing the readings and thinking about them with your journal entries, it 
+is important to get assignments in on time.
 
 ## Attendance Policies
 
