@@ -1,5 +1,5 @@
 ---
-title: "Introduction to association studies"
+title: "Evaluating association studies"
 output: ioslides_presentation
 ---
 
@@ -13,9 +13,18 @@ What factors are related to an outcome?
 
 - Large number of measured covariates, many of which have uncertain link to outcome
 
-<div class="notes">
-Emphasize the variability that manifests at every stage
-</div>
+## Points to evaluate
+
+- Research question
+- Data
+    - Outcome
+    - Study subjects
+    - Predictors
+- Analysis
+- Conclusions
+- What the study did not do
+
+# Research question
 
 ## Research question in the press
 
@@ -25,7 +34,7 @@ How does influenza strain exposure in childhood affect the risk of being infecte
 
 From the Science editorial:
 
-> "This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases areconcentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 (2) and previous immunity to the neuraminidase surface protein for A/H5N1 (3)."
+> This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases areconcentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 and previous immunity to the neuraminidase surface protein for A/H5N1.
 
 Why are older people more likely to be infected with one strain and younger people more likely to be infected with the other strain?
 
@@ -43,7 +52,7 @@ Prompt the class to think of characteristics that might explain this differentia
 
 From the original Science paper:
 
-> "recent experiments have revealed that broadly protective immune responses can provide cross-immunity between different HA subtypes, particularly subtypes in the same phylogenetic group"
+> recent experiments have revealed that broadly protective immune responses can provide cross-immunity between different HA subtypes, particularly subtypes in the same phylogenetic group
 
 Group 1: seasonal H1 and H2; avian H5
 Group 2: seasonal H3; avian H7
@@ -55,6 +64,8 @@ Does data on this exist?
 <div class="notes">
 What if the researchers had not known about this recent research?
 </div>
+
+# Data
 
 ## What would the data need to look like?
 
@@ -71,7 +82,7 @@ But `firstFluExp` is not available...directly.
 
 From the Science editorial:
 
-> "Using historical influenza epidemiological records, Gostic et al. carefully reconstruct the susceptibility of each birth cohort based on the likelihood that their primary infection was with group 1 or 2 HA influenza"
+> Using historical influenza epidemiological records, Gostic et al. carefully reconstruct the susceptibility of each birth cohort based on the likelihood that their primary infection was with group 1 or 2 HA influenza
 
 <div class="notes">
 The CNN article doesn't give a lot of detail. It is almost always necessary to go back to the original study.
@@ -100,37 +111,25 @@ birth_year(i) num_H5_infects(outcome) demography poultry_exposure age_risk frac_
 "Normalization of data to demographic age distribution" section just explains how "excess cases" in Figure 2C, D was calculated
 </div>
 
+# Data | <span style="text-decoration: underline">**outcome**</span>, study subjects, predictors
+
 ## Points to evaluate
 
-- Outcome
-- Subjects
-- Predictors
-- Analysis
-- Conclusions
-- What the study did not do
-
-## Outcome
-
 - Ideal outcome or an outcome of convenience?
-- How many outcomes are being studied?
+- Natural outcome or one artificially created by the researchers?
 - Is there a chance that the outcome was ascertained with error?
+- How many outcomes are being studied?
 
 ## Choice of outcome studied
 
-First try to imagine what the ideal outcome to measure would be. Then compare to what was actually done. Are you satisfied or not?
+> Next, the researchers collected data on more recent **clinical and fatal cases of H5N1 and H7N9**, two types of bird flu. They took a close look at each reported patient's age in the data -- and analyzed the more recent data along with the historical data.
+> "We've done the analysis on H5 and H7 viruses because those are the ones that have caused lots of cases -- enough cases that we can do the statistics"
 
-Data for some types of outcomes are more readily availble than others
-
-- Medical information: physician diagnosis rather than patient report
-- Extreme events rather than more typical ones
-
-Somtimes researchers categorize a continuous variable
-
-## Choice of outcome studied {.build}
-
-Researchers only had access to severe cases of flu ("clinical and fatal cases of H5N1 and H7N9").
-
+<div class="notes">
 So really they were studying the relationship between immunity to **extreme** H5/H7 and first influenza exposure.
+</div>
+
+----
 
 How might conclusions have been different if the authors also had information about non-severe cases of avian flu?
 
@@ -140,9 +139,23 @@ Consider different situations:
 - Non-severe cases don't show the same effect as severe cases. This would have diminished the effect size
 </div>
 
+## Choice of outcome studied
+
+- Data for some types of outcomes are more readily availble than others
+    - Medical information: physician diagnosis rather than patient report
+    - Extreme events rather than more typical ones
+- When there are many adjectives describing an outcome, think carefully about the generalizability of the results.
+- Somtimes researchers create categories for their outcome
+    - Thresholding a continuous variable
+    - Summarizing a complex occurrence as a categorical event
+
 ## Outcome ascertainment
 
-Systematic inaccuracies in measuring the outcome can bias effect estimates.
+???
+
+## Outcome ascertainment
+
+Systematic inaccuracies in measuring the outcome can bias affect estimates.
 
 - Did outcome ascertainment require subjects to rely on memory? (recall bias)
 - What are the accuracy characteristics of the technologies measuring the outcomes?
@@ -152,39 +165,72 @@ What inaccuracies might be associated with measuring the number of severe avian 
 
 ## Number of outcomes
 
-One approach to analyzing multiple outcomes is to combine them into a score.
+Sometimes researchers collect multiple outcomes on each subject (e.g. physical and cognitive)
 
-When should a variable be a covariate and when should it define multiple levels over which to fit separate models?
+- Separate regression analysis for each one
+- If a more abstract measure is being studied, one approach to analyzing multiple outcomes is to combine them into a score
+    - e.g. Want to study patient understanding of insurance procedures. Questions on a patient survey could be viewed as multiple outcomes
 
-## Study subjects
+# Data | outcome, <span style="text-decoration: underline">**study subjects**</span>, predictors
+
+## Points to evaluate
 
 How were subjects selected?
 
 - Was the study observational or randomized?
 - Enrollment criteria
 
-If there is bias in the type of people who end up in the study, we can try to
-
-- limit the generalizability we perceive
-- create a lower or upper bound on the overall effect
+If there is bias in the type of people who end up in the study, we need to think carefully about both the outcomes and predictors represented in our study.
 
 <div class="notes">
+We can try to
+- limit the generalizability we perceive
+- create a lower or upper bound on the overall effect
 Create a lower or upper bound on the overall effect: if most people who enroll are extremely sick, we might guess that the effect is at most what is reported
 </div>
 
-## Predictors
+# Data | outcome, study subjects, <span style="text-decoration: underline">**predictors**</span>
 
-Do the predictors encompass the set of variables that should reasonably be associated with the outcome?
+## Points to evaluate
 
-- In the flu study: 
+- Were all important predictors measured/collected?
+- How well are the predictors measured/ascertained?
 
-How well are the predictors measured/ascertained?
+## Predictor ascertainment
 
-- 
+> In order to examine whether childhood exposure influences immunity later in life, the researchers collected data from historical epidemiological records on all known human cases of these virus subtypes and estimated the annual probability of infection in children from around the world.
 
-## Analysis
+## Model specification
 
-Identify the method(s) used and the associated assumptions. Are there any features of the data that lead you to question the validity of those assumptions?
+Recall that one of the assumptions of regression was correct model specification
+
+# Analysis
+
+## Points to evaluate
+
+- Identify the statistical method(s) used and the associated assumptions
+    - Often not possible from media reporting
+- Are there any features of the data that lead you to question the validity of those assumptions?
+
+# Conclusions
+
+## Points to evaluate
+
+- What estimates are reported? Do they have associated measures of uncertainty?
+- How useful are the conclusions? To whom are they useful?
+- Are appropriate reference/control conditions provided to give context for what we should expect?
+
+## Reported estimates
+
+From CNN:
+
+> If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75%
+
+## Reported estimates
+
+From the original research paper:
+
+> ?????
 
 ## Conclusions {.build}
 
@@ -193,15 +239,3 @@ Are the conclusions something we should care about?
 Example: reports about movie earnings at the box office. Can we compare earnings from movies made in different years?
 
 An example of such thinking in action: [Hillary Clinton set to receive more votes than any US presidential candidate in history except Barack Obama](http://www.independent.co.uk/news/world/americas/us-elections/us-election-hillary-clinton-more-votes-popular-vote-any-candidate-barack-obama-donald-trump-a7413596.html)
-
-## Conclusions
-
-Can you identify any conclusions that should have associated estimates of uncertainty?
-
-From CNN:
-
-> "If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75%"
-
-## Conclusions
-
-Are appropriate reference/control conditions provided to give context for what we should expect?
