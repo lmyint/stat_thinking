@@ -30,7 +30,7 @@ What factors are related to an outcome?
 
 ## Research question in the press
 
-How does influenza strain exposure in childhood affect the risk of being infected with and dsevere H5N1 or H7N9 in adulthood and its severity?
+How does influenza strain exposure in childhood affect the risk of being infected with severe H5N1 or H7N9 in adulthood?
 
 ## Research question from initial investigation
 
@@ -59,6 +59,7 @@ From the original Science paper:
 "recent experiments have revealed that broadly protective immune responses can provide cross-immunity between different HA subtypes, particularly subtypes in the same phylogenetic group"
 
 Group 1: seasonal H1 and H2; avian H5
+
 Group 2: seasonal H3; avian H7
 
 This knowledge prompted the researchers to ask: does the subtype of an individual's first influenza exposure affect immunity to avian flus H5 and H7?
@@ -227,6 +228,9 @@ Used indicator variables to count number of high-risk young children and elderly
 ## Predictor ascertainment: HA, NA imprinting
 
 "In order to examine whether childhood exposure influences immunity later in life, the researchers collected data from historical epidemiological records on all known human cases of these virus subtypes and **estimated the annual probability of infection in children from around the world**." (CNN)
+
+"To inform hemagglutinin and neuraminidase imprinting models, we estimated the
+fraction of each birth cohort with first IAV exposure to seasonal subtypes H1N1, H2N2 or H3N2, and the fraction that remained naïve. We first used a truncated geometric model to estimate the baseline probability that first IAV infection occurs at a given age. Because age-seroprevalence studies report that 98-100% of children have been infected with IAV by age 12 (20, 21, 44), we set 12 as the maximum possible age of first infection...**Using published age-seroprevalence data**, the maximum likelihood estimate for [the annual attack rate] was 0.28 (95% CI 0.26-0.30), consistent with other IAV attack rates estimated in children. To account for variability in the annual attack rate between years, we compiled an index of IAV circulation intensity from 1918-2015"
 
 # Analysis
 
