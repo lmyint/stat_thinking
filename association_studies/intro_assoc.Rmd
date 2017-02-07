@@ -1,6 +1,9 @@
 ---
 title: "Evaluating association studies"
-output: ioslides_presentation
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
 ---
 
 ## Association studies
@@ -22,7 +25,6 @@ What factors are related to an outcome?
     - Predictors
 - Analysis
 - Conclusions
-- What the study did not do
 
 # Research question
 
@@ -32,9 +34,7 @@ How does influenza strain exposure in childhood affect the risk of being infecte
 
 ## Research question from initial investigation
 
-From the Science editorial:
-
-> This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases areconcentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 and previous immunity to the neuraminidase surface protein for A/H5N1.
+> This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases are concentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 and previous immunity to the neuraminidase surface protein for A/H5N1. (Science editorial)
 
 Why are older people more likely to be infected with one strain and younger people more likely to be infected with the other strain?
 
@@ -42,7 +42,10 @@ Why are older people more likely to be infected with one strain and younger peop
 
 What are the characteristics of the older people (who tended to be infected with H7) and of the younger people (who tended to be infected with H5)?
 
-What characteristics can we look at?
+What characteristics can we look at? What is likely to be different these two groups?
+- Genetics?
+- Lifestyle?
+- Exposures?
 
 <div class="notes">
 Prompt the class to think of characteristics that might explain this differential infection. Write these on the board. These covariates are good candidates for variables that should be adjusted for in the statistical analysis. Prompt the students to recall the uses of regression.
@@ -88,29 +91,6 @@ From the Science editorial:
 The CNN article doesn't give a lot of detail. It is almost always necessary to go back to the original study.
 </div>
 
-<div class="notes">
-For the p_yci
-
-- strain prevalence by year and country
-- age-specific poultry exposure rates by year
-
-y = calendar year in which H5 or H7 infection occurred
-c = country
-i = birth cohort (calendar year of birth)
-
-p_yci = probability of {H5,H7} infection (death or fatality) for an individual who had that aforementioned avian flu infection in calendar year y, in country c, and was born in year i
-- Outcome vector has length equal to the number of birth years represented in the data. D_yc has the same length and describes the proportion of people born in each of those years (sum(D_yc)=1). Had poultry exposure rates by age group, so this would also form a vector of the same length
-- For y,c in calendar_year_of_avian_flu_infection,country: fit multinomial model:
-birth_year(i) num_H5_infects(outcome) demography poultry_exposure age_risk frac_HA_imprint frac_NA_imprint
-1950
-1951
-.
-.
-1967
-
-"Normalization of data to demographic age distribution" section just explains how "excess cases" in Figure 2C, D was calculated
-</div>
-
 # Data | <span style="text-decoration: underline">**outcome**</span>, study subjects, predictors
 
 ## Points to evaluate
@@ -123,7 +103,7 @@ birth_year(i) num_H5_infects(outcome) demography poultry_exposure age_risk frac_
 ## Choice of outcome studied
 
 > Next, the researchers collected data on more recent **clinical and fatal cases of H5N1 and H7N9**, two types of bird flu. They took a close look at each reported patient's age in the data -- and analyzed the more recent data along with the historical data.
-> "We've done the analysis on H5 and H7 viruses because those are the ones that have caused lots of cases -- enough cases that we can do the statistics"
+> "We've done the analysis on H5 and H7 viruses because those are the ones that have caused lots of cases -- enough cases that we can do the statistics" (CNN)
 
 <div class="notes">
 So really they were studying the relationship between immunity to **extreme** H5/H7 and first influenza exposure.
@@ -145,13 +125,9 @@ Consider different situations:
     - Medical information: physician diagnosis rather than patient report
     - Extreme events rather than more typical ones
 - When there are many adjectives describing an outcome, think carefully about the generalizability of the results.
-- Somtimes researchers create categories for their outcome
+- Somtimes researchers create categories for their outcome (natural outcome versus a created one)
     - Thresholding a continuous variable
     - Summarizing a complex occurrence as a categorical event
-
-## Outcome ascertainment
-
-???
 
 ## Outcome ascertainment
 
@@ -163,6 +139,13 @@ Systematic inaccuracies in measuring the outcome can bias affect estimates.
 
 What inaccuracies might be associated with measuring the number of severe avian flu cases?
 
+## Outcome ascertainment
+
+From the supplemental materials:
+
+> We included confirmed, suspected and probable cases in our final analysis
+> Mild or asymptomatic cases of both infections may not be ascertained, so our results should be interpreted only as predictors of severe, symptomatic infection. We used simulated data to verify that our study’s core findings should be robust to case ascertainment biases
+
 ## Number of outcomes
 
 Sometimes researchers collect multiple outcomes on each subject (e.g. physical and cognitive)
@@ -170,15 +153,22 @@ Sometimes researchers collect multiple outcomes on each subject (e.g. physical a
 - Separate regression analysis for each one
 - If a more abstract measure is being studied, one approach to analyzing multiple outcomes is to combine them into a score
     - e.g. Want to study patient understanding of insurance procedures. Questions on a patient survey could be viewed as multiple outcomes
+- When looking at multiple separate outcomes, there is a risk that we detect a statistically significant relationship just by chance
+
+## Multiple testing
+
+[Green jelly beans are linked to acne!](https://xkcd.com/882/)
+
+## Number of outcomes
+
+> For each virus (H5N1 and H7N9), we fitted models independently for each case outcome (infection or death).
 
 # Data | outcome, <span style="text-decoration: underline">**study subjects**</span>, predictors
 
 ## Points to evaluate
 
-How were subjects selected?
-
-- Was the study observational or randomized?
-- Enrollment criteria
+- From what population/database/records were subjects chosen?
+- Were there inclusion/exclusion criteria?
 
 If there is bias in the type of people who end up in the study, we need to think carefully about both the outcomes and predictors represented in our study.
 
@@ -189,6 +179,15 @@ We can try to
 Create a lower or upper bound on the overall effect: if most people who enroll are extremely sick, we might guess that the effect is at most what is reported
 </div>
 
+## Historical records of avian flu
+
+> We compiled data describing **all reported human cases of H7N9 (2013-Nov. 2015)
+and H5N1 (1997-Nov. 2015) influenza**. We obtained case data from three previously published H5N1 line lists, one spanning 1997 and the other spanning Sept. 2006-Aug. 2010. We obtained data from one H7N9 line list spanning Jan.-Sept. 2013. For all other cases, we compiled original line lists using **reports from the WHO** as our primary resource and the **Hong Kong Centre for Health Protection** as a secondary resource. We incorporated **additional cases or case details from Flu Trackers** (https://flutrackers.com/forum/). (Supplemental)
+
+## Inclusion/exclusion criteria
+
+> We included **confirmed, suspected and probable cases** in our final analysis, but verified that our results are robust to the exclusion of unconfirmed cases (Fig. S7). **We excluded cases for which patient age was not reported.** Our H7N9 database (Table S3) contained 686 confirmed, suspected or probable cases, which were reported between April 1, 2013 and Nov. 13, 2015. All occurred in China. **We excluded 6 cases for which patient age was not available**, and used the remaining 680 cases, including 132 deaths, in our analysis (676 were confirmed and 4 were suspected or probable). In the same time period, WHO reported 681 confirmed cases of H7N9, so at most we are missing information on 5 confirmed cases (or fewer if some of these cases were included among our suspected and probable cases). (Supplemental)
+
 # Data | outcome, study subjects, <span style="text-decoration: underline">**predictors**</span>
 
 ## Points to evaluate
@@ -196,13 +195,39 @@ Create a lower or upper bound on the overall effect: if most people who enroll a
 - Were all important predictors measured/collected?
 - How well are the predictors measured/ascertained?
 
-## Predictor ascertainment
-
-> In order to examine whether childhood exposure influences immunity later in life, the researchers collected data from historical epidemiological records on all known human cases of these virus subtypes and estimated the annual probability of infection in children from around the world.
-
 ## Model specification
 
-Recall that one of the assumptions of regression was correct model specification
+- One of the assumptions of regression is correct model specification
+- If we leave out important predictors, we have to worry about confounding and biased effect estimates
+
+## Variables included in modeling
+
+> We used multinomial models to describe the probability distribution of H5N1 or
+H7N9 cases or fatalities across birth years. The multinomial distribution requires a set of parameters, $p_{yci}$, which described the probability that an infection observed in year $y$, country $c$, occurred in birth cohort $i$. Within each model, a unique combination of factors, including age-based risk of severe infection, poultry exposure risk, HA imprinting, and NA imprinting, determined $p_{yci}$. For each virus (H5N1 and H7N9), we fitted models independently for each case outcome (infection or death). (Supplemental)
+
+## Variables included in modeling
+
+- Demography
+- Exposure to poultry
+- Age-based risk of severe infection
+- Hemagglutinin imprinting
+- Neuraminidase imprinting
+
+## Predictor ascertainment: demography
+
+> Using the US Census Bureau’s International Database, we obtained publicly available demographic data for each country and year of case observation. (Supplemental)
+
+## Predictor ascertainment: exposure to poultry
+
+> We obtained published data from six surveys conducted in provinces that have experienced at least five cases of H5N1 or H7N9. These data were collected in three cities, Guangzhou, Shanghai and Shenzhen, and two non-urban locations, subrural Guangzhou and Xiuning, in China...No poultry exposure data were available for other affected countries...large reported uncertainties and geographic constraints on the available data prohibited a statistically valid effort to match cases with geographically specific exposure patterns. Instead we computed an average exposure rate for each birth cohort and year of H5N1 or H7N9 case observation, as follows. Each survey reported poultry exposure rates by age group. (Supplemental)
+
+## Predictor ascertainment: age-based risk
+
+Used indicator variables to count number of high-risk young children and elderly people
+
+## Predictor ascertainment: HA, NA imprinting
+
+> In order to examine whether childhood exposure influences immunity later in life, the researchers collected data from historical epidemiological records on all known human cases of these virus subtypes and **estimated the annual probability of infection in children from around the world**. (CNN)
 
 # Analysis
 
@@ -211,6 +236,21 @@ Recall that one of the assumptions of regression was correct model specification
 - Identify the statistical method(s) used and the associated assumptions
     - Often not possible from media reporting
 - Are there any features of the data that lead you to question the validity of those assumptions?
+- Did the authors perform sensitivty analyses for key assumptions?
+
+## Statistical method
+
+> We used multinomial models to describe the probability distribution of H5N1 or
+H7N9 cases or fatalities across birth years.
+
+- Multinomial models are generalizations of logistic regression for more than 2 categories
+- Categories here are birth years
+    - Logistic regression: probability of avian flu death/illness
+    - Multinomial regression: probability of avian flu death/illness for birth year 1960, 1961, ...
+
+## Sensitivity analysis
+
+- Many predictors are not actually measured directly - they are estimated
 
 # Conclusions
 
@@ -222,20 +262,25 @@ Recall that one of the assumptions of regression was correct model specification
 
 ## Reported estimates
 
-From CNN:
-
-> If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75%
+> If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75% (CNN)
 
 ## Reported estimates
 
-From the original research paper:
+From the abstract of the original research paper:
 
-> ?????
+> Statistical modeling shows that protective HA imprinting is the crucial explanatory factor, and it provides 75% protection against severe infection and 80% protection against death for both H5N1 and H7N9.
 
-## Conclusions {.build}
+## Utility of conclusions
 
-Are the conclusions something we should care about?
+- Ecological fallacy
+    - Occurs when we study aggregate data and assume that it holds for individuals
+    - In this study, all analyses were performed on aggregated data. No individual specific data
+- Considering this, what are the public health implications of these findings?
 
-Example: reports about movie earnings at the box office. Can we compare earnings from movies made in different years?
+## Reference conditions
 
-An example of such thinking in action: [Hillary Clinton set to receive more votes than any US presidential candidate in history except Barack Obama](http://www.independent.co.uk/news/world/americas/us-elections/us-election-hillary-clinton-more-votes-popular-vote-any-candidate-barack-obama-donald-trump-a7413596.html)
+If risk of severe avian flu infection or death with appropriate childhood flu exposure is 0.75 times the risk without that exposure, is that a meaningful effect? Say with regards to vaccination?
+
+## Corroborating studies
+
+This study is rooted heavily in analyzing epidemiological records. What laboratory experiments might be useful to substantiate the authors' claims? What about a public policy experiment or other observational study?
