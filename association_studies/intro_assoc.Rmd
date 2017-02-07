@@ -34,7 +34,7 @@ How does influenza strain exposure in childhood affect the risk of being infecte
 
 ## Research question from initial investigation
 
-> This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases are concentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 and previous immunity to the neuraminidase surface protein for A/H5N1. (Science editorial)
+"This [hemagglutinin] difference parallels intriguing epidemiological differences: A/H5N1 cases are found mainly in children and young adults, whereas A/H7N9 cases are concentrated in older individuals. These contrasting age profiles have sparked several hypotheses, including the effect of age-specific contacts with infected birds for A/H7N9 and previous immunity to the neuraminidase surface protein for A/H5N1." (Science editorial)
 
 Why are older people more likely to be infected with one strain and younger people more likely to be infected with the other strain?
 
@@ -43,6 +43,7 @@ Why are older people more likely to be infected with one strain and younger peop
 What are the characteristics of the older people (who tended to be infected with H7) and of the younger people (who tended to be infected with H5)?
 
 What characteristics can we look at? What is likely to be different these two groups?
+
 - Genetics?
 - Lifestyle?
 - Exposures?
@@ -55,7 +56,7 @@ Prompt the class to think of characteristics that might explain this differentia
 
 From the original Science paper:
 
-> recent experiments have revealed that broadly protective immune responses can provide cross-immunity between different HA subtypes, particularly subtypes in the same phylogenetic group
+"recent experiments have revealed that broadly protective immune responses can provide cross-immunity between different HA subtypes, particularly subtypes in the same phylogenetic group"
 
 Group 1: seasonal H1 and H2; avian H5
 Group 2: seasonal H3; avian H7
@@ -85,7 +86,7 @@ But `firstFluExp` is not available...directly.
 
 From the Science editorial:
 
-> Using historical influenza epidemiological records, Gostic et al. carefully reconstruct the susceptibility of each birth cohort based on the likelihood that their primary infection was with group 1 or 2 HA influenza
+"Using historical influenza epidemiological records, Gostic et al. carefully reconstruct the susceptibility of each birth cohort based on the likelihood that their primary infection was with group 1 or 2 HA influenza."
 
 <div class="notes">
 The CNN article doesn't give a lot of detail. It is almost always necessary to go back to the original study.
@@ -102,14 +103,9 @@ The CNN article doesn't give a lot of detail. It is almost always necessary to g
 
 ## Choice of outcome studied
 
-> Next, the researchers collected data on more recent **clinical and fatal cases of H5N1 and H7N9**, two types of bird flu. They took a close look at each reported patient's age in the data -- and analyzed the more recent data along with the historical data.
-> "We've done the analysis on H5 and H7 viruses because those are the ones that have caused lots of cases -- enough cases that we can do the statistics" (CNN)
+"Next, the researchers collected data on more recent **clinical and fatal cases of H5N1 and H7N9**, two types of bird flu. They took a close look at each reported patient's age in the data -- and analyzed the more recent data along with the historical data."
 
-<div class="notes">
-So really they were studying the relationship between immunity to **extreme** H5/H7 and first influenza exposure.
-</div>
-
-----
+"'We've done the analysis on H5 and H7 viruses because those are the ones that have caused lots of cases -- enough cases that we can do the statistics'" (CNN)
 
 How might conclusions have been different if the authors also had information about non-severe cases of avian flu?
 
@@ -143,8 +139,9 @@ What inaccuracies might be associated with measuring the number of severe avian 
 
 From the supplemental materials:
 
-> We included confirmed, suspected and probable cases in our final analysis
-> Mild or asymptomatic cases of both infections may not be ascertained, so our results should be interpreted only as predictors of severe, symptomatic infection. We used simulated data to verify that our study’s core findings should be robust to case ascertainment biases
+"We included confirmed, suspected and probable cases in our final analysis"
+
+"Mild or asymptomatic cases of both infections may not be ascertained, so our results should be interpreted only as predictors of severe, symptomatic infection. We used simulated data to verify that our study’s core findings should be robust to case ascertainment biases"
 
 ## Number of outcomes
 
@@ -161,7 +158,9 @@ Sometimes researchers collect multiple outcomes on each subject (e.g. physical a
 
 ## Number of outcomes
 
-> For each virus (H5N1 and H7N9), we fitted models independently for each case outcome (infection or death).
+"For each virus (H5N1 and H7N9), we fitted models independently for each case outcome (infection or death)." (Supplemental)
+
+How might results be different if the two outcomes were combined to be "either infection or death"?
 
 # Data | outcome, <span style="text-decoration: underline">**study subjects**</span>, predictors
 
@@ -181,12 +180,12 @@ Create a lower or upper bound on the overall effect: if most people who enroll a
 
 ## Historical records of avian flu
 
-> We compiled data describing **all reported human cases of H7N9 (2013-Nov. 2015)
-and H5N1 (1997-Nov. 2015) influenza**. We obtained case data from three previously published H5N1 line lists, one spanning 1997 and the other spanning Sept. 2006-Aug. 2010. We obtained data from one H7N9 line list spanning Jan.-Sept. 2013. For all other cases, we compiled original line lists using **reports from the WHO** as our primary resource and the **Hong Kong Centre for Health Protection** as a secondary resource. We incorporated **additional cases or case details from Flu Trackers** (https://flutrackers.com/forum/). (Supplemental)
+"We compiled data describing **all reported human cases of H7N9 (2013-Nov. 2015)
+and H5N1 (1997-Nov. 2015) influenza**. We obtained case data from three previously published H5N1 line lists, one spanning 1997 and the other spanning Sept. 2006-Aug. 2010. We obtained data from one H7N9 line list spanning Jan.-Sept. 2013. For all other cases, we compiled original line lists using **reports from the WHO** as our primary resource and the **Hong Kong Centre for Health Protection** as a secondary resource. We incorporated **additional cases or case details from Flu Trackers** (https://flutrackers.com/forum/)." (Supplemental)
 
 ## Inclusion/exclusion criteria
 
-> We included **confirmed, suspected and probable cases** in our final analysis, but verified that our results are robust to the exclusion of unconfirmed cases (Fig. S7). **We excluded cases for which patient age was not reported.** Our H7N9 database (Table S3) contained 686 confirmed, suspected or probable cases, which were reported between April 1, 2013 and Nov. 13, 2015. All occurred in China. **We excluded 6 cases for which patient age was not available**, and used the remaining 680 cases, including 132 deaths, in our analysis (676 were confirmed and 4 were suspected or probable). In the same time period, WHO reported 681 confirmed cases of H7N9, so at most we are missing information on 5 confirmed cases (or fewer if some of these cases were included among our suspected and probable cases). (Supplemental)
+"We included **confirmed, suspected and probable cases** in our final analysis, but verified that our results are robust to the exclusion of unconfirmed cases (Fig. S7). **We excluded cases for which patient age was not reported.** Our H7N9 database (Table S3) contained 686 confirmed, suspected or probable cases, which were reported between April 1, 2013 and Nov. 13, 2015. All occurred in China. **We excluded 6 cases for which patient age was not available**, and used the remaining 680 cases, including 132 deaths, in our analysis (676 were confirmed and 4 were suspected or probable). In the same time period, WHO reported 681 confirmed cases of H7N9, so at most we are missing information on 5 confirmed cases (or fewer if some of these cases were included among our suspected and probable cases)." (Supplemental)
 
 # Data | outcome, study subjects, <span style="text-decoration: underline">**predictors**</span>
 
@@ -202,8 +201,8 @@ and H5N1 (1997-Nov. 2015) influenza**. We obtained case data from three previous
 
 ## Variables included in modeling
 
-> We used multinomial models to describe the probability distribution of H5N1 or
-H7N9 cases or fatalities across birth years. The multinomial distribution requires a set of parameters, $p_{yci}$, which described the probability that an infection observed in year $y$, country $c$, occurred in birth cohort $i$. Within each model, a unique combination of factors, including age-based risk of severe infection, poultry exposure risk, HA imprinting, and NA imprinting, determined $p_{yci}$. For each virus (H5N1 and H7N9), we fitted models independently for each case outcome (infection or death). (Supplemental)
+"We used multinomial models to describe the probability distribution of H5N1 or
+H7N9 cases or fatalities across birth years. The multinomial distribution requires a set of parameters, $p_{yci}$, which described the probability that an infection observed in year $y$, country $c$, occurred in birth cohort $i$. Within each model, a unique combination of factors, including age-based risk of severe infection, poultry exposure risk, HA imprinting, and NA imprinting, determined $p_{yci}$. For each virus (H5N1 and H7N9), we fitted models independently for each case outcome (infection or death)." (Supplemental)
 
 ## Variables included in modeling
 
@@ -215,11 +214,11 @@ H7N9 cases or fatalities across birth years. The multinomial distribution requir
 
 ## Predictor ascertainment: demography
 
-> Using the US Census Bureau’s International Database, we obtained publicly available demographic data for each country and year of case observation. (Supplemental)
+"Using the US Census Bureau’s International Database, we obtained publicly available demographic data for each country and year of case observation." (Supplemental)
 
 ## Predictor ascertainment: exposure to poultry
 
-> We obtained published data from six surveys conducted in provinces that have experienced at least five cases of H5N1 or H7N9. These data were collected in three cities, Guangzhou, Shanghai and Shenzhen, and two non-urban locations, subrural Guangzhou and Xiuning, in China...No poultry exposure data were available for other affected countries...large reported uncertainties and geographic constraints on the available data prohibited a statistically valid effort to match cases with geographically specific exposure patterns. Instead we computed an average exposure rate for each birth cohort and year of H5N1 or H7N9 case observation, as follows. Each survey reported poultry exposure rates by age group. (Supplemental)
+"We obtained published data from six surveys conducted in provinces that have experienced at least five cases of H5N1 or H7N9. These data were collected in three cities, Guangzhou, Shanghai and Shenzhen, and two non-urban locations, subrural Guangzhou and Xiuning, in China...No poultry exposure data were available for other affected countries...large reported uncertainties and geographic constraints on the available data prohibited a statistically valid effort to match cases with geographically specific exposure patterns. Instead we computed an average exposure rate for each birth cohort and year of H5N1 or H7N9 case observation, as follows. Each survey reported poultry exposure rates by age group." (Supplemental)
 
 ## Predictor ascertainment: age-based risk
 
@@ -227,7 +226,7 @@ Used indicator variables to count number of high-risk young children and elderly
 
 ## Predictor ascertainment: HA, NA imprinting
 
-> In order to examine whether childhood exposure influences immunity later in life, the researchers collected data from historical epidemiological records on all known human cases of these virus subtypes and **estimated the annual probability of infection in children from around the world**. (CNN)
+"In order to examine whether childhood exposure influences immunity later in life, the researchers collected data from historical epidemiological records on all known human cases of these virus subtypes and **estimated the annual probability of infection in children from around the world**." (CNN)
 
 # Analysis
 
@@ -236,7 +235,7 @@ Used indicator variables to count number of high-risk young children and elderly
 - Identify the statistical method(s) used and the associated assumptions
     - Often not possible from media reporting
 - Are there any features of the data that lead you to question the validity of those assumptions?
-- Did the authors perform sensitivty analyses for key assumptions?
+- Did the authors perform sensitivity analyses for key assumptions?
 
 ## Statistical method
 
@@ -251,6 +250,11 @@ H7N9 cases or fatalities across birth years.
 ## Sensitivity analysis
 
 - Many predictors are not actually measured directly - they are estimated
+- The authors do refit models by assuming an alternative way to estimate each predictor
+
+<div class="notes">
+Show supplemental figure S7
+</div>
 
 # Conclusions
 
@@ -259,16 +263,17 @@ H7N9 cases or fatalities across birth years.
 - What estimates are reported? Do they have associated measures of uncertainty?
 - How useful are the conclusions? To whom are they useful?
 - Are appropriate reference/control conditions provided to give context for what we should expect?
+- What further studies would provide useful supporting evidence?
 
 ## Reported estimates
 
-> If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75% (CNN)
+"If you were exposed to a certain flu strain in your childhood, that first exposure could have resulted in long-term protection against related flu viruses, reducing your risk of a future severe infection by up to 75%" (CNN)
 
 ## Reported estimates
 
 From the abstract of the original research paper:
 
-> Statistical modeling shows that protective HA imprinting is the crucial explanatory factor, and it provides 75% protection against severe infection and 80% protection against death for both H5N1 and H7N9.
+"Statistical modeling shows that protective HA imprinting is the crucial explanatory factor, and it provides 75% protection against severe infection and 80% protection against death for both H5N1 and H7N9."
 
 ## Utility of conclusions
 
