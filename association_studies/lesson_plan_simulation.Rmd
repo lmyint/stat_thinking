@@ -1,0 +1,34 @@
+---
+title: "Lesson plan: simulation studies"
+output: pdf_document
+---
+
+Has anyone heard about simulation before? What is it useful for?
+
+Goal for the day is to use simulation to understand different aspects about regression
+
+Class 1: 
+
+- What is the impact of leaving out an important predictor? A non-important predictor?
+- What is the impact of putting in too many predictors that have no predictive value?
+- What is the impact of measurement error in the predictors?
+- What is the impact of outliers in both my predictors and outcome?
+- What if my observations have different reliability? (weighted regression)
+- Introduce GLMs but don't go into further detail
+
+Class 2:
+
+- What if my observations are correlated? (hierarchical modeling, mixed effects modeling)
+- What if I have a ton of predictors and don't know which ones are actually important? (penalized regression)
+- Parametric and non-parametric tests that often arise in association studies
+    - Binomial exact test
+    - Fisher's exact test
+    - Pearson's chi-squared test of independence
+
+What does $N(\mu, \sigma^2)$ mean?
+
+Does $Y \sim N(X\beta, \sigma^2)$ ring a bell?
+
+Introduce `rnorm` and family. Review the anatomy of an R function. Highlight the Help panel in RStudio and review the other panels.
+
+Make the connection between $Y \sim N(X\beta, \sigma^2)$ and how we can use `rnorm`.
