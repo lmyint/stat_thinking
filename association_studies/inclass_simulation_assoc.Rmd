@@ -1,0 +1,327 @@
+---
+title: "Simulation experiments: statistical analysis of association studies"
+output: html_document
+---
+
+# Simulation basics
+
+R has a suite of functions that allows you to calculate probabilities and generate random numbers from several common distributions. For example `dnorm`, `pnorm`, `qnorm`, and `rnorm` are functions to compute the density function, distribution function, quantile function, and generate random numbers. All such functions start with "d", "p", "q", and "r" and end with an abbreviation of the name of the distribution, such as "norm" for normal and "exp" for exponential.
+
+We are primarily going to be using the "r" functions for random number generation.
+
+Simulate one random number from the $N(0,1)$ distribution:
+
+```{r}
+rnorm(1, mean = 0, sd = 1)
+```
+
+Simulate 100 random numbers from the $N(0,1)$ distribution and plot their distribution:
+
+```{r}
+y <- rnorm(100, mean = 0, sd = 1)
+par(mfrow = c(1,2))
+hist(y)
+plot(density(y))
+```
+
+Simulate one random number each from the $N(1,1)$, $N(10,1)$, and $N(100,1)$ distributions:
+
+```{r}
+set.seed(1)
+rnorm(3, mean = c(1,10,100), sd = rep(1,3))
+```
+
+What does `set.seed` do? Random numbers won't necessarily be the same every time you generate them. Setting a seed is the way to ensure that they are.
+
+# Simulating a regression model
+
+The code below simulates data for a regression model with 3 predictors: $x_1$, $x_2$, and $x_3$. Can you tell from the code what the true values of the coefficients are? How could this be useful in evaluating data analysis practice?
+
+Answer: ???
+
+```{r}
+set.seed(1)
+## Set a sample size
+n <- 100
+## Randomly generate predictors
+x1 <- rt(n, df = 1)
+x2 <- rt(n, df = 1)
+x3 <- rt(n, df = 1)
+## Generate the observed outcomes
+y <- 4 + 2*x1 + 3*x2 + 4*x3 + rnorm(n, mean = 0, sd = 10)
+```
+
+We can make some exploratory scatter plots to visualize the relationship between each of the predictors and the outcome $y$.
+
+```{r}
+plot(x1, y)
+plot(x2, y)
+plot(x3, y)
+```
+
+Let's fit a linear regression model to the simulated data.
+
+```{r}
+## First make a data frame containing the predictor and outcome information
+df <- data.frame(y = y, x1 = x1, x2 = x2, x3 = x3)
+lmfit <- lm(y ~ x1 + x2 + x3, data = df)
+## Print a summary of the results of the fit
+summary(lmfit)
+## We can also extract the coefficients and confidence intervals
+coefficients(lmfit)
+confint(lmfit, level = 0.95)
+```
+
+How do the estimated coefficients compare to the true ones?
+
+## Exercise
+
+Simulate a regression model where the true intercept is 3 and the true coefficients for predictors $x_1$ to $x_4$ are 0.2, 0.1, 0.5, and 0.3 respectively. Set the standard deviation of the normal distribution component to be 4.
+
+```{r}
+set.seed(2)
+## Set a sample size
+n <- 100
+## Randomly generate all of the predictors in the same way
+x1 <- rt(n, df = 5, ncp = 20)
+
+## Generate the observed outcomes
+
+```
+
+For the simulated data you made above, fit a linear regression model and compare the estimated coeffcients to the true ones. Now try varying the standard deviation of the normal distribution component to be lower and higher. Examine the estimated coefficients and measures of uncertainty such as the standard errors and confidence intervals. Also try varying the mean term of the normal distribution component. What do you notice?
+
+```{r}
+## Fit linear model to the simulated data above
+## Look at coefficients and confidence intervals
+```
+
+Observations: ???
+
+
+
+# What is the impact of leaving out predictors?
+
+The following code (not displayed in the final output) is used to generate many different simulated datasets and automatically fit regression models.
+
+```{r echo=FALSE}
+simulateRegressionData <- function(numPredictors, numZero = 0, numObs = 1000, numDatasets = 1000, equalVar = TRUE) {
+	datasets <- lapply(seq_len(numDatasets), function(i) {
+		## Simulate coefficients
+		coeffs <- runif(numPredictors+1-numZero, 0, 5)
+		coeffs <- c(coeffs, rep(0, numZero))
+		names(coeffs) <- c("intercept", paste0("x", seq_len(numPredictors)))
+		## Make a numObs x numPredictors matrix
+		predictors <- do.call(cbind, lapply(seq_len(numPredictors), function(j) {
+			rt(numObs, df = 10, ncp = 10)
+		}))
+		## Multiply predictors matrix by coefficients
+		outcome <- rowSums(sweep(predictors, 2, tail(coeffs, -1), FUN = "*")) + coeffs[1]
+		if (equalVar) {
+			outcome <- outcome + rnorm(numObs, 0, 5)
+		} else {
+			outcome <- outcome + rnorm(numObs, 0, 10*((outcome/max(outcome))+0.1)^2)
+		}
+		df <- as.data.frame(cbind(outcome, predictors))
+		colnames(df) <- c("y", paste0("x", seq_len(numPredictors)))
+		attr(df, "trueCoeffs") <- coeffs
+		return(df)
+	})
+	attr(datasets, "equalVar") <- equalVar
+	return(datasets)
+}
+
+fitModels <- function(datasets, weighted = FALSE, dropLowest = 0, dropHighest = 0) {
+	numCoeffs <- ncol(datasets[[1]])-1
+	if (dropLowest + dropHighest >= numCoeffs) {
+		stop("Need to keep at least one predictor")
+	}
+	fits <- lapply(seq_along(datasets), function(i) {
+		df <- datasets[[i]]
+		coeffs <- attr(df, "trueCoeffs")
+		if (dropLowest > 0) {
+			whichDropLow <- order(coeffs)[1:dropLowest]
+		} else {
+			whichDropLow <- c()
+		}
+		if (dropHighest > 0) {
+			whichDropHigh <- order(coeffs)[(numCoeffs-dropHighest+1):numCoeffs]
+		} else {
+			whichDropHigh <- c()
+		}
+		dropCols <- c(whichDropLow, whichDropHigh)
+		keepCols <- c(1, setdiff(seq_len(numCoeffs), dropCols)+1)
+		## Subset data
+		df <- df[,keepCols]
+		lmfit <- lm(y ~ ., data = df)
+		if (weighted) {
+			res <- residuals(lmfit)
+			ycut <- as.numeric(cut(df$y, breaks = 30))
+			ressd <- tapply(res, ycut, sd)
+			w <- 1/ressd^2
+			w <- w[ycut]
+			lmfit <- lm(y ~ ., data = df, weights = w)
+		}
+		attr(lmfit, "trueCoeffs") <- coeffs[keepCols]
+		return(lmfit)
+	})
+	return(fits)
+}
+
+summarizeResults <- function(fits, ...) {
+	rmse <- sapply(fits, function(fit) {
+		trueCoeffs <- attr(fit, "trueCoeffs")
+		sqrt(mean((coefficients(fit)-trueCoeffs)^2))
+	})
+	plot(density(rmse, from = 0), xlab = "Square root(mean squared error)", ...)
+	invisible(rmse)
+}
+```
+
+We can simulate datasets with the `simulateRegressionData` function. You can vary the number of predictors with the `numPredictors` argument, the number of observations in each simulated dataset with `numObs`, and the total number of simulated datasets with `numDatasets`.
+
+```{r}
+set.seed(1)
+simdata <- simulateRegressionData(numPredictors = 7, numZero = 1, numObs = 1000, numDatasets = 500)
+```
+
+The `fitModels` function fits linear regression models to each of the datasets, and you can also denote that you want to exclude a certain number of predictors with the highest coefficients and with the lowest true coefficients.
+
+```{r}
+fits <- fitModels(simdata)
+fits_drophigh1 <- fitModels(simdata, dropHighest = 1)
+fits_drophigh2 <- fitModels(simdata, dropHighest = 2)
+fits_droplow1 <- fitModels(simdata, dropLowest = 1)
+fits_droplow2 <- fitModels(simdata, dropLowest = 2)
+```
+
+The `summarizeResults` function shows the distribution of root mean squared errors of the coefficient estimates over all simulations. We can use these plots to compare the impact of different model fitting procedures.
+
+```{r}
+par(mfrow = c(2,3))
+summarizeResults(fits, main = "Drop none")
+summarizeResults(fits_drophigh1, main = "Drop highest (1)")
+summarizeResults(fits_drophigh2, main = "Drop highest (2)")
+summarizeResults(fits_droplow1, main = "Drop lowest (1)")
+summarizeResults(fits_droplow2, main = "Drop lowest (2)")
+```
+
+## Exercise
+
+Play with the number of predictors included in the regression, the number of unpredictive covariates, and the numbers of coefficients excluded from the model fitting. What do you notice about the accuracy of the model in terms of the root mean squared errors?
+
+Observations: ???
+
+
+
+# What if my observations have unequal reliability?
+
+One of the assumptions of linear regression is that the errors have constant variance. This is known as homoskedasticity. Heteroskedasticity occurs when observations have unequal variance.
+
+```{r}
+set.seed(1)
+n <- 1000
+x <- rnorm(n, 10)
+y <- 3 + 2*x + rnorm(n, 0, x-min(x)+1)
+plot(x, y)
+```
+
+Fit a linear regression model to this data. Plot the residuals of the fit versus the predictions. What is a visual indicator of heteroskedasticity in this plot?
+
+Answer: ???
+
+```{r}
+df <- data.frame(y = y, x = x)
+lmfit <- lm(y ~ x, data = df)
+plot(fitted.values(lmfit), residuals(lmfit))
+abline(h = 0, col = "red")
+```
+
+Let's also look at the summary table and confidence intervals.
+
+```{r}
+summary(lmfit)
+confint(lmfit)
+```
+
+**Weighted regression** is a technique that can be used to estimate coefficients with less bias and variability in the presence of heteroskedasticity. How does the coefficient estimate and confidence interval width change when using weighted regression?
+
+```{r}
+w <- 1/(x-min(x)+1)
+lmfitw <- lm(y ~ x, data = df, weights = w)
+summary(lmfitw)
+confint(lmfitw)
+```
+
+Observations: ???
+
+## Exercise
+
+With weighted regression, it is assumed that the weights are known with high degree of precision. Play with different functions for the weights and see how the coefficient estimate and confidence interval width changes.
+
+```{r}
+## Some examples of ways to calculate weights
+## Feel free to try your own
+w2 <- 1/x
+w3 <- 1/x^2
+w4 <- 1/y
+## Fitting models
+lmfitw2 <- lm(y ~ x, data = df, weights = w2)
+summary(lmfitw2)
+confint(lmfitw2)
+
+lmfitw3 <- lm(y ~ x, data = df, weights = w3)
+summary(lmfitw3)
+confint(lmfitw3)
+
+lmfitw4 <- lm(y ~ x, data = df, weights = w4)
+summary(lmfitw4)
+confint(lmfitw4)
+```
+
+Observations: ???
+
+
+
+# What is the impact of measurement error in the predictors?
+
+A subtle assumption of regression is that all predictors are measured exactly. Let's investigate what happens if predictors are not measured correctly.
+
+```{r}
+set.seed(3)
+n <- 1000
+x <- rt(n, df = 5)
+xobs <- x + rnorm(n, 0, 2)
+y <- 1 + 2*x + rnorm(n, 0, 2)
+```
+
+Let's see visually what happens with measurement error.
+
+```{r}
+par(mfrow = c(1,2))
+plot(x, y, xlim = c(-10,6))
+abline(a = 1, b = 2, col = "red")
+plot(xobs, y, xlim = c(-10,6))
+abline(a = 1, b = 2, col = "red")
+```
+
+```{r}
+df_noerror <- data.frame(y = y, x = x)
+df_error <- data.frame(y = y, x = xobs)
+## Fit linear regression using correct x
+lmfit_noerror <- lm(y ~ x, data = df_noerror)
+summary(lmfit_noerror)
+confint(lmfit_noerror)
+
+## Fit linear regression using error-prone x
+lmfit_error <- lm(y ~ x, data = df_error)
+summary(lmfit_error)
+confint(lmfit_error)
+```
+
+## Exercise
+
+Vary the noise term used to generate the observed predictor `xobs`. How does this change the bias in the coefficient estimate?
+
+Observations: ???
+
