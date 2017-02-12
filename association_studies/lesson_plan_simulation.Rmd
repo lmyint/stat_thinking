@@ -3,9 +3,7 @@ title: "Lesson plan: simulation studies"
 output: pdf_document
 ---
 
-Has anyone heard about simulation before? What is it useful for?
-
-Goal for the day is to use simulation to understand different aspects about regression
+# Tentative topics covered
 
 Class 1: 
 
@@ -25,6 +23,12 @@ Class 2:
     - Fisher's exact test
     - Pearson's chi-squared test of independence
 
+# Class 1
+
+Has anyone heard about simulation before? What is it useful for?
+
+Goal for the day is to use simulation to understand different aspects about regression
+
 What does $N(\mu, \sigma^2)$ mean?
 
 Does $Y \sim N(X\beta, \sigma^2)$ ring a bell?
@@ -32,3 +36,12 @@ Does $Y \sim N(X\beta, \sigma^2)$ ring a bell?
 Introduce `rnorm` and family. Review the anatomy of an R function. Highlight the Help panel in RStudio and review the other panels.
 
 Make the connection between $Y \sim N(X\beta, \sigma^2)$ and how we can use `rnorm`.
+
+Review good practices for working with R and RStudio
+
+- Don't highlight the ``` when sending code to the Console
+- Use ful to go to Chunks > Run current chunk or Run > Run current chunk
+- Looking at line numbers
+- If you see red (errors), likely fix is to start at the chunk where the variables were generated
+- Saving progress and continuing where you left off
+- Saving plots and going back and forth between previous plots
