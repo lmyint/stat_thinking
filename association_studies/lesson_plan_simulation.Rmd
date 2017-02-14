@@ -12,10 +12,10 @@ Class 1:
 - What is the impact of measurement error in the predictors?
 - What is the impact of outliers in both my predictors and outcome?
 - What if my observations have different reliability? (weighted regression)
-- Introduce GLMs but don't go into further detail
 
 Class 2:
 
+- Introduce GLMs but don't go into further detail
 - What if my observations are correlated? (hierarchical modeling, mixed effects modeling)
 - What if I have a ton of predictors and don't know which ones are actually important? (penalized regression)
 - Parametric and non-parametric tests that often arise in association studies
@@ -40,8 +40,12 @@ Make the connection between $Y \sim N(X\beta, \sigma^2)$ and how we can use `rno
 Review good practices for working with R and RStudio
 
 - Don't highlight the ``` when sending code to the Console
-- Use ful to go to Chunks > Run current chunk or Run > Run current chunk
+- Useful to go to Chunks > Run current chunk or Run > Run current chunk
 - Looking at line numbers
 - If you see red (errors), likely fix is to start at the chunk where the variables were generated
 - Saving progress and continuing where you left off
 - Saving plots and going back and forth between previous plots
+
+# Class 2
+
+For conditional logistic regression, draw parallels to a paired t-test to comment on the need to adjust for covariates in an unmatched case control study with ordinary logistic regression.
