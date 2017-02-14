@@ -1,0 +1,399 @@
+---
+title: "Simulation experiments: statistical analysis of association studies - part 2"
+output: pdf_document
+---
+
+# Generalized linear models
+
+Linear regression is a tool for estimating the effects of covariates on a continuous outcome:
+
+$$ E[\mathrm{continuous\:outcome}] = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Logistic regression is a tool for estimating the effects of covariates on the risk/probability of a binary outcome:
+
+$$ log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Generalized linear models form a class of statistical models that can be used to study the effects of covariates on different types of predictors:
+
+$$ \mathrm{link\:function}(E[\mathrm{outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Linear and logistic regression are special cases of generalized linear models. 
+
+Type of data | Typical link function | Name of model(s)
+-------------------------------------------------------
+Continuous | Identity | Linear regression
+Binary | Logit | Logistic regression
+Categorical | Logit | Multinomial, ordinal logistic regression
+Counts | Log | Log-linear models/Poisson regression
+
+Note that for linear regression, the left hand side uses the identity function $f(x) = x$. For logistic regression, the left hand side uses the logit function $f(x) = \log(x/(1-x))$
+
+## Simulation example: count data
+
+Let's briefly discuss the Poisson distribution, which is a useful model for count data. A Poisson random variable can take any integer value greater than or equal to 0, and we generally write $X \sim \mathrm{Poisson}(\lambda)$ where $\lambda$ is the expected number of occurrences in a given time window. We can simulate Poisson counts with the `rpois` function. We can specify one value of $\lambda$:
+
+```{r}
+set.seed(1)
+counts <- rpois(500, lambda = 4)
+mean(counts)
+hist(counts, breaks = 0:10, freq = FALSE, xlab = "Counts", main = "")
+lines(x = 0:10, y = dpois(0:10, lambda = 4), col = "red")
+legend("topright", legend = c("Simulated", "Theoretical"), col = c("black", "red"), lty = "solid")
+```
+
+If we want each simulated count to come from a Poisson distribution with its own mean, we can specify a vector of numbers for lambda.
+
+```{r}
+rpois(3, lambda = c(1, 100, 1000))
+```
+
+Count data can arise in public health applications when we collect data on incidence rates or when we monitor recurrent events for an individual. Let's simulate individual-level data on number of hospitilizations in a given year. We are interested in how different factors, such as sex and age, contribute to this number.
+
+Let's first simulate a random sex and age for each individual in our study.
+
+```{r}
+set.seed(1)
+n <- 200
+sex <- rbinom(n, size = 1, prob = 0.5)
+age <- round(2*rgamma(n, shape = 3, scale = 2)+30)
+```
+
+Let's next simulate the hospitalization counts $Y_i$ for each individual. We will say that the mean number of hospitalizations $E[Y_i] = \lambda_i$ for each individual is related to their sex and age by:
+
+$$ \sqrt{\lambda_i} = \beta_0 + \beta_{\mathrm{sex}}\mathrm{sex} + \beta_{\mathrm{age}}\mathrm{age} $$
+$$ \sqrt{E[Y_i]} = \beta_0 + \beta_{\mathrm{sex}}\mathrm{sex} + \beta_{\mathrm{age}}\mathrm{age} $$
+
+```{r}
+beta0 <- 2
+beta_sex <- 0.1
+beta_age <- 0.2
+hospCount <- rpois(n, lambda = (beta0 + beta_sex*sex + beta_age*age)^2)
+```
+
+To fit a Poisson regression model, we use the `glm` function and specify the family to be Poisson. By default, the link function (the function that links mean counts to covariates) is assumed to be the natural logarithm. How close are the estimated coefficients to the true values?
+
+```{r}
+df <- data.frame(hospCount = hospCount, age = age, sex = sex)
+fit <- glm(hospCount ~ age + sex, data = df, family = poisson)
+summary(fit)
+```
+
+We can specify a different link function as below. How close are the estimated coefficients to the true values?
+
+```{r}
+fit2 <- glm(hospCount ~ age + sex, data = df, family = poisson(link = "sqrt"))
+summary(fit2)
+```
+
+What if we treat counts as a continuous variable and use linear regression to estimate the effect of sex and age?
+
+```{r}
+summary(lm(hospCount ~ age + sex, data = df))
+summary(lm(log(hospCount) ~ age + sex, data = df))
+summary(lm(sqrt(hospCount) ~ age + sex, data = df))
+```
+
+## Conditional logistic regression
+
+For matched case-control studies, a special type of logistic regression is more appropriate than ordinary logistic regression
+
+In a matched case-control study, there are $N$ sets of individuals where each set usually consists of one case and one or more controls. It is reasonable to believe that there is a set-specific baseline log odds. This parameter is not of interest and is often called a nuisance parameter. What is of interest is the average difference in log odds between cases and controls.
+
+**Thought exercise:** It might be attractive to say that the difference in log odds should be set-specific too. Can you see a problem with allowing this?
+
+Including a dummy variable for each stratum (case-control set) in a standard unconditional logistic regression leads to biased estimates of the log odds ratio. (Chapter 7 of [Statistical Methods in Cancer Research. Volume I - The analysis of case-control studies](http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/)) We can instead use a modified form of logistic regression called conditional logistic regression. This technique finds the coefficients that maximize the conditional likelihood (conditional on the total number of cases in a stratum). These estimates are unbiased.
+
+Let's use a simulation example to see how conditional logistic regression works. We can first simulate, for a population of 2000 people, pairs of people who have the same baseline log odds of disease (log odds of disease if unexposed to some environmental factor).
+
+```{r}
+set.seed(1)
+# 1000 baseline log odds will be repeated twice to form each pair
+baselineLogOdds <- rep(rnorm(1000, mean = -1.4, sd = 0.1), each = 2)
+pairID <- rep(seq_len(1000), each = 2)
+```
+
+We next simulate the exposure status of these 2000 people. We will set the true log odds ratio of disease comparing exposed to unexposed people to be 0.3. From this we can calculate the probability of death for each person to simulate disease status for each person within the 1000 pairs.
+
+```{r}
+## Set truth
+beta1 <- 0.3
+## Simulate exposure status
+exposed <- rbinom(2000, size = 1, prob = 0.2)
+## Calculate probability of disease
+logOdds <- baselineLogOdds + beta1*exposed
+odds <- exp(logOdds)
+p <- odds/(1+odds)
+## Simulate disease status
+disease <- rbinom(2000, size = 1, prob = p)
+```
+
+Our study is designed to look at 100 case control pairs. Let's select 100 pairs which have one disease and one undiseased person.
+
+```{r}
+diseaseMat <- matrix(disease, ncol = 2, byrow = TRUE)
+pairIDmat <- matrix(pairID, ncol = 2, byrow = TRUE)
+exposedMat <- matrix(exposed, ncol = 2, byrow = TRUE)
+## Which pairs have one diseased and one undiseased person?
+ccpairs <- which(rowSums(diseaseMat)==1)
+npairs <- 100
+## Select the first 100
+index <- head(ccpairs, npairs)
+```
+
+We can fit an ordinary logistic regression to the data by specifying a pair-specific baseline log odds with `as.factor(id)`.
+
+```{r}
+df <- data.frame(dis = as.numeric(diseaseMat[index,]),
+	id = as.numeric(pairIDmat[index,]),
+	expo = as.numeric(exposedMat[index,]))
+logfit <- glm(dis ~ expo + as.factor(id), data = df, family = binomial)
+summary(logfit)
+```
+
+Now let's fit a conditional logistic regression model. How does the estimate of the exposure coefficient compare?
+
+```{r eval=FALSE}
+## Install the survival package
+install.packages("survival")
+```
+
+```{r}
+## Load the survival package
+library(survival)
+clogfit <- clogit(dis ~ expo + strata(id), data = df)
+summary(clogfit)
+```
+
+# What if my observations are correlated?
+
+One of the assumptions when using generalized linear models to estimate effects is that observations are independent. This assumption is violated when we collect multiple outcome measurements on the same subject. This tends to happen in studies where we follow subjects over time. The field of statistics dedicated to the analysis of these data is called longitudinal data analysis.
+
+Let's investigate why traditional regression approaches might not be suited to data with correlated observations. Say that we are interested in the effect of a drug on blood glucose levels. In a randomized trial, we give each individual the drug ($x_{i1}=1$) or placebo ($x_{i1}=0$). We measure each individual's blood glucose levels using 5 different blood draws. We can model individual $i$'s blood glucose measurement for blood draw $j$ with the following model:
+
+$$ Y_{ij} = \beta_0 + \beta_1 x_{i1} + a_i + \epsilon_{ij} $$
+
+You can think of the $a_i$ above as being subject-specific baseline glucose measurements. It is this term that makes the 5 measurements within each individual correlated. In particular, the $a_i$ are mean 0 normally-distributed random variables.
+
+```{r}
+set.seed(2)
+n <- 200
+## Simulate subject-specific baseline levels
+subjSpecificBaselines <- rnorm(n, mean = 40, sd = 5)
+## Simulate treatment indicator
+x1 <- rbinom(n, size = 1, prob = 0.5)
+## True effect of the drug
+beta1 <- -2
+## Simulate observed blood glucose levels
+y <- rep(subjSpecificBaselines, each = 5) + beta1*rep(x1, each = 5) + rnorm(n*5, mean = 0, sd = 1)
+```
+
+Let's look at a plot of several individuals' measurements.
+
+```{r}
+matplot(matrix(y, nrow = 5)[,1:6], pch = 16,
+	col = rainbow(6), type = "b",
+	xlab = "Blood draw", ylab = "Blood glucose")
+```
+
+We can fit an ordinary linear regression model to the data with `lm`.
+
+```{r}
+## Construct data frame with all data
+subjectID <- rep(seq_len(n), each = 5)
+df <- data.frame(y = y, id = subjectID, x1 = rep(x1, each = 5))
+## Fit linear regression model
+lmfit <- lm(y ~ x1, data = df)
+summary(lmfit)
+confint(lmfit, parm = "x1")
+```
+
+We can fit an mixed effects model to the data with `lmer` from the `lme4` package. How do the estimates and confidence intervals compare?
+
+```{r eval=FALSE}
+## Install the lme4 package
+install.packages("lme4")
+```
+
+```{r}
+## Load the lme4 package
+library(lme4)
+## Fit a mixed effects model
+mixedfit <- lmer(y ~ x1 + (1 | id), data = df)
+summary(mixedfit)
+confint(mixedfit, parm = "x1", method = "Wald")
+```
+
+Let's compare the performance of the confidence intervals from the two methods by performing the above simulation 100 times. We know the true value for the effect of the drug is -2 (`beta1`). What do we expect for a correctly performing 95% confidence interval over these 100 simulations?
+
+```{r}
+set.seed(3)
+cis <- lapply(seq_len(100), function(i) {
+	subjSpecificBaselines <- rnorm(n, mean = 40, sd = 5)
+	x1 <- rbinom(n, size = 1, prob = 0.5)
+	y <- rep(subjSpecificBaselines, each = 5) + beta1*rep(x1, each = 5) + rnorm(n*5, mean = 0, sd = 1)
+	subjectID <- rep(seq_len(n), each = 5)
+	df <- data.frame(y = y, id = subjectID, x1 = rep(x1, each = 5))
+	lmfit <- lm(y ~ x1, data = df)
+	ci_lm <- confint(lmfit, parm = "x1")
+	mixedfit <- lmer(y ~ x1 + (1 | id), data = df)
+	ci_mixed <- confint(mixedfit, parm = "x1", method = "Wald")
+	return(list(lm = ci_lm, mixed = ci_mixed))
+})
+coverage_lm <- sapply(cis, function(l) {
+	l$lm[1] <= beta1 & l$lm[2] >= beta1
+})
+coverage_mixed <- sapply(cis, function(l) {
+	l$mixed[1] <= beta1 & l$mixed[2] >= beta1
+})
+sum(coverage_lm)/100
+sum(coverage_mixed)/100
+```
+
+# What if I have tons of predictors and want to sift out ones with negligible effects?
+
+Recall that in regression we typically want to either minimize the error of our estimates or maximize the likelihood of the data. Recall that the least squares criterion for linear regression looks like:
+
+$$ SSE(\beta) = \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 $$
+
+where the $Y_i$ are the outcomes for the $n$ subjects and $X_{ij}$ is the value of the $j$th covariate for subject $i$.
+
+There exist a class of methods called penalized regression that modify the error function above to reward certain sets of coefficient estimates over others. We'll look at the LASSO (least absolute shrinkage and selection operator) regression method.
+
+In LASSO regression, we minimize
+
+$$ SSE_\lambda(\beta) = \sum_{i=1}^n \left( Y_i - \sum_{j=1}^{p-1} X_{ij}\beta_j \right)^2 + \lambda\sum_{j=1}^p \|\beta_j\| $$
+
+Let's simulate an example dataset with many predictors that have low predictive value to see how LASSO works. Below we have 1000 observations of 100 predictors, but the first 5 have the largest effects.
+
+```{r}
+set.seed(5)
+n <- 1000
+p <- 100
+predictors <- matrix(rnorm(n*p, mean = 15, sd = 4), nrow = n, ncol = p)
+colnames(predictors) <- paste0("x", seq_len(p))
+coeffs <- c(rep(0.2, 5), rnorm(p-5, mean = 0, sd = 0.05))
+plot(density(coeffs[6:p]), xlab = "True coefficient value", main = "Coefficients 6-100")
+y <- rowSums(sweep(predictors, 2, coeffs, FUN = "*")) + rnorm(n, mean = 0, sd = 5)
+```
+
+```{r eval=FALSE}
+## Install the glmnet package
+install.packages("glmnet")
+```
+
+```{r}
+## Load the glmnet package
+library(glmnet)
+```
+
+Let's fit an ordinary linear regression model with all predictors.
+
+```{r}
+df <- data.frame(y = y, predictors)
+lmfit <- lm(y ~ ., data = df)
+estcoeffs_lmfit <- coefficients(lmfit)
+```
+
+Let's fit a penalized regression model (LASSO).
+
+```{r}
+pfit <- cv.glmnet(x = predictors, y = y)
+estcoeffs_pfit <- coef(pfit, s = "lambda.min")
+```
+
+Compare the mean squared error of the coefficients from the two methods.
+
+```{r}
+## Ordinary linear regression
+mean((estcoeffs_lmfit[2:101]-coeffs)^2)
+## Penalized regression
+mean((estcoeffs_pfit[2:101]-coeffs)^2)
+```
+
+# Are two factors independent?
+
+Often in association studies, we wish to know whether two factors are independent. When the two factors are both categorical variables, we can use statistical tests such as Pearson's chi-squared test of independence and Fisher's exact test. The chi-squared test relies on a mathematical approximation that is valid with a sufficient sample size in each cell of the contingency table. Fisher's exact test doesn't rely on this approximation and is recommended for small sample size situations.
+
+```{r}
+set.seed(1)
+n <- 40
+factor1 <- rbinom(n, size = 1, prob = 0.5)
+factor2 <- rbinom(n, size = 1, prob = 0.5)
+tab <- table(factor1, factor2)
+
+fisher.test(tab)
+prop.test(tab)
+```
+
+Let's evaluate how these two methods control the type I error rate for different samples sizes.
+
+```{r warning=FALSE}
+set.seed(2)
+nvec <- seq(20, 300, 20)
+error_rates <- lapply(nvec, function(n) {
+	pvals <- lapply(1:100, function(i) {
+		factor1 <- rbinom(n, size = 1, prob = 0.5)
+		factor2 <- rbinom(n, size = 1, prob = 0.5)
+		tab <- table(factor1, factor2)
+
+		fe_test <- fisher.test(tab)
+		chi_test <- prop.test(tab)
+		return(list(fisher = fe_test$p.value, chi = chi_test$p.value))
+	})
+	pvals_fisher <- sapply(pvals, "[[", "fisher")
+	pvals_chi <- sapply(pvals, "[[", "chi")
+	return(list(fisher = sum(pvals_fisher < 0.05)/100, chi = sum(pvals_chi < 0.05)/100))
+})
+error_fisher <- sapply(error_rates, "[[", "fisher")
+error_chi <- sapply(error_rates, "[[", "chi")
+plot(nvec, error_fisher, type = "b", xlab = "Sample size",
+	ylab = "Observed type I error rate", main = "alpha = 0.05")
+points(nvec, error_chi, col = "red", pch = 4, type = "b")
+legend("topright", legend = c("Fisher's", "chi-squared"),
+	col = c("black", "red"), lty = "solid", pch = c(1,4))
+```
+
+Let's evaluate the power of these methods for different samples sizes.
+
+```{r warning=FALSE}
+set.seed(2)
+nvec <- seq(20, 300, 20)
+effectStrength <- 0.1
+reject_rates <- lapply(nvec, function(n) {
+	pvals <- lapply(1:100, function(i) {
+		factor1 <- rbinom(n, size = 1, prob = 0.5)
+		p <- ifelse(factor1==1, 0.5+effectStrength, 0.5-effectStrength)
+		factor2 <- rbinom(n, size = 1, prob = p)
+		tab <- table(factor1, factor2)
+
+		fe_test <- fisher.test(tab)
+		chi_test <- prop.test(tab)
+		return(list(fisher = fe_test$p.value, chi = chi_test$p.value))
+	})
+	pvals_fisher <- sapply(pvals, "[[", "fisher")
+	pvals_chi <- sapply(pvals, "[[", "chi")
+	return(list(fisher = sum(pvals_fisher < 0.05)/100, chi = sum(pvals_chi < 0.05)/100))
+})
+reject_rate_fisher <- sapply(reject_rates, "[[", "fisher")
+reject_rate_chi <- sapply(reject_rates, "[[", "chi")
+plot(nvec, reject_rate_fisher, type = "b", xlab = "Sample size",
+	ylab = "Power", main = "alpha = 0.05")
+points(nvec, reject_rate_chi, col = "red", pch = 4, type = "b")
+legend("topleft", legend = c("Fisher's", "chi-squared"),
+	col = c("black", "red"), lty = "solid", pch = c(1,4))
+```
+
+# Are the values in these groups different?
+
+It is quite common in scientific research for investigators to simply compare the values in two groups. The unpaired and paired t-tests are **parametric tests** that can be used to test if the two groups have different means. They are called parametric because their validity depends on whether the data follow a certain distribution (the normal distribution). These parametric tests are also valid with a high enough sample size because of the central limit theorem. When sample sizes are lower or if the data don't follow a normal distribution, an alternative is to use **nonparametric tests**: the Wilcoxon-Mann-Whitney rank sum test and the Wilcoxon signed rank test.
+
+```{r}
+set.seed(2)
+n <- 10
+y1 <- rt(n, df = 5, ncp = 10)
+y2 <- rt(n, df = 5, ncp = 10)
+
+boxplot(y1, y2)
+t.test(y1, y2)
+wilcox.test(y1, y2)
+```
