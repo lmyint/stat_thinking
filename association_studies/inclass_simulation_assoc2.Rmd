@@ -22,8 +22,11 @@ Linear and logistic regression are special cases of generalized linear models.
 Type of data | Typical link function | Name of model(s)
 -------------------------------------------------------
 Continuous | Identity | Linear regression
+
 Binary | Logit | Logistic regression
+
 Categorical | Logit | Multinomial, ordinal logistic regression
+
 Counts | Log | Log-linear models/Poisson regression
 
 Note that for linear regression, the left hand side uses the identity function $f(x) = x$. For logistic regression, the left hand side uses the logit function $f(x) = \log(x/(1-x))$
