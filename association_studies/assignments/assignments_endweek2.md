@@ -29,9 +29,11 @@ The Zika virus has made a splash in the news, particularly because of the 2016 O
 
 ### Post-class assignment
 
-Based on class discussions of the articles above, evaluate the evidence set forth for the association between vaccination and autism risk and for the association between Zika virus exposure and birth defects. For each topic, discuss the following in paragraph form:
+Based on class discussions of the articles above, evaluate the evidence set forth for the association between vaccination and autism risk and for the association between Zika virus exposure and birth defects. For both topics ((1) vaccines and autism and (2) Zika and birth defects), discuss the following points in paragraphs. When possible, compare the approaches taken for the different stages of the study in the two articles for each topic. For example, for the two autism articles, you might discuss something along the lines of: "Article 1 performed case ascertainment using method X while article 2 performed case ascertainment with method Y. The methods from article 1 seem more reliable because..."
 
-1. What was the specific scientific question addressed by the article? How does this question fit into the general debate on the topic?
-2. What data was used to answer the question? Is it reliable?
-3. What methods were used to analyze the data? Were they appropriate?
-4. Does this study provide evidence for the association?
+1. What was the specific scientific question addressed by each article? How does this question fit into the general debate on the topic?
+2. What data were used to answer the question? Discuss any biases and uncertainties that could affect what data were collected and how this would affect the presence and magnitude of the main associations being investigated.
+3. What methods were used to analyze the data? Were they appropriate? Here you should comment on the statistical methods used throughout the study and how these methods do or do not give accurate estimates and measures of uncertainty.
+4. Does this study provide evidence for the association? Here you should look at relevant results tables and/or figures and reference specific numbers. You should evaluate the major pros and cons of the study and use this to assess the quality of evidence for the association.
+
+Please explain your answers fully and cite quotations and numbers from the articles in your explanations.
