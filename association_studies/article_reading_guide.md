@@ -41,7 +41,7 @@
 - Try writing down some of the logistic regression models fit
 - Were any sensitivity analyses performed?
 
-### Results and conclustions
+### Results and conclusions
 
 - What are the authors' findings regarding an association between mercury exposure and autism-related disorders?
 - How do the numbers in Table 3 support those findings?
