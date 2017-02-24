@@ -1,0 +1,22 @@
+# Mac files
+.DS_Store
+
+# R files
+.Rhistory
+.Rapp.history
+.RData
+
+# Notes
+notes_misc.md
+
+# Grading rubrics
+*rubric*
+
+# Assignment examples
+*example*
+
+# Generated HTMLs and PDFs
+*.html
+*.pdf
+!general_docs/course_info.pdf
+!general_docs/schedule.pdf
