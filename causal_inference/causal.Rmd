@@ -1,9 +1,12 @@
 ---
 title: "Causal Inference"
-output: ioslides_presentation
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
 ---
 
-# Introduction to causal inference ideas
+# What are causal effects?
 
 ## Slide credits
 
@@ -13,7 +16,7 @@ Much of the material draws upon or is adapted from [Elizabeth Stuart's](http://w
 
 ![](images/divorce_margarine.png)
 
-http://tylervigen.com/spurious-correlations
+[More fun with spurious correlations](http://tylervigen.com/spurious-correlations)
 
 ## Confounding
 
@@ -21,15 +24,22 @@ If we want to study the relationship between X and Y, we say that C is a confoun
 
 ## Thinking about causality
 
-Does smoking cause lung cancer?
+- Does smoking cause lung cancer?
+- Alternatively, what is the effect of smoking on the risk of developing lung cancer? We have some cause, smoking, and want to know its effect on an outcome, the risk of developing lung cancer.
+- One approach: obtain lung cancer rates in a set of people who smoke and in a set of people who do not smoke. What is wrong with this approach?
 
-Alternatively, what is the effect of smoking on the risk of developing lung cancer? We have some cause, smoking, and want to know its effect on an outcome, the risk of developing lung cancer.
+## Causal inference: goals of the field
 
-One approach: obtain lung cancer rates in a set of people who smoke and in a set of people who do not smoke. What is wrong with this approach?
+- The field of causal inference is dedicated to developing and using methods to study causal effects.
+- In particular, causal effects are the effect of a cause as opposed to the the cause of an effect
+    - Cause of an effect: what causes lung cancer?
+    - Effect of a cause: what is the effect of smoking on developing lung cancer?
 
 ## Ideal situation: observing parallel universes
 
-We would like to have a person who doesn't smoke and observe if he develops lung cancer and ideally compare to the same man in a parallel universe where he does smoke. Such a pair of outcomes is called a set of **potential outcomes**. The outcome in the parallel universe is called a **counterfactual outcome**.
+- We would like to have a person who doesn't smoke and observe if he develops lung cancer and ideally compare to the same man in a parallel universe where he does smoke.
+- Such a pair of outcomes is called a set of **potential outcomes**. The outcome in the parallel universe is called a **counterfactual outcome**.
+- A framework for thinking about potential outcomes is detailed in the **Rubin causal model**.
 
 ## Rubin causal model
 
@@ -41,7 +51,7 @@ A framework for precise formulation of causal effects
 
 ## Treatment
 
-- Must be able to be administered as an intervention
+- Must be able to be administered as an **intervention**
 - Non-examples:
     - BMI: "having a high BMI"
     - Sex: "being female"
@@ -68,20 +78,23 @@ If a study unit receives a particular level of the treatment (e.g. control) in r
 
 ## Fundamental problem of causal inference
 
-Units | $Y_i(1)$ | $Y_i(0)$
----------------------------
-  1   |    30    |    ?
-  2   |    ?     |   15
-  .   |    .     |    .
-  .   |    .     |    .
-  .   |    .     |    .
-  N   |    22    |    ?
+Example: viral load levels 5 days post-physician visit
 
-## Causal effects (ideal) {.build}
+ Units   $Y_i(1)$   $Y_i(0)$   $T_i$
+------- ---------- ---------- -------
+  1       30            ?        1
+  2       ?            15        0
+  .       .             .        .
+  .       .             .        .
+  N       22            ?        1
+
+$T_i$ is the indicator of the treatment actually received.
+
+## Causal effects (ideal)
 
 What if we could observe study unit $i$ in both parallel universes? How might we compute the causal effect of treatment for this study unit?
 
-$Y_i(1) - Y_i(0)$
+$$ Y_i(1) - Y_i(0) $$
 
 But we can't observe both of these!
 
@@ -89,17 +102,53 @@ But we can't observe both of these!
 
 Average treatment effect (ATE): average effect for everyone in the population
 
-$$ATE = \frac{1}{N}\sum_{i=1}^N (Y_i(1) - Y_i(0))$$
+$$ ATE = \frac{1}{N}\sum_{i=1}^N (Y_i(1) - Y_i(0)) $$
 
 Average treatment effect for the treated (ATT): average effect for only those treated
 
-$$ATT = \frac{1}{N}\sum_{i \in T} (Y_i(1) - Y_i(0))$$
+$$ ATT = \frac{1}{N}\sum_{i \in T} (Y_i(1) - Y_i(0)) $$
 
 where $T$ is the set of people who received the treatment ($T_i = 1$)
 
-## SUTVA (finish)
+## Examples: ATE and ATT
 
-## Assignment mechanism (finish)
+- Effect of heavy adolescent drug use on earnings at age 30
+    - ATE: average effect of drug use on everyone, if everyone were forced to take drugs
+    - ATT: average effect of drug use only on those who take drugs
+- Effect of personalized tutoring on high school GPA
+    - ATE: average effect of tutoring for everyone, if everyone were forced to get tutoring
+    - ATT: average effect of tutoring only for those who obtain tutors
+
+# How do we learn about causal effects?
+
+## Key concepts
+
+- Replication
+- Stable Unit Treatment Value Assumption (SUTVA)
+- Assignment mechanism
+
+## Replication
+
+- Collect data on multiple units where there is a mix of units receiving and not-receiving the treatment
+
+## SUTVA
+
+- If outcomes for one person could depend on someone else's treatment assignment, then the number of potential outcomes would explode
+    - e.g. Person 1's potential outcomes would not only be for treatment and control but also for both given every possible combination of other individual's treatment assigments
+- The Stable Unit Treatment Value Assumption (SUTVA) deals with this complication. It assumes:
+    1. No interference between units: treatment assignment of one unit does not a↵ect potential outcomes of another unit
+        - Drug use of one person doesn't affect someone else's outcomes
+    2. Treatment only has one version
+        - "Heavy" drug use doesn't have distinct subcategories such as "very heavy" or "moderately heavy"
+
+## Assignment mechanism
+
+- Process that determines which treatment each unit receives
+- Randomized experiments
+    - Known, clean assignment mechanism
+- Observational studies
+    - Have to guess an assignment mechanism
+    - Have to propose an explanation for why certain individuals become heavy drug users
 
 ## Exercise: comparing two groups
 
@@ -148,15 +197,21 @@ A student wishes to study the impact of feeding coffee to his soybean plants. He
 
 ## Worrying about confounding {.build}
 
-Why is confounding a worry when trying to ascertain causal effects? Consider a situation where we want to know how effective a drug is at reducing viral load but people with less severe illness are more likely to obtain the drug than those with more severe illness. How is our estimate of drug efficacy affected?
+- Why is confounding a worry when trying to ascertain causal effects?
+- Consider a situation where we want to know how effective a drug is at reducing viral load but people with less severe illness are more likely to obtain the drug than those with more severe illness.
+- How is our estimate of drug efficacy affected?
 
+<div style="text-align: center">
 ![](images/causal_diagram_treatment.png)
+</div>
 
 ## Randomized controlled trials
 
 In RCTs, study units are randomly assigned to the treatment or control condition. What does this imply about the links in the causal diagram?
 
+<div style="text-align: center">
 ![](images/causal_diagram_treatment.png)
+</div>
 
 $$ P(T \mid X, Y(0), Y(1)) = P(T \mid X) $$
 
@@ -165,8 +220,17 @@ For this reason, RCTs are said to be the gold standard for assessing causal effe
 ## Analyzing RCTs
 
 - Regression analysis
-- Permutation testing
 - Tests for comparing means in two groups
+- Permutation testing
+
+## Regression analysis
+
+$$ E[\mathrm{outcome}] = \beta_0 + \beta_T\mathrm{treatment} + \beta_1 x_1 + \cdots + \beta_p x_p $$
+
+- With randomized trials, we expect no difference in $x_1, \ldots, x_p$ between the treatment arms.
+- But there will still be some variation between the arms, and these predictors likely do help explain the outcome, so including them in the regression model is useful because we get a more refined estimate of the treatment effect.
+
+## Comparing means
 
 ## Different types of RCTs
 
