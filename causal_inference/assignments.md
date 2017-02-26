@@ -28,6 +28,7 @@ We will be having an in-class discussion and debate regarding the two articles b
 2. [A Randomized Trial of Intraarterial Treatment for Acute Ischemic Stroke](http://www.nejm.org/doi/full/10.1056/NEJMoa1411587)
 
 We will be splitting into two groups to discuss these articles:
+
 - Group 1 will defend the positions in article 1 and attack the positions in article 2.
 - Group 2 will attack the positions in article 1 and defend the positions in article 2.
 
@@ -39,6 +40,7 @@ We will be having an in-class discussion and debate regarding the two articles b
 2. [Evaluating short-term drug effects using a physician-specific prescribing preference as an instrumental variable](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2715942/)
 
 We will be splitting into two groups to discuss these articles:
+
 - Group 1 will defend the positions in article 1 and attack the positions in article 2.
 - Group 2 will attack the positions in article 1 and defend the positions in article 2.
 
