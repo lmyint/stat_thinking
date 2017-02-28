@@ -31,6 +31,7 @@ output:
 - Generalized linear models (GLMs)
 - Conditional logistic regression for matched data
 - Penalized regression
+- Power
 - Common statistical tests
 
 ## Linear regression: assumptions
@@ -215,6 +216,23 @@ Association studies can broadly be divided into two categories
 **Penalized regression** is a special type of regression that is suited to answer the second question.
 
 **Idea**: if there are lots of predictors with very small effects, you will have lower error overall if you find which ones they are and say that their estimated effects are zero.
+
+# Power
+
+## Hypothesis testing
+
+- Recall that in statistical hypothesis testing, we set up a null hypothesis to describe a situation where nothing interesting is happening.
+- Typically this corresponds to some difference being 0 or some effect being nonexistent (which is usually expressed as some difference being 0).
+- We wish to control one error probability: the type I error, which gives the probability of rejecting the null hypothesis when it is indeed true. We typically control set this to be $\alpha = 0.05$.
+
+## Hypothesis testing: decision making and power
+
+- The constraint of allowable type I error gives rise to thresholds on test statistics and p-values
+- Specifically, a given type I error rate corresponds to a test statisic threshold and a p-value threshold
+- If our test statistic exceeds the threshold in absolute value (two-tailed test), we reject the null
+- If our test statistic is lower than the p-value threshold, we reject the null
+- Given this rejection procedure, we can calculate power, which is the probability of rejecting the null given that it is false
+- To calculate power, we need to know the distribution of the test statistics if the alternative hypothesis were true. Notably this involves assuming the magnitude of the true effect
 
 # Common statistical tests
 
