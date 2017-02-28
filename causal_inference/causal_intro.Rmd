@@ -239,7 +239,7 @@ $$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \m
   N             M,150          150        144        1
 ---------------------------------------------------------
 
-Fail to reject $H_0: \beta_0 = 0$ and $H_0: \beta_1 = 0$
+Fails to reject $H_0: \beta_1 = 0$
 
 ## Control assumption: statistician 2
 
@@ -257,6 +257,8 @@ $$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \b
 
   N             M,150        $\beta_0+\beta_1+150(\beta_3+1)$     144        1
 ---------------------------------------------------------------------------------
+
+Rejects $H_0: \beta_1 = 0$
 
 # Estimating causal effects: randomized trials
 
