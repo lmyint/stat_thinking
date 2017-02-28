@@ -1,0 +1,237 @@
+---
+title: "Main ideas: evaluation of association studies"
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
+---
+
+## Main points
+
+- Research question
+    - Stating this precisely helps us understand what the study did and did not do
+    - Put this in context of what previous studies have done
+- Data: outcome, study subjects, predictors
+    - Think about systematic biases (selection, recall, ascertainment, misclassification) from epidemiology
+- Analysis
+    - What are the features of the data used? Given this, are the statistical techniques used appropriate?
+    - Sensitivity analyses
+- Conclusions
+    - Internal and external validity
+
+# Analysis
+
+## Statistical techniques and considerations
+
+- What happens when certain regression assumptions are violated?
+    - Important variables omitted
+    - Non-constant variance of error terms
+    - Measurement error in predictors
+    - Observations are not independent
+- Generalized linear models (GLMs)
+- Conditional logistic regression for matched data
+- Penalized regression
+- Common statistical tests
+
+## Linear regression: assumptions
+
+The following assumptions for linear regression ensure that estimates are unbiased and confidence intervals have the appropriate coverage probabilities (95% CIs should contain the true value 95% of the time.)
+
+- Linearity
+    - Expected outcome is a linear combination of predictors
+- Correct model specification
+    - No omitted or extraneous variables
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+- Statistical independence of the observations
+- Constant variance of the error terms
+- Normally-distributed errors
+- Independent variables are not linear combinations of each other
+    - Not so much an assumption rather than a computational issue
+    - High correlation between independent variables inflates standard errors
+- Predictors are measured without error
+
+## Violation of assumptions
+
+- Linearity
+    - Expected outcome is a linear combination of predictors
+- **Correct model specification**
+    - **No omitted or extraneous variables**
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+- Statistical independence of the observations
+- Constant variance of the error terms
+- Normally-distributed errors
+- Independent variables are not linear combinations of each other
+    - Not so much an assumption rather than a computational issue
+    - High correlation between independent variables inflates standard errors
+- Predictors are measured without error
+
+## Violation of assumptions: correct model specification
+
+Simulation studies
+
+- True regression model has $p$ predictors but you fit a model only including $k$ predictors ($k < p$)
+- Excluding highly important predictors generally increases the root mean squared error (RMSE) of the remaining predictors
+- Excluding less important predictors can increase the (RMSE) but not by as much
+- **Analogy to real world practice**: not adjusting for (un)important confounders
+
+## Violation of assumptions
+
+- Linearity
+    - Expected outcome is a linear combination of predictors
+- Correct model specification
+    - No omitted or extraneous variables
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+- Statistical independence of the observations
+- **Constant variance of the error terms**
+- Normally-distributed errors
+- Independent variables are not linear combinations of each other
+    - Not so much an assumption rather than a computational issue
+    - High correlation between independent variables inflates standard errors
+- Predictors are measured without error
+
+## Violation of assumptions: heteroskedasticity
+
+**Heteroskedasticity** describes the situation when observations have unequal variance
+
+Simulation studies
+
+- Simple linear regression model was simulated so that variability of an observation was proportional to the value of the outcome. (Higher $y$ values indicated higher variability)
+- **Weighted regression** is a technique that can be used to give observations different contributions to the final estimates
+- Success of weighted regression over ordinary regression is heavily dependent on the weights used
+- Knowing exact weights gives best performance but this is rarely possible in practice.
+
+## Violation of assumptions
+
+- Linearity
+    - Expected outcome is a linear combination of predictors
+- Correct model specification
+    - No omitted or extraneous variables
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+- Statistical independence of the observations
+- Constant variance of the error terms
+- Normally-distributed errors
+- Independent variables are not linear combinations of each other
+    - Not so much an assumption rather than a computational issue
+    - High correlation between independent variables inflates standard errors
+- **Predictors are measured without error**
+
+## Violation of assumptions: predictor measurement error
+
+Ascertainment bias is often a problem in data collection. How can this impact our estimates of the effects of variables of primary interest?
+
+Simulation studies
+
+- True predictor $x$ measured exactly without error. Add noise to it to get $x_obs$. Regress outcome $y$ on observed $x_obs$ rather than true $x$
+- As measurement error increases, the coefficient for the effect of $x$ (as measured by the noisy $x_obs$) gets more biased
+
+## Violation of assumptions
+
+- Linearity
+    - Expected outcome is a linear combination of predictors
+- Correct model specification
+    - No omitted or extraneous variables
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+- **Statistical independence of the observations**
+- Constant variance of the error terms
+- Normally-distributed errors
+- Independent variables are not linear combinations of each other
+    - Not so much an assumption rather than a computational issue
+    - High correlation between independent variables inflates standard errors
+- Predictors are measured without error
+
+## Violation of assumptions: correlated observations
+
+Observations can be thought of as pieces of information. Correlation reduces the amount of information available.
+
+ex) "Where is the ship?"
+
+Pirate: "North"
+Parrot: "North"
+
+versus
+
+Pirate 1: "North"
+Pirate 2: "North"
+
+## Violation of assumptions: correlated observations
+
+- If observations are correlated, then using ordinary regression techniques will incorrectly underestimate the variability of your estimates
+- You will think that your estimates are more precise than they actually are
+    - Impacts type I error rate: you will reject more often (think you are more certain than you are) even when it is incorrect to do so
+- **Mixed effects modeling**/**hierarchical modeling** are techniques that can be used to deal with correlated observations
+- Correlated observations often arise in longitudinal studies where you collect multiple observations on an individul over time or when your study units are nested (e.g. students within schools within school districts)
+
+## Generalized linear models
+
+Linear regression
+
+$$ E[\mathrm{continuous\:outcome}] = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Logistic regression
+
+$$ \log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+Generalized linear model
+
+$$ \mathrm{link\:function}(E[\mathrm{other\:type\:of\:outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+## Generalized linear models
+
+Most common forms:
+
+ Type of data   Link function   Name of model(s)
+-------------- --------------- -----------------------------------------------
+ Continuous       Identity             Linear regression
+ Binary            Logit              Logistic regression
+ Categorical       Logit           Multinomial, ordinal logistic regression
+ Counts             Log           Poisson regression, log-linear models
+
+## Conditional logistic regression
+
+For matched case-control studies, a special type of logistic regression is more appropriate.
+
+In a matched case-control study:
+
+- $N$ sets of individuals
+- Each set usually consists of one case and one or more controls
+- Reasonable to believe that there is a set-specific log odds. This parameter is not of interest - often called a nuisance parameter.
+    - Of interest: difference in log odds between cases and controls
+
+## Conditional logistic regression
+
+Including a dummy variable for each stratum (case-control set) in a standard unconditional logistic regression leads to biased estimates of the log odds ratio. (Chapter 7 of [Statistical Methods in Cancer Research. Volume I - The analysis of case-control studies](http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/))
+
+Instead, conditional logistic regression finds the coefficients that maximize the conditional likelihood (conditional on the total number of cases in a stratum). These estimates are unbiased.
+
+## Penalized regression
+
+Association studies can broadly be divided into two categories
+
+- How are various factors related to an outcome?
+    - Small number of measured covariates believed to be important in predicting outcome
+- What factors are related to an outcome?
+    - Large number of measured covariates, many of which have uncertain link to outcome
+
+**Penalized regression** is a special type of regression that is suited to answer the second question.
+
+**Idea**: if there are lots of predictors with very small effects, you will have lower error overall if you find which ones they are and say that their estimated effects are zero.
+
+# Common statistical tests
+
+## Are two factors independent?
+
+- Fisher's exact test, chi-squared test
+    - Two factors are unpaired. e.g. Sex and smoking
+    - Chi-squared test relies on an assumption of an appropriately high sample size (> 5 per cell)
+    - FET does not rely on that assumption but can be overly sensitive (reject too often incorrectly) with very large sample sizes
+- McNemar's test
+    - Two factors are paired. e.g. your diagnostic test result #1 and #2, mother status and baby status
+
+## Comparisons of continuous measures between groups
+
+- t-test
+    - Tests whether the means in two groups are the same
+    - Requires normally distributed data or sufficient sample size (> 30 per group)
+- Wilcoxon rank sum test
+    - Tests whether one group has higher values than the other
+    - Does not require the above assumptions but can be overly sensitive (reject too often incorrectly) with very large sample sizes
