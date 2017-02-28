@@ -1,16 +1,20 @@
 ---
-title: "Causal Inference"
+title: "Causal Inference: introduction, RCTs, discontinuity designs"
 output:
   ioslides_presentation:
     widescreen: true
     css: ../styles/styles.css
 ---
 
-# What are causal effects?
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+```
 
 ## Slide credits
 
 Much of the material draws upon or is adapted from [Elizabeth Stuart's](http://www.biostat.jhsph.edu/~estuart/index.html) slides from her [causal inference class](https://courseplus.jhu.edu/core/index.cfm/go/syl:syl.public.view/catalogID/23321)
+
+# What are causal effects?
 
 ## Correlation does not imply causation
 
@@ -27,6 +31,22 @@ If we want to study the relationship between X and Y, we say that C is a confoun
 - Does smoking cause lung cancer?
 - Alternatively, what is the effect of smoking on the risk of developing lung cancer? We have some cause, smoking, and want to know its effect on an outcome, the risk of developing lung cancer.
 - One approach: obtain lung cancer rates in a set of people who smoke and in a set of people who do not smoke. What is wrong with this approach?
+
+## Bradford-Hill criteria
+
+1. Strength (effect size)
+2. Consistency (reproducibility)
+3. Specificity
+4. Temporality
+5. Biological gradient
+6. Plausibility
+7. Coherence
+8. Experiment
+9. Analogy
+
+[Wikipedia](https://en.wikipedia.org/wiki/Bradford_Hill_criteria) and [original article](https://www.edwardtufte.com/tufte/hill)
+
+[Zika Virus and Birth Defects - Reviewing the Evidence for Causality](http://www.nejm.org/doi/full/10.1056/NEJMsr1604338)
 
 ## Causal inference: goals of the field
 
@@ -118,6 +138,8 @@ where $T$ is the set of people who received the treatment ($T_i = 1$)
 - Effect of personalized tutoring on high school GPA
     - ATE: average effect of tutoring for everyone, if everyone were forced to get tutoring
     - ATT: average effect of tutoring only for those who obtain tutors
+- ATE generally applies to beneficial interventions
+- ATT generally applies to harmful interventions
 
 # How do we learn about causal effects?
 
@@ -149,6 +171,7 @@ where $T$ is the set of people who received the treatment ($T_i = 1$)
 - Observational studies
     - Have to guess an assignment mechanism
     - Have to propose an explanation for why certain individuals become heavy drug users
+- Study designs in causal inference try to capitalize on some feature of the world that allows for knowledge about the assignment mechanisms
 
 ## Exercise: comparing two groups
 
@@ -158,11 +181,13 @@ where $T$ is the set of people who received the treatment ($T_i = 1$)
 
 Statistician 1: No evidence of differential effect of diet between sexes
 
+- Does not adjust observed weight changes (outcome) for initial weight
 - Looks at the difference in mean weight changes between men and women
 - Neither men nor women show a change in weight from September to June
 
 Statistician 2: Diet has larger effect on men
 
+- Adjusts observed weight changes for initial weight
 - Uses regression to model June weight as a function of sex and September weight
 - Holding September weight constant, men will weigh more in June on average
 
@@ -183,10 +208,6 @@ The two statisticians aren't actually able to answer the main questions:
 
 This example is known as [Lord's paradox](https://en.wikipedia.org/wiki/Lord's_paradox).
 
-<div class="notes">
-Draw a table with columns: units, sex, Yi(1), and Yi(0). Yi(1) is filled in but Yi(0) is not.
-</div>
-
 ## Lord's paradox: data in RCM form
 
 ---------------------------------------------------------
@@ -198,14 +219,13 @@ Draw a table with columns: units, sex, Yi(1), and Yi(0). Yi(1) is filled in but 
 
   .               .              .         .         .
 
-  .               .              .         .         .
-
   N             M,150            ?        144        1
 ---------------------------------------------------------
 
 ## Control assumption: statistician 1
 
-$$ E[\mathrm{June\:weight\:under\:control}] = \mathrm{Weight}_\mathrm{Sept} $$
+$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} $$
+$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \mathrm{Weight}_\mathrm{Sept} $$
 
 ---------------------------------------------------------
  Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
@@ -216,28 +236,27 @@ $$ E[\mathrm{June\:weight\:under\:control}] = \mathrm{Weight}_\mathrm{Sept} $$
 
   .               .              .         .         .
 
-  .               .              .         .         .
-
   N             M,150          150        144        1
 ---------------------------------------------------------
 
+Fail to reject $H_0: \beta_0 = 0$ and $H_0: \beta_1 = 0$
+
 ## Control assumption: statistician 2
 
-$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} $$
+$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} $$
+$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} + \mathrm{Weight}_\mathrm{Sept} $$
 
-------------------------------------------------------------------------------
- Units   Sex, Sept. weight   $Y_i(0)$                       $Y_i(1)$   $T_i$
-------- ------------------- ------------------------------ ---------- -------
-  1             M,140        $\beta_0+\beta_1+140\beta_3$     141        1
+---------------------------------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$                           $Y_i(1)$   $T_i$
+------- ------------------- ---------------------------------- ---------- -------
+  1             M,140        $\beta_0+\beta_1+140(\beta_3+1)$     141        1
 
-  2             F,120        $\beta_0+120\beta_3$             119        1
+  2             F,120        $\beta_0+120(\beta_3+1)$             119        1
 
-  .               .              .                             .         .
+  .               .              .                                 .         .
 
-  .               .              .                             .         .
-
-  N             M,150        $\beta_0+\beta_1+150\beta_3$     144        1
-------------------------------------------------------------------------------
+  N             M,150        $\beta_0+\beta_1+150(\beta_3+1)$     144        1
+---------------------------------------------------------------------------------
 
 # Estimating causal effects: randomized trials
 
@@ -265,10 +284,7 @@ This property is known as **unconfounded treatment assignment**. For this reason
 
 ## Analyzing RCTs
 
-- Regression analysis
-
-$$ E[\mathrm{outcome}] = \beta_0 + \beta_T\mathrm{treatment} + \beta_1 x_1 + \cdots + \beta_p x_p $$
-
+- Regression analysis: $E[\mathrm{outcome}] = \beta_0 + \beta_T\mathrm{treatment} + \beta_1 x_1 + \cdots + \beta_p x_p$
     - With randomized trials, we **expect** no difference in $x_1, \ldots, x_p$ between the treatment arms.
     - But there will still be some variation between the arms, and these predictors likely do help explain the outcome, so including them in the regression model is useful because we get a more refined estimate of the treatment effect.
 
@@ -325,7 +341,7 @@ $$ E[\mathrm{outcome}] = \beta_0 + \beta_T\mathrm{treatment} + \beta_1 x_1 + \cd
 - Compliance and dropout characteristics likely confound the relationship between treatment and outcome.
 - We will look more at noncompliance when we discuss instrumental variables.
 
-## How well did the randomization work? Randomization designs
+## Randomization designs
 
 - Bernoulli (coin flip)
     - Useful if subjects are coming in one at a time
@@ -348,14 +364,6 @@ $$ E[\mathrm{outcome}] = \beta_0 + \beta_T\mathrm{treatment} + \beta_1 x_1 + \cd
     - At the end of the process, the patient declines to participate
     - What if this happens over and over? What problems could arise?
 
-## Criteria for causality
-
-Bradford-Hill criteria
-
-Example: key points from Zika article on reviewing evidence for causation
-
-Put this slide towards the beginning before RCM
-
 # Estimating causal effects: interrupted time series and regression discontinuity designs
 
 ## Interrupted time series
@@ -364,104 +372,135 @@ Put this slide towards the beginning before RCM
     - Treatment: policy
     - Units: people in the population
     - Potential outcomes: health outcomes under the policy and health outcomes without the policy
+    - Estimates ATE or ATT depending on the population subject to the policy
+
+## Interrupted time series
+
 - How does the time trend of a control outcome change after the policy is introduced?
+    - Called comparative interrupted time series
     - Gets at the specificity of the intervention effect
     - If the intervention affects many different outcomes, this is weaker evidence than if it only affects the outcome of interest
+    - Allows estimates of ATE and ATT
+- Nice feature: knowing how policy was introduced means we know the assignment mechanism
 
 ## Interrupted time series
 
-```{r}
+Treated units: states subject to health insurance policy
+
+```{r fig.width=10}
+par(mar = c(5,4,0.2,2))
 ## Plot time trend of interest before and after intervention
+x <- c(1:15,15.01,16:30)
+y1_treated_counter <- 0.3*x
+y1 <- 0.3*x
+y1[x > 15] <- 0.5*x[x > 15] + 1
+plot(x[x <= 15], y1[x <= 15], type = "l", xlim = range(x), ylim = range(y1), xlab = "Time", ylab = "Outcome")
+lines(x[x > 15], y1[x > 15])
+lines(x[x > 15], y1_treated_counter[x > 15], lty = "dashed", col = "gray50")
+abline(v = 15, lwd = 4)
+text(x = 13, y = 1, labels = "Intervention")
+legend("bottomright", legend = c("Treated units (observed)", "Treated units (counterfactual)"), col = c("black", "gray50"), lty = "solid", bty = "n")
 ```
 
 ## Interrupted time series
 
-```{r}
+Treated units: states subject to health insurance policy
+
+Control units: states not subject to health insurance policy
+
+```{r fig.width=10}
+par(mar = c(5,4,0.2,2))
 ## Add time trend for control group before and after intervention
 ## This trend has a jump at intervention time
+y2_ctrl_counter <- 0.2*x + 8
+y2 <- 0.2*x + 8
+y2[x > 15] <- 0.3*x[x > 15] + 0.5 + 8
+plot(x[x <= 15], y1[x <= 15], type = "l", xlim = range(x), ylim = range(y1, y2), xlab = "Time", ylab = "Outcome")
+lines(x[x > 15], y1[x > 15])
+lines(x[x > 15], y1_treated_counter[x > 15], lty = "dashed", col = "gray50")
+## Control group
+lines(x[x <= 15], y2[x <= 15], col = "red")
+lines(x[x > 15], y2[x > 15], col = "red")
+lines(x[x > 15], y2_ctrl_counter[x > 15], lty = "dashed", col = "deeppink")
+abline(v = 15, lwd = 4)
+text(x = 13, y = 1, labels = "Intervention")
+legend("bottomright", legend = c("Treated units (observed)", "Control units (observed)", "Treated units (counterfactual)", "Control units (counterfactual)"), col = c("black", "red", "gray50", "deeppink"), lty = "solid", bty = "n")
 ```
 
 ## Interrupted time series
 
-```{r}
+Treated units: states subject to health insurance policy
+
+Control units: states not subject to health insurance policy
+
+```{r fig.width=10}
+par(mar = c(5,4,0.2,2))
 ## Add time trend for control group before and after intervention
-## This trend does not have a jump at intervention time
+## This trend has a much smaller jump at intervention time
+y2_ctrl_counter <- 0.2*x + 8
+y2 <- 0.2*x + 8
+y2[x > 15] <- 0.2*x[x > 15] + 0.05 + 8
+plot(x[x <= 15], y1[x <= 15], type = "l", xlim = range(x), ylim = range(y1, y2), xlab = "Time", ylab = "Outcome")
+lines(x[x > 15], y1[x > 15])
+lines(x[x > 15], y1_treated_counter[x > 15], lty = "dashed", col = "gray50")
+## Control group
+lines(x[x <= 15], y2[x <= 15], col = "red")
+lines(x[x > 15], y2[x > 15], col = "red")
+lines(x[x > 15], y2_ctrl_counter[x > 15], lty = "dashed", col = "deeppink")
+abline(v = 15, lwd = 4)
+text(x = 13, y = 1, labels = "Intervention")
+legend("bottomright", legend = c("Treated units (observed)", "Control units (observed)", "Treated units (counterfactual)", "Control units (counterfactual)"), col = c("black", "red", "gray50", "deeppink"), lty = "solid", bty = "n")
 ```
 
 ## Interrupted time series: caveats
 
-- History: other events that co-occur with the intervention
-    - Less of a problem if have multiple communities, or some comparison communities
-- Testing: frequent assessment may affect the measurements themselves
-    - Having many baseline observations helps; also helps if see change in outcome right at point of intervention
+- How do we model the time trends before and after the intervention?
+    - Time series methods, regression
+    - As with regression we assume that this time trend model is correctly specified
+- History: confounding due to other events that co-occur with the intervention
 - Instrumentation: if the measurement instrument or process changes over time
 - Instability: variability in the time series
+
+## Interrupted time series: caveats
+
 - Regression to the mean: tendency of extreme scores to regress toward the mean on later measurement occasions
-    - Helps if have many repeated measures
+    - If units tend to have extreme measures on their first measurement, later repeat measurements will tend to settle closer to the actual mean
+    - Helps if units have many repeated measures
 - Selection: if treatment and comparison communities different in ways that are confounded with the intervention
 - Lack of control of the implementation of the program: hard to separate out effects of the process of implementing the program from effects of the program itself
-    - Ideal would be to choose the time program is implemented randomly
+    - Ideal would be to randomly choose the time of program implementation
 
 ## Regression discontinuity
 
 - Take advantage of some arbitrary cutoff that determines who gets treatment or not
-- Treatment:
-- Units:
-- Potential outcomes:
+    - Treatment: the treatment itself (e.g. drug targeted to select populations)
+    - Units: patients
+    - Potential outcomes: college success with and without the 
 - Main argument: people just above and just below the cutoff essentially similar, except for their receipt of the intervention
-- Assumes smooth model underlying the outcome in absence of the intervention
+    - Assumes smooth model underlying the outcome in absence of the intervention
 
-```{r}
+## Regression discontinuity
 
+Example: What is the effect on college success of an advanced education program? Program is given to students who exceed a cutoff.
+
+```{r fig.width=10}
+set.seed(1)
+n <- 500
+score <- runif(n, 80, 150)
+success_null <- 0.5*score + rnorm(n, mean = 0, sd = 5)
+success_pos <- 0.5*score + rnorm(n, mean = 0, sd = 5)
+success_pos[score > 120] <- 0.5*score[score > 120] + 15 + rnorm(sum(score > 120), mean = 0, sd = 5)
+par(mfrow = c(1,2))
+plot(score, success_null, xlab = "Score", ylab = "College success", main = "No effect")
+abline(v = 120, lwd = 3)
+plot(score, success_pos, xlab = "Score", ylab = "College success", main = "Positive effect")
+abline(v = 120, lwd = 3)
 ```
 
+## Regression discontinuity: caveats
 
-
-
-
-# Estimating causal effects: nonexperimental studies
-
-## Types of nonexperimental studies
-
-- Matching studies
-    - As much as possible, replicate a randomized trial by comparing units that are as similar as possible other than the treatment
-- Natural experiments
-    - Take advantage of some chance event in life that affects who gets treatments
-- Regression dicontinuity
-    - Take advantage of some cutoff that determines who gets treated
-- Interrupted time series
-    - Take advantage of the introduction of a policy to compare outcomes before and after
-
-## Matching methods
-
-- Exact matching
-- Propensity scores
-
-## Exact matching
-
-- For each treated individual, find a control who matches on all other covariates.
-- Very difficult even with a moderate number of covariates
-
-## Propensity scores
-
-- Probability of receiving the treatment given the covariates
-
-$$ \mathrm{Propensity\:score} = P(T_i = 1 | X_i) $$
-
-- Want to match treated and untreated individuals with similar propensity scores
-    - Given their characteristics, they had almost the same chance to receive the treatment
-    - Almost as if the treatment were randomly assigned
-    - At each value of the propensity score, treatment and control groups have the same distribution of each covariate
-
-## Using propensity scores
-
-- $k$-nearest neighbor matching
-    - For each treated subject, find the $k$ controls with the closest propensity score
-- Subclassification/stratification
-    - Make a small number of groups where all units in a group fall into the same propensity score range
-- Use propensity scores as weights
-
-## Estimating propensity scores
-
-- Any method for modeling the probability of a categorical event (treatment is usually binary)
-- Logistic regression is most commonly used
+- Treatment effect estimated: not ATE or ATT but rather effect for people who barely could have received either treatment or no treatment
+- Need to check that those just above and below are comparable for confounding characteristics
+- How do we model the trend above and below the cutoff?
+- We assume that the cutoff is followed exactly
+- All participants in the intervention receive the same level and amount of intervention (SUTVA)
