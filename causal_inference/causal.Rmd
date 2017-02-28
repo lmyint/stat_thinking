@@ -20,7 +20,7 @@ Much of the material draws upon or is adapted from [Elizabeth Stuart's](http://w
 
 ## Confounding
 
-If we want to study the relationship between X and Y, we say that C is a confounder of the relationship between X and Y if C causes both X and Y.
+If we want to study the relationship between X and Y, we say that C is a confounder of the relationship between X and Y if C causes both X and Y resulting in little to no direct influence of X on Y.
 
 ## Thinking about causality
 
@@ -136,7 +136,7 @@ where $T$ is the set of people who received the treatment ($T_i = 1$)
 - If outcomes for one person could depend on someone else's treatment assignment, then the number of potential outcomes would explode
     - e.g. Person 1's potential outcomes would not only be for treatment and control but also for both given every possible combination of other individual's treatment assigments
 - The Stable Unit Treatment Value Assumption (SUTVA) deals with this complication. It assumes:
-    1. No interference between units: treatment assignment of one unit does not a↵ect potential outcomes of another unit
+    1. No interference between units: treatment assignment of one unit does not affect potential outcomes of another unit
         - Drug use of one person doesn't affect someone else's outcomes
     2. Treatment only has one version
         - "Heavy" drug use doesn't have distinct subcategories such as "very heavy" or "moderately heavy"
@@ -166,9 +166,7 @@ Statistician 2: Diet has larger effect on men
 - Uses regression to model June weight as a function of sex and September weight
 - Holding September weight constant, men will weigh more in June on average
 
-## Group work
-
-The analysis done by both statisticians can be written as a regression model. Write down this model for both statisticians.
+## Thought exercise
 
 What is the treatment? What is the causal effect?
 
@@ -178,7 +176,7 @@ Which statistician's analysis is correct for determining the causal effect?
 
 This study has no control! We are interested in the effect of university diet on weight - this is the treatment. Everyone in the study received the treatment!
 
-The two statisticians aren't actually answering the main questions
+The two statisticians aren't actually able to answer the main questions:
 
 - What is the causal effect of university diet on weight changes?
 - Is this effect different in men and women?
@@ -189,13 +187,61 @@ This example is known as [Lord's paradox](https://en.wikipedia.org/wiki/Lord's_p
 Draw a table with columns: units, sex, Yi(1), and Yi(0). Yi(1) is filled in but Yi(0) is not.
 </div>
 
-## Analogy
+## Lord's paradox: data in RCM form
 
-A student wishes to study the impact of feeding coffee to his soybean plants. He has 5 plants and gives each of them 2 oz of coffee each night for 2 weeks. He records the plant heights before the experiment and after the two weeks. He concludes that coffee administration resulted in plants growing an average of 3.7 cm in the 2 weeks.
+---------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
+------- ------------------- ---------- ---------- -------
+  1             M,140            ?        141        1
+
+  2             F,120            ?        119        1
+
+  .               .              .         .         .
+
+  .               .              .         .         .
+
+  N             M,150            ?        144        1
+---------------------------------------------------------
+
+## Control assumption: statistician 1
+
+$$ E[\mathrm{June\:weight\:under\:control}] = \mathrm{Weight}_\mathrm{Sept} $$
+
+---------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
+------- ------------------- ---------- ---------- -------
+  1             M,140          140        141        1
+
+  2             F,120          120        119        1
+
+  .               .              .         .         .
+
+  .               .              .         .         .
+
+  N             M,150          150        144        1
+---------------------------------------------------------
+
+## Control assumption: statistician 2
+
+$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} $$
+
+------------------------------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$                       $Y_i(1)$   $T_i$
+------- ------------------- ------------------------------ ---------- -------
+  1             M,140        $\beta_0+\beta_1+140\beta_3$     141        1
+
+  2             F,120        $\beta_0+120\beta_3$             119        1
+
+  .               .              .                             .         .
+
+  .               .              .                             .         .
+
+  N             M,150        $\beta_0+\beta_1+150\beta_3$     144        1
+------------------------------------------------------------------------------
 
 # Estimating causal effects: randomized trials
 
-## Worrying about confounding {.build}
+## Worrying about confounding
 
 - Why is confounding a worry when trying to ascertain causal effects?
 - Consider a situation where we want to know how effective a drug is at reducing viral load but people with less severe illness are more likely to obtain the drug than those with more severe illness.
@@ -210,56 +256,168 @@ A student wishes to study the impact of feeding coffee to his soybean plants. He
 In RCTs, study units are randomly assigned to the treatment or control condition. What does this imply about the links in the causal diagram?
 
 <div style="text-align: center">
-![](images/causal_diagram_treatment.png)
+![](images/causal_diagram_treatment_broken.png)
 </div>
 
 $$ P(T \mid X, Y(0), Y(1)) = P(T \mid X) $$
 
-For this reason, RCTs are said to be the gold standard for assessing causal effects. However, RCTs are not so clean in real life (see later slides).
+This property is known as **unconfounded treatment assignment**. For this reason, RCTs are said to be the gold standard for assessing causal effects. However, RCTs are not so clean in real life (see later slides) and sometimes aren't ethical.
 
 ## Analyzing RCTs
 
 - Regression analysis
-- Tests for comparing means in two groups
-- Permutation testing
-
-## Regression analysis
 
 $$ E[\mathrm{outcome}] = \beta_0 + \beta_T\mathrm{treatment} + \beta_1 x_1 + \cdots + \beta_p x_p $$
 
-- With randomized trials, we expect no difference in $x_1, \ldots, x_p$ between the treatment arms.
-- But there will still be some variation between the arms, and these predictors likely do help explain the outcome, so including them in the regression model is useful because we get a more refined estimate of the treatment effect.
+    - With randomized trials, we **expect** no difference in $x_1, \ldots, x_p$ between the treatment arms.
+    - But there will still be some variation between the arms, and these predictors likely do help explain the outcome, so including them in the regression model is useful because we get a more refined estimate of the treatment effect.
 
-## Comparing means
+- Tests for comparing two groups
+    - t-tests, Wilcoxon rank sum tests
+    - Tests for comparing proportions
 
-## Different types of RCTs
+## Points to consider when evaluating RCTs
 
-- Efficacy
-- Effectiveness
-- Pragmatic
+- Data quality
+    - Ascertainment biases, measurement error, missing data
+- Small sample sizes
+    - A RCT on 20 subjects is likely not better than a larger well-designed observational study.
+- Interference between units
+    - This would violate the SUTVA assumption.
+    - e.g. Could people on treatment share information with those on control?
+- Generalizability
+- How well did the randomization work?
+    - Were the different arms actually balanced for all important confounders?
+- Noncompliance
+    - Do subjects actually stick to their treatment arm?
+
+## Generalizability: RCT design spectrum
+
+- Efficacy trials
+- Effectiveness trials
+- Pragmatic trials
 
 ## Efficacy trials
 
+- Also called "explanatory trials"
+- Tries to answer: what is the effect of treatment under optimal conditions?
+- Proof of concept
+- Often has more stringent inclusion and exclusion criteria
+
 ## Effectiveness trials
+
+- Treatment is delivered as it would be "in the real world"
+- Gives a more realistic picture of how the treatment would work in practice
 
 ## Pragmatic trials
 
-## Complications in RCTs
+- Very large-scale trials
+- Enroll diverse populations and deliver "real world" versions of the treatment
+- Similar to effectiveness trials but generally describes larger studies
+- Pros: if treatment shows a positive effect, good evidence it will work in practice
+- Cons: if null results, unclear if that is the truth or if this was due to the trial not being run well enough
+- PRECIS criteria can help investigators gauge how "explanatory" or "pragmatic" their trial is
 
-- Noncompliance
-- Missing data
-- Small sample sizes
-- Interference between units
-- Infeasible or unethical
+## Noncompliance
 
-## Interpretation of RCTs
+- "It Is Essential to Study Program Implementation" and "Use What Has Been Learned About Preventing and Analyzing Attrition" (Shadish)
+- "Classically, the problem has been whether to analyze data according to how participants were assigned (an intent-to-treat analysis), which preserves the integrity of random assignment but describes the effect of assignment to treatment rather than of treatment itself, or to analyze data according to treatment received, which confounds treatment receipt with selection bias into treatment so that the causal estimate may be biased."
+- Compliance and dropout characteristics likely confound the relationship between treatment and outcome.
+- We will look more at noncompliance when we discuss instrumental variables.
 
-- How representative was the study population of the target population?
-- Does randomization itself change the nature of the effect being studied?
-    - Is there a difference between being randomized to treatment vs. selecting the treatment?
-- Does the implementation of the trial generalizable to standard practice?
-    - How much skill is required in administering the treatment?
-    - How much optimization is required of the treatment in the general population?
+## How well did the randomization work? Randomization designs
+
+- Bernoulli (coin flip)
+    - Useful if subjects are coming in one at a time
+- Complete randomization (pulling names out of a hat)
+    - Useful if want to ensure certain number of treated subjects
+- Block randomization
+    - Eliminates chance imbalances in blocking variables (e.g., gender)
+- Cluster/group randomization
+    - Relevant especially if treatment at group level. e.g. Classrooms randomized to teaching strategies rather than students randomized to learning strategies
+    - Can help make SUTVA more reasonable
+- Sequential randomization/adaptive designs
+    - Want to learn as the study progresses. e.g. In drug trials, may learn quickly that one group benefits more
+
+## How well did the randomization work? Practical considerations
+
+- "The Logistics of Selection and Assignment Can Make or Break Your Experiment" (Shadish)
+- Hypothetical situation: create random assignments beforehand (1: treament, 0: control): 1001010011
+    - First patient comes in: should be treated (don't tell patient in a blinded experiment)
+    - A lot of information must be conveyed regarding the study
+    - At the end of the process, the patient declines to participate
+    - What if this happens over and over? What problems could arise?
+
+## Criteria for causality
+
+Bradford-Hill criteria
+
+Example: key points from Zika article on reviewing evidence for causation
+
+Put this slide towards the beginning before RCM
+
+# Estimating causal effects: interrupted time series and regression discontinuity designs
+
+## Interrupted time series
+
+- How does the time trend of an outcome change after a policy is introduced?
+    - Treatment: policy
+    - Units: people in the population
+    - Potential outcomes: health outcomes under the policy and health outcomes without the policy
+- How does the time trend of a control outcome change after the policy is introduced?
+    - Gets at the specificity of the intervention effect
+    - If the intervention affects many different outcomes, this is weaker evidence than if it only affects the outcome of interest
+
+## Interrupted time series
+
+```{r}
+## Plot time trend of interest before and after intervention
+```
+
+## Interrupted time series
+
+```{r}
+## Add time trend for control group before and after intervention
+## This trend has a jump at intervention time
+```
+
+## Interrupted time series
+
+```{r}
+## Add time trend for control group before and after intervention
+## This trend does not have a jump at intervention time
+```
+
+## Interrupted time series: caveats
+
+- History: other events that co-occur with the intervention
+    - Less of a problem if have multiple communities, or some comparison communities
+- Testing: frequent assessment may affect the measurements themselves
+    - Having many baseline observations helps; also helps if see change in outcome right at point of intervention
+- Instrumentation: if the measurement instrument or process changes over time
+- Instability: variability in the time series
+- Regression to the mean: tendency of extreme scores to regress toward the mean on later measurement occasions
+    - Helps if have many repeated measures
+- Selection: if treatment and comparison communities different in ways that are confounded with the intervention
+- Lack of control of the implementation of the program: hard to separate out effects of the process of implementing the program from effects of the program itself
+    - Ideal would be to choose the time program is implemented randomly
+
+## Regression discontinuity
+
+- Take advantage of some arbitrary cutoff that determines who gets treatment or not
+- Treatment:
+- Units:
+- Potential outcomes:
+- Main argument: people just above and just below the cutoff essentially similar, except for their receipt of the intervention
+- Assumes smooth model underlying the outcome in absence of the intervention
+
+```{r}
+
+```
+
+
+
+
 
 # Estimating causal effects: nonexperimental studies
 
