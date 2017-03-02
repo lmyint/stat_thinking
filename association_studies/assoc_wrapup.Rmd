@@ -42,7 +42,7 @@ The following assumptions for linear regression ensure that estimates are unbias
     - Expected outcome is a linear combination of predictors
 - Correct model specification
     - No omitted or extraneous variables
-    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+    - Functional form of variables is correct (e.g. x versus $x^2$ or $\sqrt{x}$)
 - Statistical independence of the observations
 - Constant variance of the error terms
 - Normally-distributed errors
@@ -57,7 +57,7 @@ The following assumptions for linear regression ensure that estimates are unbias
     - Expected outcome is a linear combination of predictors
 - **Correct model specification**
     - **No omitted or extraneous variables**
-    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+    - Functional form of variables is correct
 - Statistical independence of the observations
 - Constant variance of the error terms
 - Normally-distributed errors
@@ -81,7 +81,7 @@ Simulation studies
     - Expected outcome is a linear combination of predictors
 - Correct model specification
     - No omitted or extraneous variables
-    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+    - Functional form of variables is correct
 - Statistical independence of the observations
 - **Constant variance of the error terms**
 - Normally-distributed errors
@@ -107,7 +107,7 @@ Simulation studies
     - Expected outcome is a linear combination of predictors
 - Correct model specification
     - No omitted or extraneous variables
-    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+    - Functional form of variables is correct
 - Statistical independence of the observations
 - Constant variance of the error terms
 - Normally-distributed errors
@@ -131,7 +131,7 @@ Simulation studies
     - Expected outcome is a linear combination of predictors
 - Correct model specification
     - No omitted or extraneous variables
-    - Functional form of variables is correct (e.g. x versus $x^2$ or $sqrt{x}$)
+    - Functional form of variables is correct
 - **Statistical independence of the observations**
 - Constant variance of the error terms
 - Normally-distributed errors
