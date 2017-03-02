@@ -134,7 +134,10 @@ following:
 
 1.  Collection of at least ten news articles on the chosen subject and
     three primary research papers cited by or directly related to the
-    content of those articles
+    content of those articles. Of the three research papers, at most 
+    one can be a systematic review/meta-analysis. If you choose to read 
+    more than three research papers, the additional ones can include any 
+    number of systematic reviews/meta-analyses.
 
 2.  Summary of content in the news articles and primary research papers
 
@@ -178,7 +181,9 @@ is important to get assignments in on time.
 
 Because participation is tracked, excess absences will detract from 
 your participation grade unless you provide documentation for illness 
-or extenuating circumstances.
+or extenuating circumstances. A maximum of three free absences (unexcused 
+absences for any reason) will be allowed for the semester. Beyond that point, 
+points will be deducted from your participation grade.
 
 ## Electronics
 
