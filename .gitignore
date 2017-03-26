@@ -18,8 +18,10 @@ notes_misc.md
 # Generated HTMLs and PDFs
 *.html
 *.pdf
+*.doc*
 !general_docs/course_info.pdf
 !general_docs/schedule.pdf
+!general_docs/schedule.docx
 
 # Powerpoints
 *.ppt*
