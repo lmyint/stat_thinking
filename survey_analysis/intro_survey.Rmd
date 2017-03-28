@@ -35,95 +35,6 @@ Politico: "NIH conducted the survey to help it better design the PMI study, whic
 - [About: Precision Medicine Initiative](https://ghr.nlm.nih.gov/primer/precisionmedicine/initiative)
 - [All of Us Research Program](https://www.nih.gov/research-training/allofus-research-program)
 
-# Total survey error
-
-## Components of total survey error
-
-Total survey error describes all of the possible errors that can affect our estimate of the quantitiy of interest.
-
-<div style="text-align: center">
-![](images/tse.gif)
-</div>
-
-[Reference](https://link.springer.com/referenceworkentry/10.1007%2F978-94-007-0753-5_3034)
-
-## Components of total survey error
-
-- Sampling errors: errors in estimates due to not surveying the entire population
-    - Related to the inherent variability of what we are trying to measure
-- Nonsampling errors: errors in estimates due to all other factors
-    - Nonresponse
-    - Measurement error
-    - Information bias (e.g. self-report, recall)
-
-## Sampling errors
-
-Related to standard error formulas for different estimators:
-
-$$ SE(\hat p) = \sqrt{ \frac{p(1-p)}{n} } $$
-
-$$ SE(\bar X) = \frac{s}{\sqrt n} $$
-
-This is just one aspect of estimation error!
-
-## Response rate
-
-NIH: "The study authors analyzed responses of 2,601 people, selected randomly from a representative sample of the U.S. population."
-
-Politico: "The 2,600-person survey found consistent support across racial and ethnic groups, including demographic groups that have been historically understudied in research."
-
-## Response rate
-
-- Is the number of respondents high enough to represent a spread of demographic variables?
-- We know how many people responded to the survey, but we don't know how many people were asked to take the survey. Why is this important?
-
-## Nonresponse rates
-
-How would we judge reliability of the survey results under these two situations?
-
-- 10,000 asked to take the survey. 2,601 respond
-- 3,000 asked to take the survey. 2,601 respond
-
-What are some reasons that people would not take the survey?
-
-## Nonresponse bias
-
-Those who don't take the survey could be systematically different from those who do.
-
-Notable example: Literary Digest poll during the 1936 presidential election between Franklin D. Roosevelt and Alf Landon ([Wikipedia](https://en.wikipedia.org/wiki/United_States_presidential_election,_1936#Pre-election_polling))
-
-## Dealing with nonresponse
-
-- Nonresponse seems similar to noncompliance in randomized trials - can we use an instrumental variables approach?
-- Statisticians have developed approaches for this: [Wang et al. (2014)](http://www.jstor.org/stable/24310979), [Tchetgen Tchetgen EJ, Wirth KE (2017)](https://www.ncbi.nlm.nih.gov/pubmed/28230909)
-- Difficulty is in finding a strong instrument
-
-## Dealing with nonresponse
-
-- Compare covariates of responders and nonresponders
-    - Can use census information or work with companies that maintain a database of people "representative" of various populations
-    - Often with convenience surveys (e.g. internet surveys), this information is not available.
-
-## Dealing with nonresponse
-
-- Use **multiple imputation** to assess sensitivity of estimates to potential values from nonresponders.
-    - Recall: imputation is a statistical technique used to fill in missing values.
-    - **Single imputation** guesses one value for each missing value. Does not account for the uncertainty in this filling-in process.
-    - **Multiple imputation** proposes multiple values for each missing value. Perform estimation on each of these datasets.
-
-## Dealing with nonresponse
-
-- Plan for this in the design phase
-    - For surveys that occur over time or are administered in waves, we can collect demographic information over time. We might assume that those who responded later, after a lot of prodding, are similar to the nonrespondents. ([Armstrong et al. Estimating nonresponse bias in mail surveys](http://www.jstor.org/stable/3150783))
-    - Can also use a propensity score-like approach: use logistic regression to model the probability of response given observed covariates and use these "propensity scores" to say that responders with low propensity scores are similar to nonresponders.
-
-## Measurement error and information bias
-
-- Measurement error can be dealt with using statistical techniques that acknowledge this added uncertainty.
-    - e.g. mixed effects models treat covariates as random variables rather than fixed quantities when estimating effects of interest.
-    - Recall our simulation investigation in module 1: adding noise to the $X$ variable when looking at the relationship between $Y$ and $X$.
-- To assess information bias, we would typically need to collect external data in which we know the true measurements or conduct sensitivity analyses to make qualitiative comments about the impact on our estimates.
-
 # Survey Design
 
 ## Sampling plan
@@ -235,6 +146,95 @@ Sometimes validating the measurement capabilities of a survey is an entire resea
 - Usually this involves testing the materials in a pilot study.
 
 Were there any parts of these materials that stood out to you?
+
+# Total survey error
+
+## Components of total survey error
+
+Total survey error describes all of the possible errors that can affect our estimate of the quantitiy of interest.
+
+<div style="text-align: center">
+![](images/tse.gif)
+</div>
+
+[Reference](https://link.springer.com/referenceworkentry/10.1007%2F978-94-007-0753-5_3034)
+
+## Components of total survey error
+
+- Sampling errors: errors in estimates due to not surveying the entire population
+    - Related to the inherent variability of what we are trying to measure
+- Nonsampling errors: errors in estimates due to all other factors
+    - Nonresponse
+    - Measurement error
+    - Information bias (e.g. self-report, recall)
+
+## Sampling errors
+
+Related to standard error formulas for different estimators:
+
+$$ SE(\hat p) = \sqrt{ \frac{p(1-p)}{n} } $$
+
+$$ SE(\bar X) = \frac{s}{\sqrt n} $$
+
+This is just one aspect of estimation error!
+
+## Response rate
+
+NIH: "The study authors analyzed responses of 2,601 people, selected randomly from a representative sample of the U.S. population."
+
+Politico: "The 2,600-person survey found consistent support across racial and ethnic groups, including demographic groups that have been historically understudied in research."
+
+## Response rate
+
+- Is the number of respondents high enough to represent a spread of demographic variables?
+- We know how many people responded to the survey, but we don't know how many people were asked to take the survey. Why is this important?
+
+## Nonresponse rates
+
+How would we judge reliability of the survey results under these two situations?
+
+- 10,000 asked to take the survey. 2,601 respond
+- 3,000 asked to take the survey. 2,601 respond
+
+What are some reasons that people would not take the survey?
+
+## Nonresponse bias
+
+Those who don't take the survey could be systematically different from those who do.
+
+Notable example: Literary Digest poll during the 1936 presidential election between Franklin D. Roosevelt and Alf Landon ([Wikipedia](https://en.wikipedia.org/wiki/United_States_presidential_election,_1936#Pre-election_polling))
+
+## Dealing with nonresponse
+
+- Nonresponse seems similar to noncompliance in randomized trials - can we use an instrumental variables approach?
+- Statisticians have developed approaches for this: [Wang et al. (2014)](http://www.jstor.org/stable/24310979), [Tchetgen Tchetgen EJ, Wirth KE (2017)](https://www.ncbi.nlm.nih.gov/pubmed/28230909)
+- Difficulty is in finding a strong instrument
+
+## Dealing with nonresponse
+
+- Compare covariates of responders and nonresponders
+    - Can use census information or work with companies that maintain a database of people "representative" of various populations
+    - Often with convenience surveys (e.g. internet surveys), this information is not available.
+
+## Dealing with nonresponse
+
+- Use **multiple imputation** to assess sensitivity of estimates to potential values from nonresponders.
+    - Recall: imputation is a statistical technique used to fill in missing values.
+    - **Single imputation** guesses one value for each missing value. Does not account for the uncertainty in this filling-in process.
+    - **Multiple imputation** proposes multiple values for each missing value. Perform estimation on each of these datasets.
+
+## Dealing with nonresponse
+
+- Plan for this in the design phase
+    - For surveys that occur over time or are administered in waves, we can collect demographic information over time. We might assume that those who responded later, after a lot of prodding, are similar to the nonrespondents. ([Armstrong et al. Estimating nonresponse bias in mail surveys](http://www.jstor.org/stable/3150783))
+    - Can also use a propensity score-like approach: use logistic regression to model the probability of response given observed covariates and use these "propensity scores" to say that responders with low propensity scores are similar to nonresponders.
+
+## Measurement error and information bias
+
+- Measurement error can be dealt with using statistical techniques that acknowledge this added uncertainty.
+    - e.g. mixed effects models treat covariates as random variables rather than fixed quantities when estimating effects of interest.
+    - Recall our simulation investigation in module 1: adding noise to the $X$ variable when looking at the relationship between $Y$ and $X$.
+- To assess information bias, we would typically need to collect external data in which we know the true measurements or conduct sensitivity analyses to make qualitiative comments about the impact on our estimates.
 
 # Final thoughts
 
