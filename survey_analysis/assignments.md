@@ -39,7 +39,7 @@ Read the following [original research article](http://journals.plos.org/plosone/
 
 ## Journal assignment: end of module
 
-Perform a thorough evaluation of the [PLoS research article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160461) on the Precision Medicine Initiative survey. Keeping in mind the goals of the survey, evaluate the design of the survey (including questionnaire design, informational material design, sampling plan), the results, and the conclusions.
+Perform a thorough evaluation of the [PLoS research article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160461) on the Precision Medicine Initiative survey. Keeping in mind the goals of the survey, evaluate the design of the survey (including questionnaire design, informational material design, sampling plan), the results, and the conclusions. In your evaluation, also make sure to define and explain all statistical concepts.
 
 Also answer these related questions:
 
