@@ -1,3 +1,8 @@
+---
+header-includes:
+  - \hypersetup{colorlinks=true}
+---
+
 # Module: Survey Analysis
 
 ## Class 1
