@@ -43,5 +43,5 @@ Perform a thorough evaluation of the [PLoS Medicine research article](http://jou
 
 Also answer these related questions:
 
-1. Kaplan-Meier curves were not mentioned in the statistical analysis section. Given the goals of the study, explain why the authors used Cox proportional hazards regression instead. Explain some questions that the authors could have tried to answer with Kaplan-Meier curves and log-rank tests, but also comment on the limitations of this.
+1. Kaplan-Meier curves were not mentioned in the statistical analysis section. Given the goals of the study, explain why the authors used Cox regression instead. Explain some questions that the authors could have tried to answer with Kaplan-Meier curves and log-rank tests, but also comment on the limitations of this.
 2. Suppose you wanted to further investigate the apparent implications of this study using by designing your own study in which you administer an intervention. What intervention would you use and what study design? If the claims made in this paper are indeed true, what results would you expect to see?
