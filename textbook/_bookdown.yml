@@ -1,0 +1,5 @@
+book_filename: stat_thinking
+output_dir: stat_thinking_book
+language:
+  ui:
+    chapter_name: "Chapter "

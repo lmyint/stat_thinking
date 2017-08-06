@@ -1,0 +1,25 @@
+# Causal Inference: Techniques and Designs {#chap_causal_techniques}
+
+In the last chapter, we introduced foundational ideas in the field of causal inference. In this chapter, we will be a looking at a number of statistical techniques and study designs that use these ideas to make reasonable inferences about causal effects.
+
+## Matching
+
+
+
+## Randomized controlled trials
+
+
+
+## Instrumental variable methods
+
+
+
+## Propensity scores
+
+
+
+## Interrupted time series
+
+
+
+## Regression discontinuity

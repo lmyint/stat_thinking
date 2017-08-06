@@ -1,0 +1,7 @@
+# Survival Analysis {#chap_survival}
+
+Often in health research we are interested in outcomes that are slow to occur or develop, such as disease or mortality. Studies that enroll patients for extended durations to examine these outcomes typically have the problem of incomplete data collection because patients drop out, are otherwise lost to follow-up, or never experience the outcome within the study window. These complications make necessary a particular field of analysis within biostatistics called survival analysis. In this chapter, we will learn about the particular characteristics of the data that arise in these types of long-term studies and about the statistical methods that can be used to analyze the resulting data.
+
+## Characteristics of survival data
+
+Discussion of censoring

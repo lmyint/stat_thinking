@@ -1,0 +1,71 @@
+# Modeling Essentials {#chap_modeling}
+
+Models, generally speaking, are simplified descriptions of the world that distill the workings of a system into its essential parts. We construct models mainly for two purposes: to explain our observations and to predict what will happen in the future using data we have now. Much of public health research has the goal of understanding the relationship between outcomes and exposures or other characteristics. To this end, we will expand our toolbox to include a class of models, called **generalized linear models**, that can handle different types of data we see in public health research. Because common study designs in public health research violate the assumptions for this class of models, we will also look at other modeling strategies that can be used in such cases.
+
+## Regression fundamentals
+
+Regression is a class of techniques that is used to describe outcomes as a function of predictor variables, also called **covariates**. Because there are different types of outcomes, there are also different types of regression methods that are suited for each type. You likely have learned about linear and logistic regression in previous classes. We will review both in the following sections.
+
+Throughout I will use $Y$ to denote the outcome variable and $x_1,\ldots,x_p$ to denote $p$ covariates. $E[Y]$ denotes the **expected value** of $Y$ and is another way of writing the *mean* of $Y$. It describes the average value of the outcome we would see if we had data on a very large number of outcomes. $E[Y]$ is an example of a **parameter** as we talked about in Chapter \@ref(chap_hypo_test). It is a true underlying value that describes a characteristic of the population.
+
+It will also be helpful to know the term **linear combination**. If $x_1,\ldots,x_p$ are covariate values, then a linear combination of these covariates is written as:
+
+$$ LC = a_1 x_1 + \cdots + a_p x_p $$
+
+where $a_1,\ldots,a_p$ are numbers and the result $LC$ is a number as well.
+
+### Linear regression
+
+In linear regression, we want to describe continuous measures as a function of covariates. To be concrete, let's say that our outcome measure $Y$ is the concentration of HIV particles in the blood and that $x_1,x_2,x_3$ indicate clinical and demographic covariates that might reasonably affect viral particle concentration, say age in years, sex (1 for females, 0 for males), and antiretroviral (ART) drug dosage in milligrams (mg).
+
+In linear regression, we model the expected value of $Y$ as a linear combination of covariates:
+
+$$ E[Y] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 $$
+
+$\beta_0,\beta_1,\beta_2,\beta_3$ are called **regression coefficients** and are simply numbers. **Fitting** a linear regression model is the computational process of estimating the numeric values of the $\beta$'s (column 1 in the table below).
+
+```{r reg_output, echo=FALSE}
+set.seed(3)
+n <- 500
+age <- round(4*rgamma(n, shape = 7.5, scale = 1))
+sex <- rbinom(n, size = 1, prob = 0.6)
+ART <- round(rgamma(n, shape = 5, scale = 1), 2)
+y <- 3 + 0.4*age + 0.1*sex - 0.05*ART
+y <- y + rnorm(n, mean = 0, sd = sqrt(y))
+
+df <- data.frame(hiv = y, age = age, sex = sex, ART = ART)
+lmfit <- lm(hiv ~ age+sex+ART, data = df)
+
+library(broom)
+tidy(lmfit)
+```
+
+#### Interpreting coefficients
+
+The regression coefficients in front of the covariates ($\beta_1,\beta_2,\beta_3$) have the nice interpretation of being the *expected change in outcome per 1 unit increase in the predictor, holding all other variables constant*. To see this, let's look at age ($x_1$). We will compare two people who are identical in terms of sex and ART dosage but who differ in age by 1.
+
+Person 1: Age = $a$, sex = $s$, ART dosage = $d$
+Person 2: Age = $a+1$, sex = $s$, ART dosage = $d$
+
+We can write the expected HIV particle concentration for each of them:
+
+Person 1: $E[Y_1] = \beta_0 + \beta_1a + \beta_2s + \beta_3d$
+Person 2: $E[Y_2] = \beta_0 + \beta_1(a+1) + \beta_2s + \beta_3d$
+
+The expected change in outcome comparing person 2 to person 1 is $E[Y_2] - E[Y_1]$:
+
+$$ E[Y_2] - E[Y_1] = \beta_1 $$
+
+Thus, we see that $\beta_1$ is the expected change in HIV concentration per year increase in age, holding sex and ART dosage constant.
+
+What about $\beta_0$? $\beta_0$ is called the **intercept** and represents the expected outcome (mean HIV particle concentration) for a person who has age 0, is male, and has an ART dosage of 0. It is somewhat odd to imagine someone with age 0, so for this reason, predictor variables like age are often **mean-centered**.
+
+$$ E[Y] = \beta_0 + \beta_1 (x_1 - \bar{x_1}) + \beta_2 x_2 + \beta_3 (x_3 - \bar{x_3}) $$
+
+The numeric values and the interpretations of $\beta_1,\beta_2,\beta_3$ don't change, but the numeric value and interpretation
+
+
+## Generalized linear models
+
+
+## Model selection techniques

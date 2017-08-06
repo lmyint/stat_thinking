@@ -1,0 +1,25 @@
+# Data Quality and Study Design {#chap_data_design}
+
+We begin our journey by considering the process that lies at the heart of every scientific endeavor: measurement. Measurement is the fundamental means by which we collect information about the world, and it shapes the quality of inferences we can make even before statistical tools come into the picture. Flaws in measurement result in poor data quality and dubious conclusions, so it is important to be able to recognize flags of unsound measurements. The ideas in this chapter will be relevant for the rest of the course and for evaluating science in general.
+
+
+## Framework for evaluating data quality
+
+When I think about the data used in any study, I find it useful to organize my questions by asking who, what, when, where, why, and how about the following topics:
+
+- Participants enrolled in the study
+- Outcome data collected
+- Covariate data collected
+- Validation data collected
+
+
+## Study participants
+
+
+## Outcomes
+
+
+## Covariates
+
+
+## Validation data

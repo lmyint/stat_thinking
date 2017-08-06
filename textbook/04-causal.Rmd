@@ -1,0 +1,261 @@
+# Causal Inference: Background {#chap_causal_background}
+
+Up until this point we've been looking at various statistical tools that can be used to study the relationship between outcomes and covariates. These relationships, also called associations, are interesting but not what we fundamentally care about. Ultimately science cares about identifying causes of an outcome, but unfortunately, this is a very difficult endeavor in health research. Why is it so difficult to determine if some exposure truly **causes** an outcome? To be confident in making such a strong claim, we would ideally need to compare many people who have had the exposure to many people who have not and who are otherwise identical. This is difficult to impossible in most settings! In this chapter, we are going to learn about tools and study designs that researchers use to attempt to get closer to causal effects as opposed to just associations. These tools and study designs fall under a general biostatistical area known as **causal inference.**
+
+## Bradford Hill criteria
+
+In this chapter, we are going to be learning about study designs and techniques that have statistical tools associated with them. Before we jump into that content, it is worth being aware of a set of causality criteria known as the Bradford Hill criteria^[[Wikipedia](https://en.wikipedia.org/wiki/Bradford_Hill_criteria)]. These criteria were set forth by a statistician named Sir Austin Bradford Hill in 1965 to provide some useful guidelines for assessing if a causal claim is supported by scientific literature. This is typically used in reviewing a large body of observational studies and lends itself to more qualitative discussions. The criteria he propsed are as follows:
+
+1. **Strength**: causal effects should be strong or noticeable in some sense (large effect size)
+2. **Consistency**: causal effects should be able to be shown across multiple studies (reproducibility)
+3. **Specificity**: causal effects should be specific to a certain system, population, environment
+4. **Temporality**: a cause should occur before any effects
+5. **Biological gradient**: higher levels of the causal agent should result in higher intensities of the outcome (dose-response relationship)
+6. **Plausibility**: causal effects should be supported by mechanistic explanations (answers: how?)
+7. **Coherence**: epidemiological results and laboratory results should support each other
+8. **Experiment**: is there experimental evidence where the supposed causal agent was intervened upon?
+9. **Analogy**: is the supposed causal agent similar to another agent which we strongly believe to be causally related to an outcome?
+
+```{block, type="reflect"}
+Do you agree with all of these criteria? Which, if any, would you amend and how?
+```
+
+As an example, there have been two recent papers^[[Zika Virus and Birth Defects - Reviewing the Evidence for Causality](http://www.nejm.org/doi/full/10.1056/NEJMsr1604338)] ^[[Does Zika Virus Cause Microcephaly - Applying the Bradford Hill Viewpoints](http://currents.plos.org/outbreaks/article/zika-virus-and-microcephaly-applying-the-bradford-hill-criteria-for-causation/)] using the Bradford Hill criteria to review the body of literature studying the association beteen Zika virus infection in pregnant mothers and birth defects. Feel free to look at how these authors interpreted and applied these criteria for this situation.
+
+## Exercise: comparing two statisticians
+
+Before we dive into new material, let's consider the following scenario. University officials are interested in determining if the food served at the main cafeteria is causing weight gain in the freshman class. Specifically they want to know whether this weight gain is different in men and women. They have data on the September and May weights of all members of last year's freshman class. Two statisticians are called in to conduct an analysis.
+
+Statistician A computes the weight change from September to May for each freshman and separates these differences by sex. He compares these weight changes in males and females using a t-test. He fails to reject the null hypothesis of no weight difference and concludes that there is no evidence that the cafeteria is causing differential weight gain in male and female freshmen.
+
+Statistician B models May weight as a function of September weight and gender. Specifically, he fits the following regression model:
+
+XXX - need to finish
+
+```{block, type="respond"}
+Think about what the university is trying to answer, and the methods of the two statisticians. Which statistician used the more appropriate analysis to answer the question? Why?
+```
+
+## Exercise: debriefing
+
+This example is known as [Lord's paradox](https://en.wikipedia.org/wiki/Lord's_paradox).
+
+---------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
+------- ------------------- ---------- ---------- -------
+  1             M,140            ?        141        1
+
+  2             F,120            ?        119        1
+
+  .               .              .         .         .
+
+  N             M,150            ?        144        1
+---------------------------------------------------------
+
+Control assumption: statistician 1
+
+$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} $$
+$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \mathrm{Weight}_\mathrm{Sept} $$
+
+---------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
+------- ------------------- ---------- ---------- -------
+  1             M,140          140        141        1
+
+  2             F,120          120        119        1
+
+  .               .              .         .         .
+
+  N             M,150          150        144        1
+---------------------------------------------------------
+
+Fails to reject $H_0: \beta_1 = 0$
+
+Control assumption: statistician 2
+
+$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} $$
+$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} + \mathrm{Weight}_\mathrm{Sept} $$
+
+---------------------------------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$                           $Y_i(1)$   $T_i$
+------- ------------------- ---------------------------------- ---------- -------
+  1             M,140        $\beta_0+\beta_1+140(\beta_3+1)$     141        1
+
+  2             F,120        $\beta_0+120(\beta_3+1)$             119        1
+
+  .               .              .                                 .         .
+
+  N             M,150        $\beta_0+\beta_1+150(\beta_3+1)$     144        1
+---------------------------------------------------------------------------------
+
+Rejects $H_0: \beta_1 = 0$
+
+
+## Rubin causal model
+
+What made that last example tricky for the two statisticians? We know that the university did not provide any information about student weight outcomes in the absence of the cafeteria, but this was not immediately obvious to the statisticians.
+
+When thinking about our scientific questions that attempt to get at causal effects, it is useful to have some sort of structure, some sort of guidelines in a sense, that helps us formulate the information we need. The **Rubin causal model** is one such framework that is widely used in the field of causal inference. It contains three components:
+
+- Treatment
+- Units
+- Potential outcomes
+
+A **treatment** is some program, consumable item, or the like, that can be administered to participants in the study. These participants are called **units**. A key idea is that the treatment must be able to be administered as an intervention. This is of practical importance because if the treatment does actually *cause* some change in outcomes of interest, it is useful for us to be able to intervene on the treatment (by increasing it or removing it, say) to affect outcomes in the real world. In the table below, the first column lists some general concepts that we might be interested in, the second lists typical treatments that we might think about but that are not suitable treatments in this framework, and the third column lists suitable formulations of the treatment.
+
+ Idea           Non-examples           Examples
+-------------- ---------------------- ---------------------------------
+  BMI           "Having a high BMI"    Weight loss program
+  Sex           "Being female"         Gender partial policies
+  Preferences   "Liking Pepsi"         Advertising campaigns for Pepsi
+
+We often think about causal questions such as, "Does having a high BMI cause an increased risk for heart disease?" It is a relevant and important scientific question, but it does not provide a good example of a treatment in this framework because it does not provide us a means of *studying* the effect of BMI. In a little bit, we will get to the idea of **assignment mechanisms** for treaments. An assignment mechanism tells us how different units are assigned to treatment or control and are used in the mathematics of estimating treatment effects. Being able to be assigned to treatment or control necessitates that the treatment be one that can be administered as an intervention, which is not true for "having a high BMI." Rather, we can assign people to diet and exercise programs which lead them to change their BMI.
+
+**Units**, as we discussed above, are the entities (person, place, or thing) to which we administer treatment or withold it (control). A person, place, or thing at two different times is considered as two different units. So, yourself at this moment and yourself 10 days from now are considered different units. This is sensible given that you're going to change, albeit slightly, in the next 10 days.
+
+**Potential outcomes** are outcomes that could be observed for each unit under the different levels of the treatment (typically two levels). In other words,
+
+- $Y_i(0)$ is the potential outcome for study unit $i$ under the control condition.
+- $Y_i(1)$ is the potential outcome for study unit $i$ under the treatment condition.
+
+If a study unit receives a particular level of the treatment in real life, then the outcome under the other level of the treatment is called the **counterfactual** outcome. We don't get to observe this counterfactual outcome! So if a unit received the treatment in real life, their counterfactual outcome would be the outcome under the control condition. Think of potential outcomes as splitting the world into two parallel universes
+
+If we knew a unit's potential outcome under control $Y(0)$ and under treatment $Y(1)$, then we could simply subtract the two quantities to obtain the causal effect of the treatment for that unit. Easy, right? We can just observe the unit under the control condition first and then the treatment condition (or vice-versa) to obtain these two potential outcomes. But wait! Recall that a person, place, or thing at two different times is considered as two different units. This is the case here - after we observe the unit under the control condition, it becomes a different unit which we then observe under the treament condition. The two outcomes we observe are no longer directly comparable. This leads us to the **fundamental problem of causal inference**: we can only ever observe one potential outcome for each unit. This problem is illustrated in the table below.
+
+ Units   $Y_i(1)$   $Y_i(0)$   $T_i$
+------- ---------- ---------- -------
+  1       30            ?        1
+  2       ?            15        0
+  .       .             .        .
+  10      22            ?        1
+
+```{block, type="caption"}
+Treatment ($T_i$): Exposure to a Pepsi advertising campaign ($T_i = 1$). No exposure $T_i = 0$.
+Units: American individuals
+Potential outcomes ($Y_i(1)$ and $Y_i(0)$): dollars of Pepsi purchased in a week under treatment and control
+```
+
+We see that unit 1 was exposed to the advertising campaign and has the potential outcome under the treatment condition filled in. Conversely, unit 2 was not exposed to the ad campaign and has the potential outcome under the control condition filled in. Ideally, we would subtract column three from column two and average these resulting differences to estimate the causal effect of a Pepsi advertising campaign on dollars spent on Pepsi per week.
+
+
+## Types of causal effects
+
+There are two types of causal effects that are usually estimated in causal inference studies: the **average treatment effect (ATE)** and the **average treatment effect for the treated (ATE)**.
+
+Average treatment effect (ATE): average effect for everyone in the population
+
+$$ ATE = \frac{1}{N}\sum_{i=1}^N (Y_i(1) - Y_i(0)) $$
+
+Average treatment effect for the treated (ATT): average effect for only those treated
+
+$$ ATT = \frac{1}{N}\sum_{i \in T} (Y_i(1) - Y_i(0)) $$
+
+where $T$ is the set of people who received the treatment ($T_i = 1$)
+
+Let's look at two examples to see how the ATE and ATT differ.
+
+```{block, type="example"}
+**Example:** effect of heavy adolescent drug use on earnings at age 30
+
+- ATE: average effect of drug use for everyone, if everyone were forced to take drugs
+- ATT: average effect of drug use only for those who take drugs
+```
+
+```{block, type="example"}
+**Example:** effect of personalized tutoring on high school GPA
+
+- ATE: average effect of tutoring for everyone, if everyone were forced to get tutoring
+- ATT: average effect of tutoring only for those who obtain tutors
+```
+
+We see from these examples that ATE is a useful estimate for neutral or beneficial interventions because there is no problem with theoretically administering the treatment to the entire population. The ATT generally applies to harmful interventions or interventions that we would not want our broader population of inference to experience.
+
+## How do we learn about causal effects?
+
+So far we have set up the Rubin causal model as a framework for specifying the study of causal effects. It is useful for thinking carefully about what our treatment/intervention should be and who will receive the treatment and control conditions. There are few more ideas that we need in order to use this thinking in practice for real studies.
+
+- Replication
+- Stable Unit Treatment Value Assumption (SUTVA)
+- Assignment mechanism
+
+### Replication
+
+We need data on multiple units where there is a mix of units receiving the treatment and control conditions. On the surface, this is perhaps obvious, but it was not so clear in our example on Lord's paradox. In that example, there were multiple units under the treatment (cafeteria food) condition but none under the control condition. It is not uncommon in scientific investigations for all subjects to only receive the treatment, yet investigators wish to use this data to estimate the (causal) effect of the treatment.
+
+### Stable Unit Treatment Value Assumption (SUTVA)
+
+This assumption has two parts:
+
+1. No interference between units: treatment assignment of one unit does not affect potential outcomes of another unit. e.g. One person's drug use (treatment) doesn't affect someone else's outcomes.
+2. Treatment only has one version and control only has one version. e.g. "Heavy" drug use doesn't have distinct subcategories such as "very heavy" or "moderately heavy." "Low" drug use doesn't have distinct subcategories such as "very low" or "moderately low."
+
+What is useful about having these assumptions? The second part is easier to tackle - if the treatment and/or control has more than one version, then comparisons between the treatment and control groups become murky. For example, comparing heavy drug users to low drug users is unclear if both categories have gradations. Am I obtaining the effect of high-ish drug use versus low-ish drug use?
+
+The first part of the assumption is for tractability of the analysis. Imagine that I have just two people in my study: Alice and Bob. The outcome of interest is liver function as a score from 1 to 100. If Alice and Bob never interact, then the potential outcomes might look like this:
+
+ Units   Heavy drug use   Low drug use
+------- ---------------- --------------
+ Alice        10               50
+ Bob          14               48
+
+Both Alice and Bob have potential liver function scores under the heavy and low drug use conditions. If, however, Alice and Bob had the chance to interact, it is reasonable that they might influence each other's outcomes (say by encouraging poor behavior). Then the potential outcomes become more complicated:
+
+ Units   Alice: heavy, Bob: heavy   Alice: heavy, Bob: low   Alice: low, Bob: heavy   Alice: low, Bob: low
+------- -------------------------- ------------------------ ------------------------ -----------------------
+ Alice              10                         10                      50                     50
+ Bob                8                          48                      48                     14
+
+When there was no interference, Alice only had two potential outcomes. Now with the potential for interference, Alice's two potential outcomes now also depend on Bob's drug use which increases the number of potential outcomes to 4. The same happens for Bob. With more subjects in the study, the number of potential outcomes increases exponentially. We then must ask ourselves: Which columns do we compare to estimate causal effects? Do we compare all possible combinations? Answering such questions is not easy, so we need to be careful in designing, conducting, and evaluting studies to be sure that both parts of SUTVA holds. In summary:
+
+- If part 1 of SUTVA could be violated, we must question the purity of the comparison being made. What exactly is meant by treatment group versus control group if there are gradations of treatment and control?
+- If part 2 of SUTVA could be violated, we must also question the purity of the comparison being made. With interference, the treatment group now has gradations such as "treatment with strong influence from control group" and "treatment with moderate influence from control group." In a way, part 1 of SUTVA is being violated here as well.
+
+### Assignment mechanism
+
+An assignment mechanism is a deterministic or probabilitic process that determines which treatment each unit receives. We will see shortly that the idea of an assignment mechanism generalizes the idea of selection bias.
+
+
+- Randomized experiments
+    - Known, clean assignment mechanism
+- Observational studies
+    - Have to guess an assignment mechanism
+    - Have to propose an explanation for why certain individuals become heavy drug users
+- Study designs in causal inference try to capitalize on some feature of the world that allows for knowledge about the assignment mechanisms
+
+
+
+
+
+
+
+
+## Outline
+
+- Interrupted time series
+    - Need accurate estimate of time trend before and after the intervention
+    - Is there a discontinuity in the time trend near the time of the intervention?
+    - Assume that other historical events that may co-occur with the intervention don't confound the intervention effect
+    - Are measurement practices uniform over time?
+    - Is there a control population not subject to the intervention/treatment?
+- Randomized trial
+    - What role does randomization play in estimating the treatment effect? (Hint: what is unconfounded treatment assignment?)
+    - Assume that treatment and control groups are only randomly different from each other. Can also be described as balance of covariates.
+    - Discuss randomization mechanism and how this helps achieve sample size balance in the treatment arms and covariate balance
+    - Discuss the effect of noncompliance
+    - Discuss the importance of blinding
+    - Comment on generalizability and where this trial falls on the spectrum between efficacy and pragmatic
+- Propensity scores
+    - What is a propensity score and how were they estimated?
+    - Idea that propensity scores can be used to make the treated and control groups more similar[1]
+    - Authors are estimating ATT. What is the interpretation of this?
+    - How are the propensity scores used to estimate the ATT?
+    - Discuss the "region of common support"
+    - Discuss how balance of covariates was assessed
+- Instrumental variables
+    - Explain idea behind instrumental variable approach - how are these studies "natural experiments"?
+    - What instruments were considered in this study?
+    - Instrument should be positively correlated with who gets treatment
+    - Instrument should be randomly assigned
+    - Instrument should only affect the outcomes through the treatment received (exclusion restriction)
+
+## Extrapolation as a special case of generalizability considerations
