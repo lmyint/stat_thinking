@@ -32,7 +32,7 @@ Statistician B models May weight as a function of September weight and gender. S
 
 XXX - need to finish
 
-```{block, type="respond"}
+```{block, type="reflect"}
 Think about what the university is trying to answer, and the methods of the two statisticians. Which statistician used the more appropriate analysis to answer the question? Why?
 ```
 

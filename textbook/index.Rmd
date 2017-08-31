@@ -2,6 +2,7 @@
 title: "Statistical Thinking for Informed Decision Making"
 author: "Leslie Myint"
 site: bookdown::bookdown_site
+output: bookdown::gitbook
 documentclass: book
 bibliography: references.bib
 biblio-style: apalike
@@ -12,4 +13,4 @@ description: "This is the class textbook for Statistical Thinking for Informed D
 
 # Preface {-}
 
-This is the class textbook for Statistical Thinking for Informed Decision Making. This book will serve as the source for pre-class reading on statistical concepts. Boxed sections within the book entitled **Respond on Blacboard:** should be answered and responses submitted on Blackboard before each class. Boxed sections entitled **Reflection Question** are for you to think about on your own, with no response needed on Blackboard. These will typically be a source of discussion during class.
+This is the class textbook for Statistical Thinking for Informed Decision Making. This book will serve as the source for pre-class reading on statistical concepts. Boxed sections entitled **Reflection Question** are for you to think about on your own and will be used as a source of discussion during class.
