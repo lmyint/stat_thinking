@@ -21,9 +21,9 @@ Much of the science that we are exposed to on a daily basis is not through origi
 
 Upon successfully completing this course, students will be able to:
 
-1.  Critically evaluate reporting on studies in major fields of
-    statistics including association studies, causal inference,
-    surveys, and survival analysis.
+1.  Critically evaluate scientific research articles in major areas of
+    statistics including association studies, causal inference, surveys, 
+    survival analysis, and longitudinal data analysis.
 
 2.  Understand the logistical and statistical considerations required
     for the design and analysis of such studies.
@@ -43,28 +43,33 @@ Upon successfully completing this course, students will be able to:
 7.  Apply field-specific terminology to convey ideas about such studies
     and their reporting in the news.
 
-8.  Clearly communicate informed evaluations about a particular body of
-    news.
+8.  Clearly communicate informed evaluations about a particular broad
+    scientific topic through the final project.
 
-## Resources
+## Textbook
 
-Useful resources for learning more about R programming and data analysis
-include:
+There is a custom textbook for this class that serves as both pre-class 
+reading and reference material. The textbook contains small highlighted 
+sections containing reflection questions that students should think about 
+before coming to class to be prepared for discussion.
 
--   CodeSchool's Try R course:\
-    <https://www.codeschool.com/courses/try-r>
+## Course Structure
 
--   Coursera's R programming course:\
-    <https://www.coursera.org/learn/r-programming>
+The course is divided into modules ranging from 1 to 3 weeks. Each module 
+focuses on a particular statistical area and will be associated with a 
+mix of textbook reading, lecture material, news article discussion, research 
+article discussion, and in-class interactive explorations of concepts using 
+point-and-click applications. The modules covered are as follows:
 
--   DataCamp's R programming course:\
-    <https://www.datacamp.com/courses/free-introduction-to-r>
+1. Hypothesis testing
+2. Regression modeling
+3. Causal inference
+4. Survey analysis
+5. Survival analysis
+6. Longitudinal data analysis
 
--   Advanced R by Hadley Wickham\
-    <http://adv-r.had.co.nz/>
-
--   A Handbook of Statistical Analyses Using R\
-    <https://cran.r-project.org/web/packages/HSAUR/>
+Each module will have one associated assignment to be turned in for grading. 
+More information on these assignments is given in the following section.
 
 ## Grading
 
@@ -75,70 +80,32 @@ in class by asking questions, answering questions, and contributing
 to discussions. I will be making note of participation and post 
 participation grades approximately every two weeks.
 
-**Weekly journal: Synthesis of class topics – 70%**
+**Module assignments – 70%**
 
-Students will keep a journal of responses to the required readings, 
-lectures, and discussion material. For each module, students will be 
-given a document containing required pre-class readings and questions 
-to answer before and/or after each class. These questions are intended 
-to focus students' attention on the readings and to clearly express 
-ideas discussed in class.
+Each module (except module 6) will have one assignment. These assignments 
+will vary between answering questions related to content covered and 
+activities explore in class, critiquing research articles, and 
+proposing/defending a study design to answer scientific questions.
 
-Responses will be graded weekly on content, clarity of writing, and
-appropriate use of statistics and terminology.
+Assignments will be graded on content, clarity of writing, appropriate 
+use of statistical concepts and terminology, and thoughtful evaluation 
+of data quality issues. These will always be due 9 days after the end of 
+the module.
 
-**Final project: News topic synthesis – 20%**
+**Final project: Scientific topic synthesis – 20%**
 
-Students will choose a news subject that interests them (preferably
-related to public health topics but others may be suitable—see
-instructor) and perform a comprehensive review and evaluation of news
-reporting on this subject. Requirements for the project include the
-following:
-
-1.  Collection of at least ten news articles on the chosen subject and
-    three primary research papers cited by or directly related to the
-    content of those articles. Of the three research papers, at most 
-    one can be a systematic review/meta-analysis. If you choose to read 
-    more than three research papers, the additional ones can include any 
-    number of systematic reviews/meta-analyses.
-
-2.  Summary of content in the news articles and primary research papers
-
-3.  Critical evaluation of the news articles and primary research papers
-
-4.  Proposed data analysis: students should locate where data related to
-    the topic can be found, summarize the features of the available
-    data, formulate a research question, propose an analysis plan to
-    answer that question, and defend this plan. Students do not actually
-    have to perform the analysis.
-
-5.  In-class presentation (approximately 10 minutes) giving a brief overview
-    of the subject area, news article coverage, primary research findings, 
-    and proposed data analysis (items 2-4).
-
-6.  Written report on items 2-4
-
-Throughout the semester, you will be required to turn in a document showing 
-how you have met certain milestones. These will form a small portion of the 
-final project grade.
-
-Milestone 1: Choose topic. Find 4 news articles and 1 primary research paper. 
-Write a short summary of the news articles and research paper.
-
-Milestone 2: Find at least 6 more news articles and 1 more primary research 
-paper. Write a short summary of the new material. Find and briefly discuss a 
-source of data on your topic.
-
-Milestone 3: Find the last research paper and begin planning your proposed 
-data analysis. Write a short summary of the paper and outline your data 
-analysis plan.
+Students will work in teams of up to 4, depending on class size. Teams 
+will perform a detailed investigation into the state of knowledge 
+regarding a broad scientific topic. Students can come up with this topic 
+on their own or choose from topics in a 2015 [Pew Research Center report](http://www.pewinternet.org/2015/01/29/public-and-scientists-views-on-science-and-society/).
+Teams will be required to read and evaluate a collection of news articles 
+and primary research articles. Deliverables include a group report and a group 
+presentation. More information will be given in a separate document.
 
 ## Late assignments
 
-For each day late that an assignment is submitted, 10% of the total points 
-for that assignment will be deducted. Because a lot of class activity depends 
-on doing the readings and thinking about them with your journal entries, it 
-is important to get assignments in on time.
+For every 24 hours late that an assignment is submitted, 10% of the total 
+points for that assignment will be deducted.
 
 ## Attendance Policies
 
@@ -151,12 +118,15 @@ points will be deducted from your participation grade.
 ## Electronics
 
 Laptops will be permitted during class in order to take notes, reference 
-the articles being discussed, and to perform in-class simulation activities.
+the articles being discussed, and to perform in-class simulation activities. 
+Please do not abuse this privilege by frequently using laptops for activities 
+not related to what we are doing in class.
 
 ## Exams
 
-There will be no midterm or final examinations. The final project paper 
-will be due at the end of our final exam slot: Wednesday, May 17 at 5PM.
+There will be no midterm or final examinations. The group report associated 
+with the final project will be due at the end of our final exam slot: 
+Tuesday, December 19 at 5:00PM.
 
 ## Academic Integrity
 
