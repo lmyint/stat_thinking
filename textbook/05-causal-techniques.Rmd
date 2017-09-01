@@ -8,18 +8,39 @@ In the last chapter, we introduced foundational ideas in the field of causal inf
 
 ## Randomized controlled trials
 
-
+- What role does randomization play in estimating the treatment effect? (Hint: what is unconfounded treatment assignment?)
+- Assume that treatment and control groups are only randomly different from each other. Can also be described as balance of covariates.
+- Discuss randomization mechanism and how this helps achieve sample size balance in the treatment arms and covariate balance
+- Discuss the effect of noncompliance
+- Discuss the importance of blinding
+- Comment on generalizability and where this trial falls on the spectrum between efficacy and pragmatic
 
 ## Instrumental variable methods
 
-
+- Explain idea behind instrumental variable approach - how are these studies "natural experiments"?
+- What instruments were considered in this study?
+- Instrument should be positively correlated with who gets treatment
+- Instrument should be randomly assigned
+- Instrument should only affect the outcomes through the treatment received (exclusion restriction)
 
 ## Propensity scores
 
-
+- What is a propensity score and how were they estimated?
+- Idea that propensity scores can be used to make the treated and control groups more similar[1]
+- Authors are estimating ATT. What is the interpretation of this?
+- How are the propensity scores used to estimate the ATT?
+- Discuss the "region of common support"
+- Discuss how balance of covariates was assessed
 
 ## Interrupted time series
 
-
+- Need accurate estimate of time trend before and after the intervention
+- Is there a discontinuity in the time trend near the time of the intervention?
+- Assume that other historical events that may co-occur with the intervention don't confound the intervention effect
+- Are measurement practices uniform over time?
+- Is there a control population not subject to the intervention/treatment?
 
 ## Regression discontinuity
+
+
+
