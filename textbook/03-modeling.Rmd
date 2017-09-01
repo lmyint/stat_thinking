@@ -1,8 +1,8 @@
-# Modeling Essentials {#chap_modeling}
+# Regression Modeling {#chap_modeling}
 
 Models, generally speaking, are simplified descriptions of the world that distill the workings of a system into its essential parts. We construct models mainly for two purposes: to explain our observations and to predict what will happen in the future using data we have now. Much of public health research has the goal of understanding the relationship between outcomes and exposures or other characteristics. To this end, we will expand our toolbox to include a class of models, called **generalized linear models**, that can handle different types of data we see in public health research. Because common study designs in public health research violate the assumptions for this class of models, we will also look at other modeling strategies that can be used in such cases.
 
-## Regression fundamentals
+## Regression overview
 
 Regression is a class of techniques that is used to describe outcomes as a function of predictor variables, also called **covariates**. Because there are different types of outcomes, there are also different types of regression methods that are suited for each type. You likely have learned about linear and logistic regression in previous classes. We will review both in the following sections.
 
@@ -14,7 +14,7 @@ $$ LC = a_1 x_1 + \cdots + a_p x_p $$
 
 where $a_1,\ldots,a_p$ are numbers and the result $LC$ is a number as well.
 
-### Linear regression
+## Linear regression
 
 In linear regression, we want to describe continuous measures as a function of covariates. To be concrete, let's say that our outcome measure $Y$ is the concentration of HIV particles in the blood and that $x_1,x_2,x_3$ indicate clinical and demographic covariates that might reasonably affect viral particle concentration, say age in years, sex (1 for females, 0 for males), and antiretroviral (ART) drug dosage in milligrams (mg).
 
@@ -40,7 +40,7 @@ library(broom)
 tidy(lmfit)
 ```
 
-#### Interpreting coefficients
+### Interpreting coefficients
 
 The regression coefficients in front of the covariates ($\beta_1,\beta_2,\beta_3$) have the nice interpretation of being the *expected change in outcome per 1 unit increase in the predictor, holding all other variables constant*. To see this, let's look at age ($x_1$). We will compare two people who are identical in terms of sex and ART dosage but who differ in age by 1.
 
@@ -62,8 +62,34 @@ What about $\beta_0$? $\beta_0$ is called the **intercept** and represents the e
 
 $$ E[Y] = \beta_0 + \beta_1 (x_1 - \bar{x_1}) + \beta_2 x_2 + \beta_3 (x_3 - \bar{x_3}) $$
 
-The numeric values and the interpretations of $\beta_1,\beta_2,\beta_3$ don't change, but the numeric value and interpretation
+The numeric values and the interpretations of $\beta_1,\beta_2,\beta_3$ don't change, but the numeric value and interpretation of $\beta_0$ will change. It is now interpreted as something more sensible: the expected outcome for someone of average age $\bar{x_1}$, male, and of average ART dosage $\bar{x_3}$.
 
+### Interaction
+
+The coefficients in the model we looked at above are all called **main effects**. They describe the effects of covariates holding constant the other covariates. Important to notice in this interpretation is that the effect of some factor is the *same across all individuals*.
+
+Often times, we wish to understand if effects are *different across different groups*. This can be achieved by including interaction terms in a regression model. Most often researchers will include an interaction between a continuous variable and a categorical one or between two categorical variables. For example:
+
+- How does the age effect differ across different socioeconomic categories?
+- How does the race effect differ across different countries?
+
+## Logistic regression
+
+While linear regression is used to describe continuous measures as a function of covariates, logistic regression is used to describe the probability of a binary event as a function of covariates. For logistic regression, it is helpful to remember the definition of **odds**. The odds of an event is the ratio of the probability of the event happening to the the probability of the event not happening. If $p$ is the probability of the event happening, then the odds of the event can be written as:
+
+$$ \hbox{odds} = \frac{p}{1-p} $$
+
+In logistic regression, we model the expected log odds of a binary event as a linear combination of covariates:
+
+$$ E[Y] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 $$
+
+We can go through the same process as with linear regression to obtain interpretations of coefficients in logistic regression. In linear regression, coefficients were interpreted as the expected change in outcome per unit change in covariate holding all other factors constant. In logistic regression, we replace "outcome" with "log odds of the binary event." So in logistic regression, the coefficients give the difference in log odds of the event, more commonly expressed as the log odds ratio. For example, if the binary event were disease, the interpretation of an age coefficient would be
+
+$$ \log\left( \frac{\hbox{odds of having disease at age a+1}}{\hbox{odds of having disease at age a}} \right) $$
+
+In publications these are almost always presented in exponentiated form:
+
+$$ \frac{\hbox{odds of having disease at age a+1}}{\hbox{odds of having disease at age a}} $$
 
 ## Generalized linear models
 
