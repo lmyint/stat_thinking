@@ -5,7 +5,7 @@ We begin our journey by considering the process that lies at the heart of every 
 
 ## Framework for evaluating data quality
 
-When I think about the data used in any study, I find it useful to organize my questions by asking who, what, when, where, why, and how about the following topics:
+When I think about the data used in any study, I find it useful to organize my questions by asking who, what, when, where, why, and how about each of the following topics:
 
 - Participants enrolled in the study
 - Outcome data collected
@@ -15,11 +15,89 @@ When I think about the data used in any study, I find it useful to organize my q
 
 ## Study participants
 
+**Who?**
+
+- Who took part in this study? What were their characteristics? I ask this question to get a sense of the **generalizability** of the study's results.
+- Who recruited the participants?
+
+**What?**
+
+
+**When?**
+
+- When were participants recruited? This tells me about the temporal generalizability of the results. I am also curious about any historical or societal implications of the time frame. e.g. Did this public opinion survey occur around the time of some major political event?
+- When was data collected from them? Depending on the research question, it may be best to collect data soon after study enrollment. Logistical constraints might prevent this from happening and is worth thinking about.
+
+**Where?**
+
+
+**Why?**
+
+
+**How?**
+
+
+
 
 ## Outcomes
+
+**Who?**
+
+
+**What?**
+
+
+**When?**
+
+
+**Where?**
+
+
+**Why?**
+
+
+**How?**
+
+
 
 
 ## Covariates
 
+**Who?**
+
+
+**What?**
+
+
+**When?**
+
+
+**Where?**
+
+
+**Why?**
+
+
+**How?**
+
+
+
 
 ## Validation data
+
+**Who?**
+
+
+**What?**
+
+
+**When?**
+
+
+**Where?**
+
+
+**Why?**
+
+
+**How?**
