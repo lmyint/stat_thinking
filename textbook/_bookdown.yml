@@ -1,5 +1,5 @@
 book_filename: "stat_thinking"
-output_dir: stat_thinking_book
+output_dir: ../docs
 rmd_files: ["index.Rmd", "02-testing.Rmd", "03-modeling.Rmd", "04-causal.Rmd"]
 language:
   ui:
