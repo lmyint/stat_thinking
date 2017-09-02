@@ -25,6 +25,7 @@
 !general_docs/course_info.pdf
 !general_docs/schedule.pdf
 !general_docs/schedule.docx
+!docs/*.html
 
 # Powerpoints
 *.ppt*

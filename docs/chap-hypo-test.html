@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Statistical Thinking for Informed Decision Making</title>
+  <meta name="description" content="This is the class textbook for Statistical Thinking for Informed Decision Making.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Statistical Thinking for Informed Decision Making" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the class textbook for Statistical Thinking for Informed Decision Making." />
+  <meta name="github-repo" content="lmyint/stat_thinking/textbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Statistical Thinking for Informed Decision Making" />
+  
+  <meta name="twitter:description" content="This is the class textbook for Statistical Thinking for Informed Decision Making." />
+  
+
+<meta name="author" content="Leslie Myint">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="chap-modeling.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html"><i class="fa fa-check"></i><b>1</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="1.1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#aside-what-is-statistical-inference"><i class="fa fa-check"></i><b>1.1</b> Aside: what is statistical inference?</a></li>
+<li class="chapter" data-level="1.2" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#conceptual-framework"><i class="fa fa-check"></i><b>1.2</b> Conceptual framework</a></li>
+<li class="chapter" data-level="1.3" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#statistical-details"><i class="fa fa-check"></i><b>1.3</b> Statistical details</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#one-and-two-tailed-tests"><i class="fa fa-check"></i><b>1.3.1</b> One and two-tailed tests</a></li>
+<li class="chapter" data-level="1.3.2" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#statistical-power"><i class="fa fa-check"></i><b>1.3.2</b> Statistical power</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#common-statistical-tests"><i class="fa fa-check"></i><b>1.4</b> Common statistical tests</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#tests-for-comparing-continuous-data"><i class="fa fa-check"></i><b>1.4.1</b> Tests for comparing continuous data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#tests-for-comparing-categorical-data"><i class="fa fa-check"></i><b>1.4.2</b> Tests for comparing categorical data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#multiple-testing"><i class="fa fa-check"></i><b>1.5</b> Multiple testing</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-modeling.html"><a href="chap-modeling.html"><i class="fa fa-check"></i><b>2</b> Regression Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="chap-modeling.html"><a href="chap-modeling.html#regression-overview"><i class="fa fa-check"></i><b>2.1</b> Regression overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chap-modeling.html"><a href="chap-modeling.html#linear-regression"><i class="fa fa-check"></i><b>2.2</b> Linear regression</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="chap-modeling.html"><a href="chap-modeling.html#interpreting-coefficients"><i class="fa fa-check"></i><b>2.2.1</b> Interpreting coefficients</a></li>
+<li class="chapter" data-level="2.2.2" data-path="chap-modeling.html"><a href="chap-modeling.html#interaction"><i class="fa fa-check"></i><b>2.2.2</b> Interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="chap-modeling.html"><a href="chap-modeling.html#logistic-regression"><i class="fa fa-check"></i><b>2.3</b> Logistic regression</a></li>
+<li class="chapter" data-level="2.4" data-path="chap-modeling.html"><a href="chap-modeling.html#generalized-linear-models"><i class="fa fa-check"></i><b>2.4</b> Generalized linear models</a></li>
+<li class="chapter" data-level="2.5" data-path="chap-modeling.html"><a href="chap-modeling.html#model-selection"><i class="fa fa-check"></i><b>2.5</b> Model selection</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-causal-background.html"><a href="chap-causal-background.html"><i class="fa fa-check"></i><b>3</b> Causal Inference: Background</a><ul>
+<li class="chapter" data-level="3.1" data-path="chap-causal-background.html"><a href="chap-causal-background.html#bradford-hill-criteria"><i class="fa fa-check"></i><b>3.1</b> Bradford Hill criteria</a></li>
+<li class="chapter" data-level="3.2" data-path="chap-causal-background.html"><a href="chap-causal-background.html#exercise-comparing-two-statisticians"><i class="fa fa-check"></i><b>3.2</b> Exercise: comparing two statisticians</a></li>
+<li class="chapter" data-level="3.3" data-path="chap-causal-background.html"><a href="chap-causal-background.html#rubin-causal-model"><i class="fa fa-check"></i><b>3.3</b> Rubin causal model</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-causal-background.html"><a href="chap-causal-background.html#revisiting-lords-paradox"><i class="fa fa-check"></i><b>3.3.1</b> Revisiting Lord’s paradox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-causal-background.html"><a href="chap-causal-background.html#types-of-causal-effects"><i class="fa fa-check"></i><b>3.4</b> Types of causal effects</a></li>
+<li class="chapter" data-level="3.5" data-path="chap-causal-background.html"><a href="chap-causal-background.html#how-do-we-learn-about-causal-effects"><i class="fa fa-check"></i><b>3.5</b> How do we learn about causal effects?</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chap-causal-background.html"><a href="chap-causal-background.html#replication"><i class="fa fa-check"></i><b>3.5.1</b> Replication</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chap-causal-background.html"><a href="chap-causal-background.html#stable-unit-treatment-value-assumption-sutva"><i class="fa fa-check"></i><b>3.5.2</b> Stable Unit Treatment Value Assumption (SUTVA)</a></li>
+<li class="chapter" data-level="3.5.3" data-path="chap-causal-background.html"><a href="chap-causal-background.html#assignment-mechanism"><i class="fa fa-check"></i><b>3.5.3</b> Assignment mechanism</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking for Informed Decision Making</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chap_hypo_test" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Hypothesis Testing</h1>
+<p>In this chapter, we will learn about statistical hypothesis testing, one of the most ubiquitous frameworks for making statistical inferences - for learning about the world. We will start by learning the general conceptual framework underlying hypothesis tests. This will allow us to understand a large variety of statistical tests that are commonly used in scientific practice.</p>
+<div id="aside-what-is-statistical-inference" class="section level2">
+<h2><span class="header-section-number">1.1</span> Aside: what is statistical inference?</h2>
+<p>I have said that hypothesis testing is a framework for making statistical inferences. What exactly is statistical inference? Statistical inference refers to the process of using data to make conclusions about the world. It deals with estimating true underlying quantities and expressing our uncertainty about those estimates. For example, we may assume that there is some true prevalence of malaria in a particular population which is unknown to us because we cannot collect malaria outcome data on everyone in the population. Instead, we may collect data on malaria outcomes within a certain research center. Statistical inference deals with using that collected data to estimate the true prevalence of malaria and to quantify our uncertainty about that estimate, typically with a range. This range is most often a confidence interval, a concept we will review in this chapter.</p>
+<p>Hypothesis testing, we will see, is useful for comparing groups and is most often used to identify where there are differences between groups. This is a form of statistical inference because we are still using data to learn a truth about the world - the truth being whether or not these groups of interest are different. Differences are of fundamental interest in public health and in science because we care about comparisons: comparisons of different demographic groups, of policies, of old and new treatments.</p>
+</div>
+<div id="conceptual-framework" class="section level2">
+<h2><span class="header-section-number">1.2</span> Conceptual framework</h2>
+<p>A statistical test aims to answer the question: is there a difference? This question can be made more specific in different situations:</p>
+<ul>
+<li>Is there a difference in the levels of a trait between groups? e.g. CD4 levels in different HIV risk groups.</li>
+<li>Is there a difference in the proportion of a trait between groups? e.g. Birth defects in the children of Zika-exposed and unexposed mothers.</li>
+<li>Is there a difference between the average level of a trait in population X and a meaningful cutoff value? e.g. Rate of operating room mortalities in a certain hospital as compared to the national average.</li>
+</ul>
+<p>All of the above questions are common in public health practice and can be examined in the hypothesis testing framework. Let’s develop these ideas using the example of adverse pregnancy outcomes in the children of Zika-exposed and unexposed mothers. In this case, the true underlying quantities of interest are (1) the probability of adverse pregnancy outcomes in Zika-exposed mothers <span class="math inline">\(p_E\)</span> and (2) the probability of adverse pregnancy outcomes in Zika-unexposed mothers <span class="math inline">\(p_U\)</span>. <span class="math inline">\(p_E\)</span> and <span class="math inline">\(p_U\)</span> are also referred to as <strong>parameters</strong>.</p>
+<p>The first component of a hypothesis test is the <strong>null hypothesis</strong>, denoted <span class="math inline">\(H_0\)</span>. This is a statement about the true parameters that describes the situation where <em>nothing interesting is happening</em>. It is interesting if there is a difference in the rate of birth defects between Zika-exposed and Zika-unexposed mothers. What would be uninteresting? If there were no difference in the rate of birth defects between the two groups. In other words, it would be uninteresting if the true probabilities of birth defects are the same. We can write this mathematically as:</p>
+<p><span class="math display">\[ H_0: p_E - p_U = 0 \]</span></p>
+<p>Hypothesis testing is akin to proof by contradiction. In a proof by contradiction, we assume that the opposite of what we wish to prove is true. Under this assumption, we determine what must logically follow. If we end up with a statement that is false, then our original assumption must have been wrong. For example, let’s say I want to prove the statement “Not all umbrellas are green.” In a proof by contradiction, I would assume the opposite: “All umbrellas are green.” What logically follows is that every umbrella I see must be green. I’m likely to stumble upon a counterexample very quickly, which proves my original assertion.</p>
+<p>Hypothesis testing works similarly. We set up an assumption, the null hypothesis. Under this assumption, we use the tools of probability to determine how likely our data is. If our data is unlikely under this assumption, then perhaps our assumption was wrong to begin with. The key idea is that we set up our assumption to be a description of the world with nothing interesting going on. If this assumption might be wrong, then perhaps there <em>is</em> something interesting going on. This uncertainty is what differentiates hypothesis testing from the proof by contradiction. The moral of statistics, and perhaps science in general, is that few things can ever be proven without a doubt but that we can get close with accumulation of evidence.</p>
+<p>The table below summarizes the comparison between proof by contradiction and hypothesis testing.</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="33%" />
+<col width="46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Step</th>
+<th align="left">Proof by contradiction</th>
+<th align="left">Hypothesis testing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">State what you want to show</td>
+<td align="left">Not all umbrellas are green.</td>
+<td align="left">There is a difference in the rate of birth defects between children of Zika-exposed and unexposed mothers.</td>
+</tr>
+<tr class="even">
+<td align="left">Make an assumption that is the opposite of what you want to show</td>
+<td align="left">All umbrellas are green.</td>
+<td align="left">There is no difference in the rate of birth defects between children of Zika-exposed and unexposed mothers.</td>
+</tr>
+<tr class="odd">
+<td align="left">Collect data</td>
+<td align="left">Obtain umbrellas and record their colors.</td>
+<td align="left">Collect information on birth outcomes for Zika-exposed and unexposed mothers.</td>
+</tr>
+<tr class="even">
+<td align="left">Evaluate discrepancies</td>
+<td align="left">A single counterexample of a non-green umbrella is enough to prove our original assertion.</td>
+<td align="left">Use a statistical test that provides a discrepancy measure (often a p-value).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="statistical-details" class="section level2">
+<h2><span class="header-section-number">1.3</span> Statistical details</h2>
+<p>The previous section set up the big picture ideas of hypothesis testing. In this section, we will delve into more of the statistical details. Let’s continue with our example of determining if there is a difference in the rate of adverse pregnancy outcomes in Zika-exposed and unexposed mothers. Recall that the probability of adverse pregnancy outcomes in Zika-exposed mothers is <span class="math inline">\(p_E\)</span> and <span class="math inline">\(p_U\)</span> for unexposed mothers. The null hypothesis (which we aim to gather data to refute) describes the situation where nothing interesting is happening:</p>
+<p><span class="math display">\[ H_0: p_E - p_U = 0 \]</span></p>
+<p>This states that the probabilities of birth defects are equal in both groups. Recall from the previous section that the next step is to use collected data to evaluate if it is discrepant with this null hypothesis. Let’s look at the following data from a cohort study published in late 2016:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Zika-positive</th>
+<th align="left">Zika-negative</th>
+<th align="left">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adverse pregnancy outcomes</td>
+<td align="left">58</td>
+<td align="left">7</td>
+<td align="left">65</td>
+</tr>
+<tr class="even">
+<td>No adverse pregnancy outcomes</td>
+<td align="left">67</td>
+<td align="left">54</td>
+<td align="left">121</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td align="left">125</td>
+<td align="left">61</td>
+<td align="left">186</td>
+</tr>
+</tbody>
+</table>
+<p>Note that <span class="math inline">\(p_E - p_U\)</span> in the formulation of the null hypothesis above denotes the true difference in probabilities. We can obtain an <strong>estimate</strong> of this true value by subtracting the sample proportions:</p>
+<p><span class="math display">\[ \frac{58}{125} - \frac{7}{61} = 0.35 \]</span></p>
+<p>This represents a resonable guess from our data of the difference in adverse outcome rates. We want to compare this estimate to 0, also called the <strong>null value</strong>. The null value gives the value of true difference in probabilities if nothing interesting were going on. Can’t we just use the difference between our estimate and the null value? This is a step in the right direction but how do we know if this difference is big? What if differences of 0.35 happen quite often just by chance? We need to take into account the uncertaintly/variability of the estimate (called the <strong>standard error</strong>) to see how much this difference exceeds what we might reasonably see by chance. The quantity that is computed in statistical tests that accounts for all of this information (the estimate, the standard error, and the null value) is called a <strong>test statistic</strong>. Often, but not always, a test statistic has the form</p>
+<p><span class="math display">\[ \hbox{test statistic} = \frac{\hbox{estimate} - \hbox{null value}}{\hbox{standard error of estimate}} \]</span></p>
+<p>What is common to all test statistics is that they are used to give a measure of discrepancy with the null hypothesis. When test statistics are large, we reject the null hypothesis. In this case, we would say that there is indeed a difference in rates of adverse pregnancy outcomes between the two groups of mothers. Let’s look at the formula above to see why it makes sense that larger test statistics suggest a higher level of discrepancy with the null hypothesis. We see that the test statistic is large when two things happen: (1) the estimate is far from the null value and (2) the standard error of the estimate is low. When (1) happens, our data is telling us that the quantity that we’re interested in is quite different from the null value. When (2) happens, our estimate is more reliable. So if our estimate of the truth is far from the null value <em>and</em> is reliable, there is some suggestion that we should reject the null hypothesis. Although not all test statistics have this form, they do all have the general use that large values correspond to decisions to reject the null hypothesis.</p>
+<p>How large does a test statistic need to be to reject the null hypothesis? Is a threshold of 4 suitable? Statistical theory is able to help us here. It turns out that different thresholds lead to different error rates - we may incorrectly reject the null hypothesis when we should not or we may incorrectly fail to reject the null hypothesis when we should reject it. In other words, errors occur if we claim differences when there are none or fail to notice differences when they truly exist. With this setup, the following outcomes are possible:</p>
+<table style="width:69%;">
+<colgroup>
+<col width="22%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left"><span class="math inline">\(H_0\)</span> true</th>
+<th align="left"><span class="math inline">\(H_A\)</span> true</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reject</td>
+<td align="left">False positive Type I error <span class="math inline">\(\alpha\)</span></td>
+<td align="left">True positive Power <span class="math inline">\(\beta\)</span></td>
+</tr>
+<tr class="even">
+<td>Fail to reject</td>
+<td align="left">True negative <span class="math inline">\(1-\alpha\)</span></td>
+<td align="left">False negative Type II error <span class="math inline">\(1-\beta\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To understand why different thresholds on the test statistic affect error rates, we need to understand how test statistics vary from dataset to dataset. The estimate of the true quantity of interest (<span class="math inline">\(p_E - p_U\)</span>) varies from dataset to dataset, and because it is used to compute the test statistic, the test statistic also varies from dataset to dataset. In other words, the test statistic comes from a distribution which might look something like this.</p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Note that this distribution is centered around zero. This turns out to be a good description of what the test statistics might look like if the null hypothesis were true. Why is that? If the null hypothesis is true, the true difference in probabilities is zero. Thus we expect estimates of the true difference in probabilities to be around zero. This means that the numerator of the test statistic will tend to be around zero, and the entire test statistic will tend to be around zero. All of this is under the assumption that the null hypothesis is true. This distribution is called the <strong>null distribution</strong> and is also described as the distribution of the test statistic <em>under the null hypothesis</em>.</p>
+<p>If the null hypothesis is true, any rejection of it is an error. Such an error is called a <strong>type I error</strong>, and the probability of making this type of error is used to pick thresholds for decision making in hypothesis testing. The probability of making a type I error is called the <strong>type I error rate</strong>, is denoted by <span class="math inline">\(\alpha\)</span> and can be written in probability notation as:</p>
+<p><span class="math display">\[ \alpha = P(\mathrm{reject} \mid H_0) \]</span></p>
+<p>For historical reasons, this rate is typically set to be 0.05: if the null hypothesis is true, then we expect to incorrectly reject the null hypothesis 5% of the time. In other words, if there really is no difference in the probability of adverse outcomes between the two groups, then we can expect to wrongly conclude that there is a difference 5% of the time. This 5% is very commonly adopted but can vary from discipline to discipline depending on desired levels of stringency. Lower values of <span class="math inline">\(\alpha\)</span> are more stringent because we are saying that the probability of a type I error should be lower. Statistical theory tells us how test statistic thresholds correspond to type I error probabilities. For example, with the null distribution we saw above, test statistic thresholds of 2 and 3 correspond to type I error rates of 0.073388 and 0.0133437, illustrated in the picture below.</p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>A threshold of 2 would not work if we wanted to maintain a type I error rate of 0.05 because it is associated with a higher type I error rate of 0.073388. It is too low of a threshold because using it would give a higher rate of type I errors than we want. A threshold of 3 is too high of a threshold. While the associated error rates are lower than our 0.05 threshold, using too high of a threshold on the test statistic means that we are also less likely to reject the null when it truly is false. In this example, the threshold that corresponds to <span class="math inline">\(\alpha = 0.05\)</span> is 2.23.</p>
+<p>A very closely related concept is the <strong>p-value</strong>. A p-value is calculated from a particular test statistic and represents the probability of seeing a test statistic as or more extreme than the one seen if the null hypothesis were true. Let’s say that our statistical test gave us a test statistic of <span class="math inline">\(t\)</span>, then we can express the p-value as:</p>
+<p><span class="math display">\[ \hbox{p-value} = P(|\hbox{test statistic}| \geq t \mid H_0) \]</span></p>
+<p>Similarly to how high values of the test statistic indicate higher discrepancy with the null hypothesis, low p-values indicate higher discrepancy with the null hypothesis. Why? Remember that test statistics provide a measure of discrepancy with the null hypothesis. A low p-value tells us that, if the null were true, it would be unlikely to see a test statistic as or more extreme than the one we saw.</p>
+<p>We have seen how test statistics and p-values give discrepancy measures with the null hypothesis. We have not focused our attention on looking directly at our estimate of the true difference in adverse event rates. Recall that our estimate of <span class="math inline">\(p_E - p_U\)</span> was 0.35. Surely, the difference in probabilities is not <em>exactly</em> 0.35. It would be nice to express this estimate with some sort of “wiggle” room, with some degree of uncertainty. This can be achieved with a <strong>confidence interval</strong>.</p>
+<p>A confidence interval can generally be written as</p>
+<p><span class="math display">\[ \hbox{estimate} \pm k \times \hbox{standard error of estimate} \]</span></p>
+<p>The value of <span class="math inline">\(k\)</span> determines the <strong>coverage probability</strong> of the confidence interval. The coverage probability gives the proportion of times over many data collections that such a confidence interval contains the true parameter of interest - contains the true value for the difference in adverse event rates. A coverage probability of 0.95 would indicate: “if I were to collect many different datasets and use this procedure each time to construct a confidence interval, I would expect 95% of those intervals to contain the true value of the parameter of interest.” Because confidence interval calculations often rely on approximations, the nominal coverage probabilities are sometimes not equal to the actual coverage probabilities. For example, a nominal 95% confidence interval may actually only cover the true value, say, 90% of the time.</p>
+<div id="one-and-two-tailed-tests" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> One and two-tailed tests</h3>
+<p>You will often see in scientific literature expressions such as one- and two-tailed tests. What does this mean? This refers to how p-values are calculated. Recall that a p-value is calculated from a particular test statistic and represents the probability of seeing a test statistic as or more extreme than the one seen if the null hypothesis were true. Let’s say we had a test statistic of 3. For a two-tailed test, we consider “more extreme” to be values greater than 3 or less than -3. In other words, we consider “more extreme” as being in both the positive and negative directions. This corresponds to writing the null (<span class="math inline">\(H_0\)</span>) and alternative (<span class="math inline">\(H_A\)</span>) hypotheses as:</p>
+<p><span class="math display">\[ H_0: p_E - p_U = 0 \]</span> <span class="math display">\[ H_A: p_E - p_U \neq 0 \]</span></p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>For a one-tailed test, we consider “more extreme” to be in one direction only. If in the positive direction, the situation looks like this:</p>
+<p><span class="math display">\[ H_0: p_E - p_U = 0 \]</span> <span class="math display">\[ H_A: p_E - p_U &gt; 0 \]</span></p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>If in the negative direction, the situation looks like this:</p>
+<p><span class="math display">\[ H_0: p_E - p_U = 0 \]</span> <span class="math display">\[ H_A: p_E - p_U &lt; 0 \]</span></p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>So when would we use a two-tailed vs one-tailed test? Two-tailed tests are used when we don’t know a priori if the difference should be positive or negative. In this case, we might <em>feel</em> that the difference <span class="math inline">\(p_E - p_U\)</span> should be positive because it seems that the rate of birth defects for Zika-exposed mothers would be higher. However, we don’t know for sure. One-tailed tests can be used if we know for sure that the difference is of a certain sign. People will often raise an eyebrow when one-tailed test results are reported because it is “easier” to obtain a statistically significant results. We can see from the plots above that the test statistic thresholds are lower when using one-tailed tests.</p>
+</div>
+<div id="statistical-power" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Statistical power</h3>
+<p>Statistical power is the probability of detecting an association <strong>given that there truly is an association</strong>. While p-values require us to know the distribution of the test statistic “under the null”, calculating power requires us to know the distribution “under the alternative”.</p>
+<p>The gray lines indicate the test statistic thresholds (two-tailed) for rejection for a type I error rate <span class="math inline">\(\alpha = 0.05\)</span>. The gray area is equal to to <span class="math inline">\(\alpha\)</span>.</p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Because the thresholds (gray lines) indicate when we reject the null, we can look at the pink area underneath the alternative distribution (red curve) to calculate power.</p>
+<p><img src="stat_thinking_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>There are three main determinants of statistical power:</p>
+<ul>
+<li>Type I error rate (<span class="math inline">\(\alpha\)</span>): Being more stringent (lower) with this rate is nice for controlling false positives, but it also decreases statistical power (imagine the gray lines moving outward).</li>
+<li>Effect size: This measures the distance between the null and alternative distributions (how far apart the black and red curves are). The further the alternative distribution is from the null distribution, the higher the power.</li>
+<li>Sample size: Sample size determines the precision of our estimates. (Recall that sample size always comes up in formulas for standard errors.) Estimate precision is reflected in the width of the distributions. The narrower the distributions (the more precise our estimates and the higher our sample size), the higher the power.</li>
+</ul>
+</div>
+</div>
+<div id="common-statistical-tests" class="section level2">
+<h2><span class="header-section-number">1.4</span> Common statistical tests</h2>
+<div id="tests-for-comparing-continuous-data" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Tests for comparing continuous data</h3>
+<p>The most common statistical tests used to compare continuous values in two groups are t-tests and Wilcoxon rank sum tests. With these tests, we want to know if one group has higher values than another group.</p>
+<p>In t-tests, we are essentially comparing the means of two groups and accounting for the variability of the observations. The test statistic in a t-test can be writen as</p>
+<p><span class="math display">\[ \frac{\hbox{difference in means}}{\hbox{SE(difference in means)}} \]</span></p>
+<p>The above is the situation for what is called an <strong>unpaired t-test</strong>. It is so called because the observations in the two groups aren’t linked in any way. In contrast, in a <strong>paired t-test</strong> the two “groups” are linked. This is most often seen in pre-post designs when each individual has both a pre-intervention and post-intervention measurement. In this case, we are interested in if the pre/post differences (also called change scores) are equal to 0. Here the test statistic can be written as:</p>
+<p><span class="math display">\[ \frac{\hbox{mean of the change scores}}{\hbox{SE(change scores)}} \]</span></p>
+<p>T-tests rely on the assumption that the observations come from a normal distribution or that the sample size is large enough for an approximation (this has to do with something called the <strong>central limit theorem</strong>) to kick in. An often used rule of thumb is 20 observations per group. When these assumptions are not met, the prescribed type I error rate <span class="math inline">\(\alpha\)</span>, typically set to 0.05, may not hold. That is, the actual type I error rate if you use the t-test with unmet assumptions might not actually be 0.05. When this is the case researchers use <strong>nonparametric tests</strong> called rank tests. Nonparametric tests do not make assumptions about the distribution of the data. The nonparametric equivalent of an unpaired t-test is called the <strong>Wilcoxon rank sum test</strong>. It is conceptually similar to a t-test where we replace the actual values with their ranks. Say for example that we have the following data:</p>
+<p>Group 1: 10 20 30</p>
+<p>Group 2: 15 35 40</p>
+<p>A t-test would operate on the actual values above. The rank sum test uses the ranks of the observations in the full data (combined over the two groups):</p>
+<p>Group 1: 1 3 4</p>
+<p>Group 2: 2 5 6</p>
+<p>If one group has lower values than another group, then its ranks will be lower than the other groups. The nonparametric equivalent of a paired t-test is called the <strong>signed rank test</strong> and works similarly - it compares the ranks of change scores that are negative and the ranks of change scores that are positive.</p>
+</div>
+<div id="tests-for-comparing-categorical-data" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Tests for comparing categorical data</h3>
+<p>Studies frequently wish to compare variables that are categorical. This is commonly seen in case-control studies where we wish to see if there is an association between case status (a binary variable) and exposure status (a binary variable). With categorical data tests, we are interested in assessing if two categorical variables (each variable having two or more categories) are independent. Using our Zika example, if birth defect status is independent of Zika exposure status, then there is no link between Zika and birth defects. For categorical data we can set up our data using a <strong>contingency table</strong> that contains the counts that appear in the category combinations. For example, the Zika example results in a 2-by-2 contingency table:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Zika-positive</th>
+<th align="left">Zika-negative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adverse pregnancy outcomes</td>
+<td align="left">58</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td>No adverse pregnancy outcomes</td>
+<td align="left">67</td>
+<td align="left">54</td>
+</tr>
+</tbody>
+</table>
+<p>As with continous data, there are parametric tests and nonparametric tests. The <strong>chi-squared test</strong> is a parametric test for categorical data. It assumes a certain distribution of the test statistic (the chi-squared distribution) that holds up as long as there are high enough counts in each cell of the contingency table. An often used rule of thumb is a count of at least 5 per cell. How does the chi-squared test work? It is helpful to look at two quite different contingency tables:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Disease</th>
+<th align="left">No disease</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposed</td>
+<td align="left">20</td>
+<td align="left">20</td>
+</tr>
+<tr class="even">
+<td>Unexposed</td>
+<td align="left">20</td>
+<td align="left">20</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Disease</th>
+<th align="left">No disease</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposed</td>
+<td align="left">33</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td>Unexposed</td>
+<td align="left">9</td>
+<td align="left">31</td>
+</tr>
+</tbody>
+</table>
+<p>In the first table, the counts are evenly distributed between the cells, so there is no sign of an association between exposure and disease. In particular, half of the study population is exposed and half are diseased. So if there is no association, we would expect <span class="math inline">\(0.5 \times 0.5 = 0.25\)</span> of the population to be both exposed and with disease. This is what the first table shows. If there were some association, we would expect either more or less than 25% of the population to be both exposed and with disease. We expect more than 25% if there is some positive association and les sthan 25% if there is some negative association. This is what we see in the second table. It is still the case that half of the study population is exposed and half are diseased, but now more than 25% are both exposed and with disease. This suggests some interaction, some association between exposure and disease. This comparison of observed counts to the counts we would expect with no association is how the chi-squared test works.</p>
+<p>A nonparametric version of the chi-squared test is called <strong>Fisher’s exact test</strong>. It is similar in spirit to the chi-squared test but does not rely on assuming a distribution for the test statistic. It essentially counts how many tables are more extreme than the actual contingency table. (For example, the second table is “more extreme” than the first.)</p>
+</div>
+</div>
+<div id="multiple-testing" class="section level2">
+<h2><span class="header-section-number">1.5</span> Multiple testing</h2>
+<p>It is often the case that studies perform many hypothesis tests. This may be because they are looking at many outcomes or covariates. Let’s say for example that a team wishes to perform 100 comparisons for their study, all at a type I error rate of 0.05. Say also that they happen to be studing something fruitless - none of their comparisons have a real difference (i.e. the null hypothesis is true for all of them). Just by chance, we expect them to see 5 (<span class="math inline">\(100 \times 0.05\)</span>) comparisons that show a statistically significant result! This is the problem of multiple testing and portrayed well by <a href="https://xkcd.com/882/">this xkcd comic</a>.</p>
+<p>When scientists perform several hypothesis tests, they can make adjustments to their p-value thresholds for rejecting the null hypothesis. For example, the <strong>Boneferroni correction</strong> divides the typical type I error rate of 0.05 by the number of tests. In this way, the type I error rate of 0.05 is now expected over <em>all of the tests</em> instead of just a single test.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["stat_thinking.pdf"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Statistical Thinking for Informed Decision Making</title>
+  <meta name="description" content="This is the class textbook for Statistical Thinking for Informed Decision Making.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Statistical Thinking for Informed Decision Making" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the class textbook for Statistical Thinking for Informed Decision Making." />
+  <meta name="github-repo" content="lmyint/stat_thinking/textbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Statistical Thinking for Informed Decision Making" />
+  
+  <meta name="twitter:description" content="This is the class textbook for Statistical Thinking for Informed Decision Making." />
+  
+
+<meta name="author" content="Leslie Myint">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="chap-modeling.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html"><i class="fa fa-check"></i><b>1</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="1.1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#aside-what-is-statistical-inference"><i class="fa fa-check"></i><b>1.1</b> Aside: what is statistical inference?</a></li>
+<li class="chapter" data-level="1.2" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#conceptual-framework"><i class="fa fa-check"></i><b>1.2</b> Conceptual framework</a></li>
+<li class="chapter" data-level="1.3" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#statistical-details"><i class="fa fa-check"></i><b>1.3</b> Statistical details</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#one-and-two-tailed-tests"><i class="fa fa-check"></i><b>1.3.1</b> One and two-tailed tests</a></li>
+<li class="chapter" data-level="1.3.2" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#statistical-power"><i class="fa fa-check"></i><b>1.3.2</b> Statistical power</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#common-statistical-tests"><i class="fa fa-check"></i><b>1.4</b> Common statistical tests</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#tests-for-comparing-continuous-data"><i class="fa fa-check"></i><b>1.4.1</b> Tests for comparing continuous data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#tests-for-comparing-categorical-data"><i class="fa fa-check"></i><b>1.4.2</b> Tests for comparing categorical data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="chap-hypo-test.html"><a href="chap-hypo-test.html#multiple-testing"><i class="fa fa-check"></i><b>1.5</b> Multiple testing</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-modeling.html"><a href="chap-modeling.html"><i class="fa fa-check"></i><b>2</b> Regression Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="chap-modeling.html"><a href="chap-modeling.html#regression-overview"><i class="fa fa-check"></i><b>2.1</b> Regression overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chap-modeling.html"><a href="chap-modeling.html#linear-regression"><i class="fa fa-check"></i><b>2.2</b> Linear regression</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="chap-modeling.html"><a href="chap-modeling.html#interpreting-coefficients"><i class="fa fa-check"></i><b>2.2.1</b> Interpreting coefficients</a></li>
+<li class="chapter" data-level="2.2.2" data-path="chap-modeling.html"><a href="chap-modeling.html#interaction"><i class="fa fa-check"></i><b>2.2.2</b> Interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="chap-modeling.html"><a href="chap-modeling.html#logistic-regression"><i class="fa fa-check"></i><b>2.3</b> Logistic regression</a></li>
+<li class="chapter" data-level="2.4" data-path="chap-modeling.html"><a href="chap-modeling.html#generalized-linear-models"><i class="fa fa-check"></i><b>2.4</b> Generalized linear models</a></li>
+<li class="chapter" data-level="2.5" data-path="chap-modeling.html"><a href="chap-modeling.html#model-selection"><i class="fa fa-check"></i><b>2.5</b> Model selection</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-causal-background.html"><a href="chap-causal-background.html"><i class="fa fa-check"></i><b>3</b> Causal Inference: Background</a><ul>
+<li class="chapter" data-level="3.1" data-path="chap-causal-background.html"><a href="chap-causal-background.html#bradford-hill-criteria"><i class="fa fa-check"></i><b>3.1</b> Bradford Hill criteria</a></li>
+<li class="chapter" data-level="3.2" data-path="chap-causal-background.html"><a href="chap-causal-background.html#exercise-comparing-two-statisticians"><i class="fa fa-check"></i><b>3.2</b> Exercise: comparing two statisticians</a></li>
+<li class="chapter" data-level="3.3" data-path="chap-causal-background.html"><a href="chap-causal-background.html#rubin-causal-model"><i class="fa fa-check"></i><b>3.3</b> Rubin causal model</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-causal-background.html"><a href="chap-causal-background.html#revisiting-lords-paradox"><i class="fa fa-check"></i><b>3.3.1</b> Revisiting Lord’s paradox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-causal-background.html"><a href="chap-causal-background.html#types-of-causal-effects"><i class="fa fa-check"></i><b>3.4</b> Types of causal effects</a></li>
+<li class="chapter" data-level="3.5" data-path="chap-causal-background.html"><a href="chap-causal-background.html#how-do-we-learn-about-causal-effects"><i class="fa fa-check"></i><b>3.5</b> How do we learn about causal effects?</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chap-causal-background.html"><a href="chap-causal-background.html#replication"><i class="fa fa-check"></i><b>3.5.1</b> Replication</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chap-causal-background.html"><a href="chap-causal-background.html#stable-unit-treatment-value-assumption-sutva"><i class="fa fa-check"></i><b>3.5.2</b> Stable Unit Treatment Value Assumption (SUTVA)</a></li>
+<li class="chapter" data-level="3.5.3" data-path="chap-causal-background.html"><a href="chap-causal-background.html#assignment-mechanism"><i class="fa fa-check"></i><b>3.5.3</b> Assignment mechanism</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking for Informed Decision Making</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chap_causal_background" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Causal Inference: Background</h1>
+<p>Up until this point we’ve been looking at various statistical tools that can be used to study the relationship between outcomes and covariates. These relationships, also called associations, are interesting but not what we fundamentally care about. Ultimately science cares about identifying causes of an outcome, but unfortunately, this is a very difficult endeavor in health research. Why is it so difficult to determine if some exposure truly <strong>causes</strong> an outcome? To be confident in making such a strong claim, we would ideally need to compare many people who have had the exposure to many people who have not and who are otherwise identical. This is difficult to impossible in most settings! In this chapter, we are going to learn about tools and study designs that researchers use to attempt to get closer to causal effects as opposed to just associations. These tools and study designs fall under a general biostatistical area known as <strong>causal inference.</strong></p>
+<div id="bradford-hill-criteria" class="section level2">
+<h2><span class="header-section-number">3.1</span> Bradford Hill criteria</h2>
+<p>In this chapter, we are going to be learning about study designs and techniques that have statistical tools associated with them. Before we jump into that content, it is worth being aware of a set of causality criteria known as the Bradford Hill criteria<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. These criteria were set forth by a statistician named Sir Austin Bradford Hill in 1965 to provide some useful guidelines for assessing if a causal claim is supported by scientific literature. This is typically used in reviewing a large body of observational studies and lends itself to more qualitative discussions. The criteria he propsed are as follows:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Strength</strong>: causal effects should be strong or noticeable in some sense (large effect size)</li>
+<li><strong>Consistency</strong>: causal effects should be able to be shown across multiple studies (reproducibility)</li>
+<li><strong>Specificity</strong>: causal effects should be specific to a certain system, population, environment</li>
+<li><strong>Temporality</strong>: a cause should occur before any effects</li>
+<li><strong>Biological gradient</strong>: higher levels of the causal agent should result in higher intensities of the outcome (dose-response relationship)</li>
+<li><strong>Plausibility</strong>: causal effects should be supported by mechanistic explanations (answers: how?)</li>
+<li><strong>Coherence</strong>: epidemiological results and laboratory results should support each other</li>
+<li><strong>Experiment</strong>: is there experimental evidence where the supposed causal agent was intervened upon?</li>
+<li><strong>Analogy</strong>: is the supposed causal agent similar to another agent which we strongly believe to be causally related to an outcome?</li>
+</ol>
+<p>As an example, there have been two recent papers<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> using the Bradford Hill criteria to review the body of literature studying the association beteen Zika virus infection in pregnant mothers and birth defects. Feel free to look at how these authors interpreted and applied these criteria for this situation.</p>
+</div>
+<div id="exercise-comparing-two-statisticians" class="section level2">
+<h2><span class="header-section-number">3.2</span> Exercise: comparing two statisticians</h2>
+<p>Before we dive into new material, let’s consider the following scenario. University officials are interested in determining if the food served at the main cafeteria is causing weight gain in the freshman class. Specifically they want to know whether this weight gain is different in men and women. They have data on the September and May weights of all members of last year’s freshman class. Two statisticians are called in to conduct an analysis.</p>
+<p>Statistician A computes the weight change from September to May for each freshman and separates these differences by sex. He compares these weight changes in males and females using a t-test. He does not find a statistically significant difference between men and women and concludes that there is no evidence that the cafeteria is causing differential weight gain in male and female freshmen.</p>
+<p>Statistician B models weight change as a function of September weight and gender using linear regression. He finds a statistically significant difference in weight changes between male and female freshmen.</p>
+</div>
+<div id="rubin-causal-model" class="section level2">
+<h2><span class="header-section-number">3.3</span> Rubin causal model</h2>
+<p>The situation above is known as <a href="https://en.wikipedia.org/wiki/Lord&#39;s_paradox">Lord’s paradox</a>. What made it tricky for the two statisticians? We know that the university did not provide any information about student weight outcomes in the absence of the cafeteria, but the two statisticians seem to have forgotten about this. The university is interested in the <em>causal effect of the cafeteria diet</em> and wants to compare this causal effect between men and women.</p>
+<p>When thinking about our scientific questions that attempt to get at causal effects, it is useful to have some sort of structure, some sort of guidelines in a sense, that helps us formulate the information we need. The <strong>Rubin causal model</strong> is one such framework that is widely used in the field of causal inference. It contains three components:</p>
+<ul>
+<li>Treatment</li>
+<li>Units</li>
+<li>Potential outcomes</li>
+</ul>
+<p>A <strong>treatment</strong> is some program, consumable item, or the like, that can be administered to participants in the study. These participants are called <strong>units</strong>. A key idea is that the treatment must be able to be administered as an intervention. This is of practical importance because if the treatment does actually <em>cause</em> some change in outcomes of interest, it is useful for us to be able to intervene on the treatment (by increasing it or removing it, say) to affect outcomes in the real world. In the table below, the first column lists some general concepts that we might be interested in, the second lists typical treatments that we might think about but that are not suitable treatments in this framework, and the third column lists suitable formulations of the treatment.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Idea</th>
+<th align="center">Non-examples</th>
+<th align="center">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">BMI</td>
+<td align="center">“Having a high BMI”</td>
+<td align="center">Weight loss program</td>
+</tr>
+<tr class="even">
+<td align="center">Sex</td>
+<td align="center">“Being female”</td>
+<td align="center">Gender partial policies</td>
+</tr>
+<tr class="odd">
+<td align="center">Preferences</td>
+<td align="center">“Liking Pepsi”</td>
+<td align="center">Advertising campaigns for Pepsi</td>
+</tr>
+</tbody>
+</table>
+<p>We often think about causal questions such as, “Does having a high BMI cause an increased risk for heart disease?” It is a relevant and important scientific question, but it does not provide a good example of a treatment in this framework because it does not provide us a means of <em>studying</em> the effect of BMI. In a little bit, we will get to the idea of <strong>assignment mechanisms</strong> for treaments. An assignment mechanism tells us how different units are assigned to treatment or control and are used in the mathematics of estimating treatment effects. Being able to be assigned to treatment or control necessitates that the treatment be one that can be administered as an intervention, which is not true for “having a high BMI.” Rather, we can assign people to diet and exercise programs which lead them to change their BMI.</p>
+<p><strong>Units</strong>, as we discussed above, are the entities (person, place, or thing) to which we administer treatment or withold it (control). A person, place, or thing at two different times is considered as two different units. So, yourself at this moment and yourself 10 days from now are considered different units. This is sensible given that you’re going to change, albeit slightly, in the next 10 days.</p>
+<p><strong>Potential outcomes</strong> are outcomes that could be observed for each unit under the different levels of the treatment (typically two levels). In other words,</p>
+<ul>
+<li><span class="math inline">\(Y_i(0)\)</span> is the potential outcome for study unit <span class="math inline">\(i\)</span> under the control condition.</li>
+<li><span class="math inline">\(Y_i(1)\)</span> is the potential outcome for study unit <span class="math inline">\(i\)</span> under the treatment condition.</li>
+</ul>
+<p>If a study unit receives a particular level of the treatment in real life, then the outcome under the other level of the treatment is called the <strong>counterfactual</strong> outcome. We don’t get to observe this counterfactual outcome! So if a unit received the treatment in real life, their counterfactual outcome would be the outcome under the control condition. Think of potential outcomes as splitting the world into two parallel universes</p>
+<p>If we knew a unit’s potential outcome under control <span class="math inline">\(Y(0)\)</span> and under treatment <span class="math inline">\(Y(1)\)</span>, then we could simply subtract the two quantities to obtain the causal effect of the treatment for that unit. Easy, right? We can just observe the unit under the control condition first and then the treatment condition (or vice-versa) to obtain these two potential outcomes. But wait! Recall that a person, place, or thing at two different times is considered as two different units. This is the case here - after we observe the unit under the control condition, it becomes a different unit which we then observe under the treament condition. The two outcomes we observe are no longer directly comparable. This leads us to the <strong>fundamental problem of causal inference</strong>: we can only ever observe one potential outcome for each unit. This problem is illustrated in the table below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Units</th>
+<th align="center"><span class="math inline">\(Y_i(1)\)</span></th>
+<th align="center"><span class="math inline">\(Y_i(0)\)</span></th>
+<th align="center"><span class="math inline">\(T_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">30</td>
+<td align="center">?</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">?</td>
+<td align="center">15</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">22</td>
+<td align="center">?</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>We see that unit 1 was exposed to the advertising campaign and has the potential outcome under the treatment condition filled in. Conversely, unit 2 was not exposed to the ad campaign and has the potential outcome under the control condition filled in. Ideally, we would subtract column three from column two and average these resulting differences to estimate the causal effect of a Pepsi advertising campaign on dollars spent on Pepsi per week.</p>
+<div id="revisiting-lords-paradox" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Revisiting Lord’s paradox</h3>
+<p>We can frame the situation using the Rubin causal model as indicated in the table below. To understand the causal effect of university diet on end-of-year weights, our potential outcomes (<span class="math inline">\(Y(0), Y(1)\)</span>) must be May weights under treatment (cafeteria diet) and under control (no cafeteria diet). It is clear when we write it this way that there was no control group. Then how are we to estimate causal effects? The two statisticians implicitly made assumptions about the counterfractual outcome without realizing it.</p>
+<table style="width:79%;">
+<colgroup>
+<col width="11%" />
+<col width="27%" />
+<col width="15%" />
+<col width="15%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Units</th>
+<th align="center">Sex, Sept. weight</th>
+<th align="center"><span class="math inline">\(Y_i(0)\)</span></th>
+<th align="center"><span class="math inline">\(Y_i(1)\)</span></th>
+<th align="center"><span class="math inline">\(T_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">M,140</td>
+<td align="center">?</td>
+<td align="center">141</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">F,120</td>
+<td align="center">?</td>
+<td align="center">119</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+</tr>
+<tr class="even">
+<td align="center">N</td>
+<td align="center">M,150</td>
+<td align="center">?</td>
+<td align="center">144</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>Statistician 1 assumed that the causal effect of the cafeteria diet for all freshmen was just the September to May weight change. In other words, he assumed that the potential outcome under control, <span class="math inline">\(Y(0)\)</span>, was simply that freshman’s September weight.</p>
+<table style="width:79%;">
+<colgroup>
+<col width="11%" />
+<col width="27%" />
+<col width="15%" />
+<col width="15%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Units</th>
+<th align="center">Sex, Sept. weight</th>
+<th align="center"><span class="math inline">\(Y_i(0)\)</span></th>
+<th align="center"><span class="math inline">\(Y_i(1)\)</span></th>
+<th align="center"><span class="math inline">\(T_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">M,140</td>
+<td align="center">140</td>
+<td align="center">141</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">F,120</td>
+<td align="center">120</td>
+<td align="center">119</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+</tr>
+<tr class="even">
+<td align="center">N</td>
+<td align="center">M,150</td>
+<td align="center">150</td>
+<td align="center">144</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>Statistician 2 used the following regression for his analysis of the data under treatment (university diet) and assumed that it also held under control (no university diet).</p>
+<p><span class="math display">\[ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} \]</span> <span class="math display">\[ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} + \mathrm{Weight}_\mathrm{Sept} \]</span></p>
+<table style="width:100%;">
+<colgroup>
+<col width="9%" />
+<col width="24%" />
+<col width="43%" />
+<col width="13%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Units</th>
+<th align="center">Sex, Sept. weight</th>
+<th align="center"><span class="math inline">\(Y_i(0)\)</span></th>
+<th align="center"><span class="math inline">\(Y_i(1)\)</span></th>
+<th align="center"><span class="math inline">\(T_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">M,140</td>
+<td align="center"><span class="math inline">\(\beta_0+\beta_1+140(\beta_3+1)\)</span></td>
+<td align="center">141</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">F,120</td>
+<td align="center"><span class="math inline">\(\beta_0+120(\beta_3+1)\)</span></td>
+<td align="center">119</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+<td align="center">.</td>
+</tr>
+<tr class="even">
+<td align="center">N</td>
+<td align="center">M,150</td>
+<td align="center"><span class="math inline">\(\beta_0+\beta_1+150(\beta_3+1)\)</span></td>
+<td align="center">144</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="types-of-causal-effects" class="section level2">
+<h2><span class="header-section-number">3.4</span> Types of causal effects</h2>
+<p>There are two types of causal effects that are usually estimated in causal inference studies: the <strong>average treatment effect (ATE)</strong> and the <strong>average treatment effect for the treated (ATE)</strong>.</p>
+<p>Average treatment effect (ATE): average effect for everyone in the population</p>
+<p><span class="math display">\[ ATE = \frac{1}{N}\sum_{i=1}^N (Y_i(1) - Y_i(0)) \]</span></p>
+<p>Average treatment effect for the treated (ATT): average effect for only those treated</p>
+<p><span class="math display">\[ ATT = \frac{1}{N}\sum_{i \in T} (Y_i(1) - Y_i(0)) \]</span></p>
+<p>where <span class="math inline">\(T\)</span> is the set of people who received the treatment (<span class="math inline">\(T_i = 1\)</span>)</p>
+<p>Let’s look at two examples to see how the ATE and ATT differ.</p>
+<p>We see from these examples that ATE is a useful estimate for neutral or beneficial interventions because there is no problem with theoretically administering the treatment to the entire population. The ATT generally applies to harmful interventions or interventions that we would not want our broader population of inference to experience.</p>
+</div>
+<div id="how-do-we-learn-about-causal-effects" class="section level2">
+<h2><span class="header-section-number">3.5</span> How do we learn about causal effects?</h2>
+<p>So far we have set up the Rubin causal model as a framework for specifying the study of causal effects. It is useful for thinking carefully about what our treatment/intervention should be and who will receive the treatment and control conditions. There are few more ideas that we need in order to use this thinking in practice for real studies.</p>
+<ul>
+<li>Replication</li>
+<li>Stable Unit Treatment Value Assumption (SUTVA)</li>
+<li>Assignment mechanism</li>
+</ul>
+<div id="replication" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Replication</h3>
+<p>We need data on multiple units where there is a mix of units receiving the treatment and control conditions. On the surface, this is perhaps obvious, but it was not so clear in our example on Lord’s paradox. In that example, there were multiple units under the treatment (cafeteria food) condition but none under the control condition. It is not uncommon in scientific investigations for all subjects to only receive the treatment, yet investigators wish to use this data to estimate the (causal) effect of the treatment.</p>
+</div>
+<div id="stable-unit-treatment-value-assumption-sutva" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Stable Unit Treatment Value Assumption (SUTVA)</h3>
+<p>This assumption has two parts:</p>
+<ol style="list-style-type: decimal">
+<li>No interference between units: treatment assignment of one unit does not affect potential outcomes of another unit. e.g. One person’s drug use (treatment) doesn’t affect someone else’s outcomes.</li>
+<li>Treatment only has one version and control only has one version. e.g. “Heavy” drug use doesn’t have distinct subcategories such as “very heavy” or “moderately heavy.” “Low” drug use doesn’t have distinct subcategories such as “very low” or “moderately low.”</li>
+</ol>
+<p>What is useful about having these assumptions? The second part is easier to tackle - if the treatment and/or control has more than one version, then comparisons between the treatment and control groups become murky. For example, comparing heavy drug users to low drug users is unclear if both categories have gradations. Am I obtaining the effect of high-ish drug use versus low-ish drug use?</p>
+<p>The first part of the assumption is for tractability of the analysis. Imagine that I have just two people in my study: Alice and Bob. The outcome of interest is liver function as a score from 1 to 100. If Alice and Bob never interact, then the potential outcomes might look like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Units</th>
+<th align="center">Heavy drug use</th>
+<th align="center">Low drug use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Alice</td>
+<td align="center">10</td>
+<td align="center">50</td>
+</tr>
+<tr class="even">
+<td align="center">Bob</td>
+<td align="center">14</td>
+<td align="center">48</td>
+</tr>
+</tbody>
+</table>
+<p>Both Alice and Bob have potential liver function scores under the heavy and low drug use conditions. If, however, Alice and Bob had the chance to interact, it is reasonable that they might influence each other’s outcomes (say by encouraging poor behavior). Then the potential outcomes become more complicated:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Units</th>
+<th align="center">Alice: heavy, Bob: heavy</th>
+<th align="center">Alice: heavy, Bob: low</th>
+<th align="center">Alice: low, Bob: heavy</th>
+<th align="center">Alice: low, Bob: low</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Alice</td>
+<td align="center">10</td>
+<td align="center">10</td>
+<td align="center">50</td>
+<td align="center">50</td>
+</tr>
+<tr class="even">
+<td align="center">Bob</td>
+<td align="center">8</td>
+<td align="center">48</td>
+<td align="center">48</td>
+<td align="center">14</td>
+</tr>
+</tbody>
+</table>
+<p>When there was no interference, Alice only had two potential outcomes. Now with the potential for interference, Alice’s two potential outcomes now also depend on Bob’s drug use which increases the number of potential outcomes to 4. The same happens for Bob. With more subjects in the study, the number of potential outcomes increases exponentially. We then must ask ourselves: Which columns do we compare to estimate causal effects? Do we compare all possible combinations? Answering such questions is not easy, so we need to be careful in designing, conducting, and evaluting studies to be sure that both parts of SUTVA holds. In summary:</p>
+<ul>
+<li>If part 1 of SUTVA could be violated, we must question the purity of the comparison being made. What exactly is meant by treatment group versus control group if there are gradations of treatment and control?</li>
+<li>If part 2 of SUTVA could be violated, we must also question the purity of the comparison being made. With interference, the treatment group now has gradations such as “treatment with strong influence from control group” and “treatment with moderate influence from control group.” In a way, part 1 of SUTVA is being violated here as well.</li>
+</ul>
+</div>
+<div id="assignment-mechanism" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Assignment mechanism</h3>
+<p>An assignment mechanism is a process that determines which treatment each unit receives. The idea of an assignment mechanism generalizes the idea of selection bias. Why is this? Say for example that the treatment of interest is the flu shot. Selection bias could occur if unhealthier people tend to not have access to clinics where they can obtain the flu shot. Thus, any comparison of flu outcomes in individuals with and without the flu shot is going to give biased results. In particular, we are likely to overestimate the benefit of the shot because we would be comparing healthy people who get the shot to unhealthy people who didn’t get the shot. This selection bias is an example of a <strong>confounded assignment mechanism</strong>. Assignment into the treatment or control group is confounded by underlying health status. Useful comparisons of the treatment and control group cannot be made because of this confounding. An example of an <strong>unconfounded assignment mechanism</strong> occurs with randomized controlled trials in which people are randomly assigned to treatment and control groups. This assignment is unconfounded because we don’t expect any covariate differences between the groups due to the randomization. More on randomized trials will be discussed in the next chapter.</p>
+<p>Study designs and techniques in causal inference try to capitalize on some feature of the world that allows for knowledge about the assignment mechanisms. If we have knowledge of the assignment mechanism, we can try to counteract it to still obtain useful estimate of causal effects.</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Bradford_Hill_criteria">Wikipedia</a><a href="chap-causal-background.html#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="http://www.nejm.org/doi/full/10.1056/NEJMsr1604338">Zika Virus and Birth Defects - Reviewing the Evidence for Causality</a><a href="chap-causal-background.html#fnref2">↩</a></p></li>
+<li id="fn3"><p><a href="http://currents.plos.org/outbreaks/article/zika-virus-and-microcephaly-applying-the-bradford-hill-criteria-for-causation/">Does Zika Virus Cause Microcephaly - Applying the Bradford Hill Viewpoints</a><a href="chap-causal-background.html#fnref3">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chap-modeling.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["stat_thinking.pdf"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
