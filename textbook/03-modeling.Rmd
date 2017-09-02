@@ -87,11 +87,35 @@ We can go through the same process as with linear regression to obtain interpret
 
 $$ \log\left( \frac{\hbox{odds of having disease at age a+1}}{\hbox{odds of having disease at age a}} \right) $$
 
-In publications these are almost always presented in exponentiated form:
+In publications, these are almost always presented in exponentiated form:
 
 $$ \frac{\hbox{odds of having disease at age a+1}}{\hbox{odds of having disease at age a}} $$
 
 ## Generalized linear models
 
+With linear and logistic regression we have dealt with continous and binary outcomes respectively. What about categorical outcomes with more than two categories, which are common in surveys and medical situations where severity is an outcome? What about count data, which arise commonly in public health via incidence rates?
 
-## Model selection techniques
+There is a class of models in statistics called **generalized linear models** that allows a variety of outcome variables to be used as the dependent variable - not just continuous and binary as we have seen with linear and logistic regression, but also count and categorical data with more than two outcomes.
+
+Generalized linear models have the general form:
+
+$$ f(E[Y]) = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$
+
+In words, the left side $f(E[Y])$ just describes some function of the expected outcome. The right side is the familiar linear combination of covariates.
+
+For linear regression, the function $f$ is the identity function $f(x) = x$ and $E[Y]$ indicates the expected/mean outcome which depends on the covariates.
+
+For logistic regression, the function $f$ is the logit function:
+
+$$ f(E[Y]) = \log\left( \frac{E[Y]}{1-E[Y]} \right) $$
+
+In logistic regression, the outcome $Y$ is the binary 0/1 indicator of group and $E[Y]$ indicates the probability of being in group 1 (e.g. the probability of being a case in a case-control study). So in more familiar form, the above expression is the log odds of being in group 1:
+
+$$ f(p) = \log\left( \frac{p}{1-p} \right) $$
+
+Similar ideas apply for when $Y$ is a different type of outcome variable (e.g. general categorical, count). The main idea with generalized linear models is that it is possible to perform regression for a wide variety of outcome variables.
+
+## Model selection
+
+What variables should be included in a regression model? It is tempting to just include them all and let the computer do the work, but we need to be careful. Say we have 100 subjects and 50 predictors. There is no way we have enough information with only 100 subjects to get reliable information on all of those predictors. This is an idea called the curse of dimentionality: the more variables we have for a fixed size dataset the less information we have to learn about each variable. Model selection techniques are used to identify the most relevant variables in explaining an outcome. If we are able to identify the most important variables, we can use this subset for regression. We will discuss techniques for this in class.
+
