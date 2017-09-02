@@ -112,7 +112,7 @@ $$ \alpha = P(\mathrm{reject} \mid H_0) $$
 
 For historical reasons, this rate is typically set to be 0.05: if the null hypothesis is true, then we expect to incorrectly reject the null hypothesis 5% of the time. In other words, if there really is no difference in the probability of adverse outcomes between the two groups, then we can expect to wrongly conclude that there is a difference 5% of the time. This 5% is very commonly adopted but can vary from discipline to discipline depending on desired levels of stringency. Lower values of $\alpha$ are more stringent because we are saying that the probability of a type I error should be lower. Statistical theory tells us how test statistic thresholds correspond to type I error probabilities. For example, with the null distribution we saw above, test statistic thresholds of 2 and 3 correspond to type I error rates of `r 2*pt(2, df = 10, lower.tail = FALSE)` and `r 2*pt(3, df = 10, lower.tail = FALSE)`, illustrated in the picture below.
 
-```{r fig.align="center", out.width="100%"}
+```{r fig.align="center"}
 library(scales)
 plot_tails <- function(thresh) {
 	plot(x, y, type = "l", main = "Null distribution", xlab = "Test statistic", ylab = "Density")
@@ -132,14 +132,14 @@ plot_tails <- function(thresh) {
 	}
 	invisible(tail_prob)
 }
-par(mfrow = c(1,2))
+par(mfrow = c(1,2), mar = c(4.5,4.1,3.1,0.1))
 thresh <- c(-2,2)
 tail_prob <- plot_tails(thresh)
-text(x = 3.5, y = 0.07, labels = paste("Area =", round(tail_prob, 2)), col = "darkorchid")
+text(x = 2, y = 0.07, labels = paste("Area =", round(tail_prob, 2)), col = "darkorchid")
 
 thresh <- c(-3,3)
 tail_prob <- plot_tails(thresh)
-text(x = 3.5, y = 0.07, labels = paste("Area =", round(tail_prob, 2)), col = "darkorchid")
+text(x = 2, y = 0.07, labels = paste("Area =", round(tail_prob, 2)), col = "darkorchid")
 ```
 
 A threshold of 2 would not work if we wanted to maintain a type I error rate of 0.05 because it is associated with a higher type I error rate of `r 2*pt(2, df = 10, lower.tail = FALSE)`. It is too low of a threshold because using it would give a higher rate of type I errors than we want. A threshold of 3 is too high of a threshold. While the associated error rates are lower than our 0.05 threshold, using too high of a threshold on the test statistic means that we are also less likely to reject the null when it truly is false. In this example, the threshold that corresponds to $\alpha = 0.05$ is `r round(qt(0.975, df = 10), 2)`.
@@ -165,7 +165,7 @@ You will often see in scientific literature expressions such as one- and two-tai
 $$ H_0: p_E - p_U = 0 $$
 $$ H_A: p_E - p_U \neq 0 $$
 
-```{r}
+```{r fig.align="center"}
 critvals <- qt(c(0.025, 0.975), df = 10)
 plot(x, y, type = "l", main = "Null distribution", xlab = "Test statistic", ylab = "Density")
 xleft <- seq(-5, critvals[1], 0.01)
@@ -181,7 +181,7 @@ For a one-tailed test, we consider "more extreme" to be in one direction only. I
 $$ H_0: p_E - p_U = 0 $$
 $$ H_A: p_E - p_U > 0 $$
 
-```{r}
+```{r fig.align="center"}
 critval <- qt(0.95, df = 10)
 plot(x, y, type = "l", main = "Distribution of test statistic under the null hypothesis", xlab = "Test statistic", ylab = "Density")
 xside <- seq(critval, 5, 0.01)
@@ -195,7 +195,7 @@ If in the negative direction, the situation looks like this:
 $$ H_0: p_E - p_U = 0 $$
 $$ H_A: p_E - p_U < 0 $$
 
-```{r}
+```{r fig.align="center"}
 critval <- qt(0.05, df = 10)
 plot(x, y, type = "l", main = "Distribution of test statistic under the null hypothesis", xlab = "Test statistic", ylab = "Density")
 xside <- seq(-5, critval, 0.01)
@@ -212,7 +212,7 @@ Statistical power is the probability of detecting an association **given that th
 
 The gray lines indicate the test statistic thresholds (two-tailed) for rejection for a type I error rate $\alpha = 0.05$. The gray area is equal to to $\alpha$.
 
-```{r}
+```{r fig.align="center"}
 x <- seq(-5, 8, 0.01)
 y <- dt(x, df = 10)
 y2 <- dt(x, df = 10, ncp = 1)
@@ -230,7 +230,7 @@ text(x = 5, y = 0.2, labels = paste0("alpha = ", 1-diff(pt(critvals, df = 10))),
 
 Because the thresholds (gray lines) indicate when we reject the null, we can look at the pink area underneath the alternative distribution (red curve) to calculate power.
 
-```{r}
+```{r fig.align="center"}
 x <- seq(-5, 8, 0.01)
 y <- dt(x, df = 10)
 y2 <- dt(x, df = 10, ncp = 1)
