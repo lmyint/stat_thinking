@@ -26,74 +26,17 @@ As an example, there have been two recent papers^[[Zika Virus and Birth Defects 
 
 Before we dive into new material, let's consider the following scenario. University officials are interested in determining if the food served at the main cafeteria is causing weight gain in the freshman class. Specifically they want to know whether this weight gain is different in men and women. They have data on the September and May weights of all members of last year's freshman class. Two statisticians are called in to conduct an analysis.
 
-Statistician A computes the weight change from September to May for each freshman and separates these differences by sex. He compares these weight changes in males and females using a t-test. He fails to reject the null hypothesis of no weight difference and concludes that there is no evidence that the cafeteria is causing differential weight gain in male and female freshmen.
+Statistician A computes the weight change from September to May for each freshman and separates these differences by sex. He compares these weight changes in males and females using a t-test. He does not find a statistically significant difference between men and women and concludes that there is no evidence that the cafeteria is causing differential weight gain in male and female freshmen.
 
-Statistician B models May weight as a function of September weight and gender. Specifically, he fits the following regression model:
-
-XXX - need to finish
+Statistician B models weight change as a function of September weight and gender using linear regression. He finds a statistically significant difference in weight changes between male and female freshmen.
 
 ```{block, type="reflect"}
 Think about what the university is trying to answer, and the methods of the two statisticians. Which statistician used the more appropriate analysis to answer the question? Why?
 ```
 
-## Exercise: debriefing
-
-This example is known as [Lord's paradox](https://en.wikipedia.org/wiki/Lord's_paradox).
-
----------------------------------------------------------
- Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
-------- ------------------- ---------- ---------- -------
-  1             M,140            ?        141        1
-
-  2             F,120            ?        119        1
-
-  .               .              .         .         .
-
-  N             M,150            ?        144        1
----------------------------------------------------------
-
-Control assumption: statistician 1
-
-$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} $$
-$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \mathrm{Weight}_\mathrm{Sept} $$
-
----------------------------------------------------------
- Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
-------- ------------------- ---------- ---------- -------
-  1             M,140          140        141        1
-
-  2             F,120          120        119        1
-
-  .               .              .         .         .
-
-  N             M,150          150        144        1
----------------------------------------------------------
-
-Fails to reject $H_0: \beta_1 = 0$
-
-Control assumption: statistician 2
-
-$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} $$
-$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} + \mathrm{Weight}_\mathrm{Sept} $$
-
----------------------------------------------------------------------------------
- Units   Sex, Sept. weight   $Y_i(0)$                           $Y_i(1)$   $T_i$
-------- ------------------- ---------------------------------- ---------- -------
-  1             M,140        $\beta_0+\beta_1+140(\beta_3+1)$     141        1
-
-  2             F,120        $\beta_0+120(\beta_3+1)$             119        1
-
-  .               .              .                                 .         .
-
-  N             M,150        $\beta_0+\beta_1+150(\beta_3+1)$     144        1
----------------------------------------------------------------------------------
-
-Rejects $H_0: \beta_1 = 0$
-
-
 ## Rubin causal model
 
-What made that last example tricky for the two statisticians? We know that the university did not provide any information about student weight outcomes in the absence of the cafeteria, but this was not immediately obvious to the statisticians.
+The situation above is known as [Lord's paradox](https://en.wikipedia.org/wiki/Lord's_paradox). What made it tricky for the two statisticians? We know that the university did not provide any information about student weight outcomes in the absence of the cafeteria, but the two statisticians seem to have forgotten about this. The university is interested in the *causal effect of the cafeteria diet* and wants to compare this causal effect between men and women.
 
 When thinking about our scientific questions that attempt to get at causal effects, it is useful to have some sort of structure, some sort of guidelines in a sense, that helps us formulate the information we need. The **Rubin causal model** is one such framework that is widely used in the field of causal inference. It contains three components:
 
@@ -136,6 +79,53 @@ Potential outcomes ($Y_i(1)$ and $Y_i(0)$): dollars of Pepsi purchased in a week
 ```
 
 We see that unit 1 was exposed to the advertising campaign and has the potential outcome under the treatment condition filled in. Conversely, unit 2 was not exposed to the ad campaign and has the potential outcome under the control condition filled in. Ideally, we would subtract column three from column two and average these resulting differences to estimate the causal effect of a Pepsi advertising campaign on dollars spent on Pepsi per week.
+
+### Revisiting Lord's paradox
+
+We can frame the situation using the Rubin causal model as indicated in the table below. To understand the causal effect of university diet on end-of-year weights, our potential outcomes ($Y(0), Y(1)$) must be May weights under treatment (cafeteria diet) and under control (no cafeteria diet). It is clear when we write it this way that there was no control group. Then how are we to estimate causal effects? The two statisticians implicitly made assumptions about the counterfractual outcome without realizing it.
+
+---------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
+------- ------------------- ---------- ---------- -------
+  1             M,140            ?        141        1
+
+  2             F,120            ?        119        1
+
+  .               .              .         .         .
+
+  N             M,150            ?        144        1
+---------------------------------------------------------
+
+Statistician 1 assumed that the causal effect of the cafeteria diet for all freshmen was just the September to May weight change. In other words, he assumed that the potential outcome under control, $Y(0)$, was simply that freshman's September weight.
+
+---------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$   $Y_i(1)$   $T_i$
+------- ------------------- ---------- ---------- -------
+  1             M,140          140        141        1
+
+  2             F,120          120        119        1
+
+  .               .              .         .         .
+
+  N             M,150          150        144        1
+---------------------------------------------------------
+
+Statistician 2 used the following regression for his analysis of the data under treatment (university diet) and assumed that it also held under control (no university diet).
+
+$$ E[\mathrm{weight\:change}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} $$
+$$ E[\mathrm{June\:weight\:under\:control}] = \beta_0 + \beta_1\mathrm{sex} + \beta_3\mathrm{Weight}_\mathrm{Sept} + \mathrm{Weight}_\mathrm{Sept} $$
+
+---------------------------------------------------------------------------------
+ Units   Sex, Sept. weight   $Y_i(0)$                           $Y_i(1)$   $T_i$
+------- ------------------- ---------------------------------- ---------- -------
+  1             M,140        $\beta_0+\beta_1+140(\beta_3+1)$     141        1
+
+  2             F,120        $\beta_0+120(\beta_3+1)$             119        1
+
+  .               .              .                                 .         .
+
+  N             M,150        $\beta_0+\beta_1+150(\beta_3+1)$     144        1
+---------------------------------------------------------------------------------
 
 
 ## Types of causal effects
@@ -212,15 +202,6 @@ When there was no interference, Alice only had two potential outcomes. Now with 
 
 ### Assignment mechanism
 
-An assignment mechanism is a deterministic or probabilitic process that determines which treatment each unit receives. We will see shortly that the idea of an assignment mechanism generalizes the idea of selection bias.
+An assignment mechanism is a process that determines which treatment each unit receives. The idea of an assignment mechanism generalizes the idea of selection bias. Why is this? Say for example that the treatment of interest is the flu shot. Selection bias could occur if unhealthier people tend to not have access to clinics where they can obtain the flu shot. Thus, any comparison of flu outcomes in individuals with and without the flu shot is going to give biased results. In particular, we are likely to overestimate the benefit of the shot because we would be comparing healthy people who get the shot to unhealthy people who didn't get the shot. This selection bias is an example of a **confounded assignment mechanism**. Assignment into the treatment or control group is confounded by underlying health status. Useful comparisons of the treatment and control group cannot be made because of this confounding. An example of an **unconfounded assignment mechanism** occurs with randomized controlled trials in which people are randomly assigned to treatment and control groups. This assignment is unconfounded because we don't expect any covariate differences between the groups due to the randomization. More on randomized trials will be discussed in the next chapter.
 
-- Randomized experiments
-    - Known, clean assignment mechanism
-- Observational studies
-    - Have to guess an assignment mechanism
-    - Have to propose an explanation for why certain individuals become heavy drug users
-- Study designs in causal inference try to capitalize on some feature of the world that allows for knowledge about the assignment mechanisms
-
-
-## Extrapolation as a special case of generalizability considerations
-
+Study designs and techniques in causal inference try to capitalize on some feature of the world that allows for knowledge about the assignment mechanisms. If we have knowledge of the assignment mechanism, we can try to counteract it to still obtain useful estimate of causal effects.
