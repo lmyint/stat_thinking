@@ -1,0 +1,405 @@
+---
+title: "Regression modeling - part 1"
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, fig.align="center")
+library(scales)
+library(broom)
+```
+
+## Scientific question
+
+Does thimerosal exposure increase the risk of autism spectrum disorders?
+
+## Potential data
+
+- Outcomes
+    - Continous: autism-spectrum score (say, as diagnosed by a psychiatrist)
+    - Binary: autism-spectrum diagnosis (yes/no)
+- Covariates/predictors
+    - Vaccine history with thimerosal content information
+    - Child's education
+    - Parental education
+    - Genetic information
+    - Environmental exposures
+
+## Visualizing the data
+
+```{r}
+set.seed(1)
+n <- 1000
+x1 <- runif(n, 5, 15) ## confounder
+x2 <- x1 + rnorm(n, 0, 1) ## exposure
+x3 <- runif(n, 6, 9) ## additional covariate
+x3 <- as.integer(x3 > 8)
+x3 <- factor(x3, levels = c(0,1), labels = c("poor", "good"))
+y <- 4*x1 - 2*as.integer(x3) - 2*x1*as.integer(x3) + rnorm(n, 0, 4)
+y_cat <- as.integer(y > 20)
+y_cat <- factor(y_cat, levels = c(0,1), labels = c("no ASD", "ASD"))
+df <- data.frame(pollution = x1, merc = x2, education = x3, asd_score = y, asd_score_cat = y_cat)
+subdf <- df[df$education=="poor",]
+par(mfrow = c(1,2))
+plot(subdf$merc, subdf$asd_score, pch = 16, col = alpha("black", 0.25), xlab = "Mercury exposure", ylab = "Autism-spectrum score")
+boxplot(merc ~ asd_score_cat, data = subdf, ylab = "Mercury exposure")
+```
+
+## Estimating a trend
+
+Which line seems to be a better fit and why?
+
+```{r}
+lmfit <- lm(asd_score ~ merc, data = subdf)
+lmfit_out <- tidy(lmfit)
+
+par(mfrow = c(1,2))
+plot(subdf$merc, subdf$asd_score, pch = 16, col = alpha("black", 0.25), xlab = "Mercury exposure", ylab = "Autism-spectrum score")
+abline(a = lmfit_out$estimate[1], b = lmfit_out$estimate[2], col = "red")
+plot(subdf$merc, subdf$asd_score, pch = 16, col = alpha("black", 0.25), xlab = "Mercury exposure", ylab = "Autism-spectrum score")
+abline(a = lmfit_out$estimate[1], b = lmfit_out$estimate[2]*0.7, col = "red")
+```
+
+## Estimating a trend
+
+- The distances between each point and the line are called **residuals**: $y_i - \hat y_i$
+- The sum of squared residuals gives an overall measure of how close the line is to the data: $\sum_i (y_i - \hat y_i)^2$
+- Minimizing the sum of squared residuals allows us to estimate the intercept and slope.
+- We can use this techinique for multiple predictors!
+
+## Linear regression
+
+We can write a model for autism spectrum score:
+
+$$ E[\hbox{autism spectrum score}] = \beta_0 + \beta_1\mathrm{mercury} $$
+
+- The $E[\hbox{autism spectrum score}]$ indicates the expected value, average, mean autism spectrum score.
+- The process of estimating the coefficients is called **fitting** a regression model:
+
+```{r}
+lmfit <- lm(asd_score ~ merc, data = df)
+lmfit_out <- tidy(lmfit)
+lmfit_out[,1:2]
+```
+
+## Linear regression
+
+More generally a linear regression model can be written as:
+
+$$ E[\hbox{continuous outcome}] = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+- With one predictor, we use the phrase **simple linear regression**.
+- With multiple predictors, we use the phrase **multiple linear regression**.
+
+## Interpreting coefficients
+
+Let's expand our simple linear regression model to include more predictors.
+
+$$ E[\hbox{autism spectrum score}] = \beta_0 + \beta_1\mathrm{mercury} + \beta_2\mathrm{education} + \beta_3\mathrm{pollution}$$
+
+What does $\beta_1$ tell us? Compare two children who differ by 1 unit in their mercury exposure but are the same in all other respects (education and pollution exposure):
+
+Child 1: Mercury exposure = $m$, education = $e$, pollution exposure = $p$ <br>
+Child 2: Mercury exposure = $m+1$, education = $e$, pollution exposure = $p$
+
+We can write the expected HIV particle concentration for each of them:
+
+Child 1: $E[Y_1] = \beta_0 + \beta_1m + \beta_2e + \beta_3p$ <br>
+Child 2: $E[Y_2] = \beta_0 + \beta_1(m+1) + \beta_2e + \beta_3p$
+
+$$ E[Y_2] - E[Y_1] = \beta_1 $$
+
+$\beta_1$ indicates the expected change in autism score per unit increase in mercury exposure, holding **all other variables in the model** constant.
+
+## Hypothesis testing for coefficients
+
+```{r}
+lmfit <- lm(asd_score ~ merc, data = df)
+lmfit_out <- tidy(lmfit)
+lmfit_out
+```
+
+## Interpreting coefficients - caution
+
+Magical! These coefficient interpretations seem to give us causal interpretations!
+
+No!
+
+To see why, we must first consider the idea of extrapolation.
+
+
+## Extrapolation
+
+```{r}
+x <- seq(1, 5, 0.2)
+y <- x^2 - 6.8
+y[x <= 3] <- x[x <= 3]
+plot(x[x <= 3], y[x <= 3], xlim = range(x), ylim = range(y), xlab = "Predictor", ylab = "Outcome")
+abline(a = 0, b = 1)
+```
+
+## Extrapolation
+
+```{r}
+plot(x, y, col = rep(c("black", "red"), times = c(sum(x <= 3), sum(x > 3))), xlim = range(x), ylim = range(y), xlab = "Predictor", ylab = "Outcome")
+abline(a = 0, b = 1)
+```
+
+## Extrapolation
+
+[Momentous sprint at the 2156 Olympics?](http://www.nature.com/doifinder/10.1038/431525a)
+
+<div style="text-align: center">
+![](images/extrapolation.png)
+</div>
+
+## Treatment effects and extrapolation
+
+```{r}
+df2 <- data.frame(x1 = 1:10, group = rep(c("Control", "Treatment"), each = 5))
+df2$y <- 2*df2$x1
+
+par(mfrow = c(1,2))
+boxplot(y ~ group, data = df2)
+```
+
+## Treatment effects and extrapolation
+
+```{r}
+par(mfrow = c(1,2))
+boxplot(y ~ group, data = df2)
+plot(df2$x1, df2$y, col = ifelse(df2$group=="Control", "black", "red"), xlab = "x1", ylab = "Outcome")
+```
+
+What seemed like a clear treatment effect seems to be confounded by the predictor $x_1$. Let's "control for it" using regression. (This language is used often but is actually quite unclear as we'll see.)
+
+## Treatment effects and extrapolation
+
+$$ E[\hbox{outcome}] = \beta_0 + \beta_1\hbox{treatment} $$
+
+```{r}
+lmfit2 <- lm(y ~ group, data = df2)
+tidy(lmfit2)
+```
+
+$$ E[\hbox{outcome}] = \beta_0 + \beta_1\hbox{treatment} + \beta_2 x_1 $$
+
+```{r}
+lmfit2 <- lm(y ~ group+x1, data = df2)
+lmfit2_out <- tidy(lmfit2)
+lmfit2_out
+```
+
+What picture is implied by this second model?
+
+## Treatment effects and extrapolation
+
+```{r}
+par(mfrow = c(1,2))
+plot(df2$x1, df2$y, col = ifelse(df2$group=="Control", "black", "red"), xlab = "x1", ylab = "Outcome", main = "Implied by model")
+abline(a = lmfit2_out$estimate[1], b = lmfit2_out$estimate[3], col = "black")
+abline(a = lmfit2_out$estimate[1]+lmfit2_out$estimate[2], b = lmfit2_out$estimate[3], col = "red", lty = "dotted", lwd = 2)
+legend("topleft", legend = c("Control trend", "Treatment trend"), lty = c("solid", "dotted"), lwd = c(1,2), col = c("black", "red"), bty = "n")
+
+plot(df2$x1, df2$y, col = ifelse(df2$group=="Control", "black", "red"), xlab = "x1", ylab = "Outcome", main = "Truth")
+lines(1:10, c(seq(2,10,2), 11:15), col = "black")
+lines(1:10, c(seq(10,11.5,length.out = 5), seq(12,20,2)), col = "red", lty = "dotted", lwd = 2)
+legend("topleft", legend = c("Control trend", "Treatment trend"), lty = c("solid", "dotted"), lwd = c(1,2), col = c("black", "red"), bty = "n")
+```
+
+## Coefficient estimates can change when adding other predictors
+
+```{r}
+lmfit <- lm(asd_score ~ merc, data = df)
+lmfit_out <- tidy(lmfit)
+lmfit_out
+
+lmfit <- lm(asd_score ~ merc+pollution, data = df)
+lmfit_out <- tidy(lmfit)
+lmfit_out
+
+lmfit <- lm(asd_score ~ merc+pollution+education, data = df)
+lmfit_out <- tidy(lmfit)
+lmfit_out
+```
+
+## Coefficient estimates can change when adding other predictors
+
+- When predictors are informative, some of the explanation for how the outcome varies gets taken up by these predictors, causing other coefficients to change.
+- The simple linear regression model with just the effect of interest is often called the **unadjusted model**.
+- Multiple linear regression models with additional covariates are sometimes called a **model with covariates** or more often the **adjusted model**.
+
+## Interaction terms
+
+```{r}
+par(mfrow = c(1,2))
+plot(df$pollution, df$asd_score, pch = 16, col = alpha("black", 0.25), xlab = "Pollution exposure", ylab = "Autism-spectrum score")
+plot(df$pollution, df$asd_score, pch = 16, col = ifelse(df$education=="good", "red", "black"), xlab = "Pollution exposure", ylab = "Autism-spectrum score")
+legend("topleft", legend = c("Poor education", "Good education"), pch = 16, col = c("black", "red"), bty = "n")
+```
+
+## Interaction terms
+
+There seems to be a different pollution trend by education status. Consider the model:
+
+$$ E[\hbox{autism spectrum score}] = \beta_0 + \beta_2\mathrm{education} + \beta_3\mathrm{pollution} + \beta_4\mathrm{education}\times\mathrm{pollution} $$
+
+```{r}
+lmfit <- lm(asd_score ~ pollution+education + pollution*education, data = df)
+lmfit_out <- tidy(lmfit)
+lmfit_out
+```
+
+- Interaction terms are used to determine if effects are different between groups.
+- They tend to be more uncertain because sample size drops when estimating group-specific effects.
+
+## Logistic regression
+
+Similar ideas to linear regression but instead we model the log odds of some event (e.g. disease status in case-control and cohort studies):
+
+$$
+\begin{align*}
+\log \hbox{odds} &= \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p \\
+\log \left( \frac{p}{1 - p} \right) &= \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p \\
+\log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) &= \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p
+\end{align*}
+$$
+
+## Generalized linear models
+
+Generalized linear models (GLMs) encompass linear and logistic regression. They have the general form:
+
+$$ \mathrm{function}(E[\mathrm{outcome}]) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+where the function on the left is called a **link function**.
+
+GLMs give the flexibility to study different types of outcomes: continous, binary, and more.
+
+## Generalized linear models
+
+Linear regression
+
+$$ E[\mathrm{continuous\:outcome}] = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+- The link function is the identity function: $f(x) = x$.
+
+Logistic regression
+
+$$ \log \left( \frac{E[\mathrm{binary\:outcome}]}{1 - E[\mathrm{binary\:outcome}]} \right) = \beta_0 + \beta_1\mathrm{predictor}_1 + \cdots + \beta_p\mathrm{predictor}_p $$
+
+- The link function is the logit function: $f(p) = \log(p/(1-p))$.
+
+
+## Generalized linear models {.smaller}
+
+Most common forms:
+
+ Type of data   Link function   Name of model(s)                                Coefficient interpretations
+-------------- --------------- ----------------------------------------------- -----------------------------
+ Continuous       Identity             Linear regression                           differences
+ Binary            Logit              Logistic regression                          odds ratios
+ Categorical       Logit           Multinomial, ordinal logistic regression        odds ratios
+ Counts             Log           Poisson regression/log-linear models             incidence rate ratios
+
+
+## Matched case control design
+
+In a matched case-control study:
+
+- $N$ sets of individuals
+- Each set usually consists of one case and one or more controls, matched on various predictors. (But not the expsoure of interest - why?)
+
+```{r}
+library(survival)
+
+set.seed(1)
+fits <- lapply(1:5, function(ratio) {
+	do.call(rbind, lapply(seq_len(100), function(i) {
+		# 2000 baseline log odds for each stratum
+		baselineLogOdds <- rep(rnorm(2000, mean = -1.4, sd = 0.1), each = ratio+1)
+		pairID <- rep(seq_len(2000), each = ratio+1)
+		## Set truth
+		beta1 <- 0.3
+		## Simulate exposure status
+		exposed <- rbinom(2000*(ratio+1), size = 1, prob = 0.2)
+		## Calculate probability of disease
+		logOdds <- baselineLogOdds + beta1*exposed
+		odds <- exp(logOdds)
+		p <- odds/(1+odds)
+		## Simulate disease status
+		disease <- rbinom(2000*(ratio+1), size = 1, prob = p)
+
+		diseaseMat <- matrix(disease, ncol = ratio+1, byrow = TRUE)
+		pairIDmat <- matrix(pairID, ncol = ratio+1, byrow = TRUE)
+		exposedMat <- matrix(exposed, ncol = ratio+1, byrow = TRUE)
+		## Which strata have one diseased person? (Rest are controls)
+		ccpairs <- which(rowSums(diseaseMat)==1)
+		npairs <- 100
+		## Select the first 100
+		index <- head(ccpairs, npairs)
+
+		df <- data.frame(dis = as.numeric(diseaseMat[index,]),
+			id = as.numeric(pairIDmat[index,]),
+			expo = as.numeric(exposedMat[index,]))
+		clogfit <- clogit(dis ~ expo + strata(id), data = df)
+		summary(clogfit)$coefficients
+	}))
+})
+ses <- lapply(fits, function(mat) { mat[,3] })
+boxplot(ses, xlab = "Control:case ratio", ylab = "SE(log odds ratio)", main = "SEs from simulated matched case-control studies")
+```
+
+## Conditional logistic regression
+
+- For matched case-control studies, a special type of logistic regression, **conditional logistic regression**, is more appropriate.
+
+```{r}
+set.seed(1)
+n <- 10
+yints <- runif(n, min = 1, max = 6)
+slope <- 0.5
+xstart <- 1
+xend <- 3
+yends <- yints + slope*xend
+plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Baseline odds of disease in unexposed", xaxt = "n")
+axis(side = 1, at = c(1,xend), labels = c("Unexposed", "Exposed"))
+points(x = rep(xstart,n), y = yints)
+```
+
+## Conditional logistic regression
+
+- For matched case-control studies, a special type of logistic regression, **conditional logistic regression**, is more appropriate.
+
+```{r}
+plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Odds of disease in exposed and unexposed", xaxt = "n")
+axis(side = 1, at = c(1,xend), labels = c("Unexposed", "Exposed"))
+points(x = rep(xstart,n), y = yints)
+points(x = rep(xend, n), y = yends)
+```
+
+## Conditional logistic regression
+
+- For matched case-control studies, a special type of logistic regression, **conditional logistic regression**, is more appropriate.
+
+```{r}
+plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Odds of disease in exposed and unexposed\nPairing evident", xaxt = "n")
+axis(side = 1, at = c(1,xend), labels = c("Unexposed", "Exposed"))
+segments(x0 = xstart, y0 = yints, x1 = xend, y1 = yends)
+points(x = rep(xstart,n), y = yints)
+points(x = rep(xend, n), y = yends)
+```
+
+## Conditional logistic regression
+
+- For matched case-control studies, a special type of logistic regression, **conditional logistic regression**, is more appropriate.
+    - Of interest: odds ratio of disease comparing exposed to unexposed
+    - Not really of interest: baseline odds of disease
+- If ordinary logistic regression were used, we would need a model such as:
+
+$$ \log\left(\frac{p}{1-p}\right) = \beta_1\mathrm{stratum}_1 + \beta_2\mathrm{stratum}_2 + \cdots + \beta_k\mathrm{stratum}_k + \beta_\mathrm{merc}\mathrm{merc} $$
+
+- It turns out that the estimate $\hat\beta_\mathrm{merc}$ is biased in this case: $E[\hat\beta_\mathrm{merc}]-\beta_\mathrm{merc} \neq 0$. ([Reference](http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/) - Chapters 6 and 7)
+- Conditional logistic regression removes the need for the stratum-specific indicator variables and gives a much less biased estimate of $\beta_\mathrm{merc}$
