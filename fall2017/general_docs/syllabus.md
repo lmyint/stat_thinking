@@ -6,7 +6,7 @@
   ---------------------- ------------------------------------------------------------
   Meeting times:         TTh 4:30 - 5:45PM
   Room:                  Homewood Campus, Krieger 309
-  Office Hours:          TBD. First floor - Brody Learning Commons
+  Office Hours:          Th 3:00 - 4:30PM. First floor - Brody Learning Commons
   Instructor:            Leslie Myint
   Contact information:   <lmyint1@jhu.edu>
   Office:                Welch Medical Library, Room 117
