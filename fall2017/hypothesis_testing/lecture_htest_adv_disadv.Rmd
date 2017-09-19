@@ -1,0 +1,81 @@
+---
+title: "Advantages and disadvantages of hypothesis testing"
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
+---
+
+## Hypothesis testing uses a sensible framework
+
+- Proof by contradiction
+- Many questions of interest can be phrased using null/alternative hypothesis language.
+
+## Current framework has been well studied
+
+- People have developed testing procedures for a wide variety of situations.
+- Tools are implemented in essentially all software packages.
+
+## Reliance on models
+
+- Hypothesis testing relies on knowing the distribution of the test statistic under the null and alternative hypotheses. (What does this mean?)
+- Knowing these distributions requires either:
+    - **Knowing that the data come from a particular distribution (e.g. the normal distribution) or arise from a particular mechanism**
+    - Relying on large sample sizes AND "random sampling" (simple random sampling to be specific)
+- To understand how data would look differently from study to study, we need to model how the data arises. i.e. Describe mathematically what data is likely to occur.
+    - e.g. Model of disease spread assumes that eveyone is equally likely to bump into each other. Realistic?
+- "All models are wrong, but some are useful." - George Box
+
+## Reliance on simple random sampling
+
+- Hypothesis testing relies on knowing the distribution of the test statistic under the null and alternative hypotheses. (What does this mean?)
+- Knowing these distributions requires either:
+    - Knowing that the data come from a particular distribution (e.g. the normal distribution) or arise from a particular mechanism
+    - **Relying on large sample sizes AND "random sampling" (simple random sampling to be specific)**
+- We will discuss simple random sampling more when we talk about surveys.
+    - General idea: in simple random sampling, everyone is equally likely to be chosen to be in the study.
+    - This is not how traditional studies proceed - there is almost always **selection bias**.
+- With selection bias, the distribution of the test statistic changes from what we expect. Why?
+
+## Interpretation of p-values
+
+Let's say we are looking at the association between Zika virus exposure and birth defects by looking at the difference in birth defect rates. How do we interpret p-values of:
+
+- 0.1?
+- 0.01?
+
+What would you say about evidence for an association in these two cases?
+
+## Interpretation of p-values
+
+What if we had some other information?
+
+- 0.1: from a randomized trial; estimated difference in rates = 0.1
+- 0.01: from a database study in Brazil; estimated difference in rates = 0.001
+
+What would you say about evidence for an association in these two cases?
+
+## Caveats about p-values
+
+- They don't take into account the study design.
+- They can only be used for a proof by contradiction. They only indicate discrepancy with the null hypothesis. They give no evidence **for** the alternative.
+- They can be misleading if we fail to consider whether the null distributions of the test statistic that we used to calculate the p-values are correct. (Reliance on models and simple random sampling)
+- Their magnitude tells us nothing about real-world impact of the effect (effect size).
+- They need to be viewed along with information about power.
+- They tend to be subconsciously dichotomized - significant vs. not significant. Is this classification really important?
+
+## In some fields, the null is almost always false
+
+- "Well of course there's an effect! But how big is it?"
+- Emphasis should not be on whether or not the null was rejected but on making sure that the estimate of the effect (and its uncertainty) is correct.
+- Example: we reject the null that birth defect rates are equal in Zika exposed and unexposed mothers. How much money should we allocate to specialized care for exposed mothers?
+
+## Significant p-values are unlikely to replicate with low power
+
+- If the alternative is really true but we have low power, then a significant p-value is unlikely to be seen again in a replication experiment.
+
+```
+library(shiny)
+runGitHub("shiny_education_apps", "lmyint", subdir = "power")
+```
+
