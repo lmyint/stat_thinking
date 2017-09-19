@@ -269,6 +269,16 @@ library(shiny)
 runGitHub("shiny_education_apps", "lmyint", subdir = "common_tests")
 ```
 
+## Hints for activity
+
+Try these different combinations and pay attention to when one method has higher type I error and power.
+
+- For continuous data
+    - Data distribution: symmetric. Sample size: 10, 100, 200, 300. True difference: 0, 0.3, 0.6
+    - Data distribution: skewed. Sample size: 10, 100, 200, 300. True difference: 0, 0.3, 0.6
+- For categorical data
+    - Sample size: 10, 200, 400, 1000. True difference: 0, 0.2, 0.4
+
 ## Confidence intervals
 
 We've used test statistics and p-values to make decisions about rejecting $H_0$.
@@ -309,3 +319,8 @@ library(shiny)
 install.packages("Hmisc") ## Run this line if you run into an error with runGitHub below
 runGitHub("shiny_education_apps", "lmyint", subdir = "confidence_intervals")
 ```
+
+Hints:
+
+- Look at how coverage probability changes as the true proportion gets very small.
+- When the true proportion is very small, how does sample size affect coverage probability?
