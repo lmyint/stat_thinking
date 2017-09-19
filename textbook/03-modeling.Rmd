@@ -81,7 +81,7 @@ $$ \hbox{odds} = \frac{p}{1-p} $$
 
 In logistic regression, we model the expected log odds of a binary event as a linear combination of covariates:
 
-$$ E[Y] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 $$
+$$ E[\hbox{log odds}] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 $$
 
 We can go through the same process as with linear regression to obtain interpretations of coefficients in logistic regression. In linear regression, coefficients were interpreted as the expected change in outcome per unit change in covariate holding all other factors constant. In logistic regression, we replace "outcome" with "log odds of the binary event." So in logistic regression, the coefficients give the difference in log odds of the event, more commonly expressed as the log odds ratio. For example, if the binary event were disease, the interpretation of an age coefficient would be
 
