@@ -1,0 +1,115 @@
+---
+title: "Regression modeling - part 2"
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, fig.align="center")
+library(scales)
+library(broom)
+```
+
+## Variable selection - activity
+
+What variables should be included in a regression model? If the number of potential variables is high relative to the study size, there isn't enough information for each variable.
+
+We'll be doing an activity using the first two tabs.
+
+```
+library(shiny)
+runGitHub("shiny_education_apps", "lmyint", subdir = "regression")
+```
+
+Group 1: Use visual exploratory data analysis in the first tab: "Explore breast cancer data"
+
+Group 2: Examine how coefficient estimates change as you add new variables
+
+## Numerically assessing model fit
+
+Does a model fit the data well? What can we look at?
+
+- Error: sums of squares
+- Prediction accuracy
+- Likelihood
+
+## Variable selection
+
+- This is a highly active area of statistics research. Some methods are better in certain types of situations and for certain data.
+- Commonly used automated methods:
+    - Forward selection
+    - Backward selection
+    - All subsets regression
+    - Penalized regression
+
+## Forward and backward selection
+
+- Forward selection
+    - Start with no variables in the model
+    - Add each in turn to see if the fit improves (using some numerical criteria)
+- Backward selection
+    - Start with all variables in the model
+    - Take away each in turn to see if the fit does not worsen
+- All subsets regression
+    - Fit all possible regression models. There are $2^p$ possibilities with $p$ predictors.
+- Penalized regression
+    - Penalize (handicap) certain sets of coefficients
+    - "Encourages" some coefficients to be set to zero (not included in the model)
+
+## Regression coefficients are sensitive to who is in the study
+
+What did you see when you clicked the "Fit model on other datasets" button?
+
+## Measurement error
+
+What is the impact of measurement error in the predictors? Explore in the "Measurement Error" tab.
+
+```
+library(shiny)
+runGitHub("shiny_education_apps", "lmyint", subdir = "regression")
+```
+
+## Meta-analysis
+
+- Meta-analysis is the process of taking estimates (and associated uncertainty) from studies and combining them into a single estimate (and associated uncertainty measure).
+- This is a huge area of statistical research: [non-exhuastive list of meta-analysis methods](http://www.metafor-project.org/doku.php/analyses)
+- Weighted least squares (regression) is a technique used in meta-analysis
+
+## Weighted least squares
+
+- Recall that the sum of squared residuals was used in standard (unweighted) regression to estimate coefficients.
+- This inherently assumes that all data points have equal reliability (deserve the same weight).
+- A case where this is violated is when there is **heteroskedasticity**: when different observations have unequal variance. (One of the assumptions for valid inferences in linear regression is the opposite: **homoskedasticity**.)
+
+----
+
+```{r}
+set.seed(1)
+n <- 1000
+x <- runif(n, 0, 10)
+y1 <- x + rnorm(n, 0, 1)
+y2 <- x + rnorm(n, 0, sqrt(x))
+df <- data.frame(x = x, y = y2, w = 1/sqrt(x)^2)
+
+par(mfrow = c(1,2))
+plot(x, y1, pch = 16, col = alpha("black", 0.5), xlab = "Predictor", ylab = "Outcome", main = "Homoskedasticity")
+plot(x, y2, pch = 16, col = alpha("black", 0.5), xlab = "Predictor", ylab = "Outcome", main = "Heteroskedasticity")
+```
+
+----
+
+Ordinary (unweighted) regression
+
+```{r}
+lmfit_ols <- tidy(lm(y ~ x, data = df))
+lmfit_ols
+```
+
+Weighted regression
+
+```{r}
+lmfit_wls <- tidy(lm(y ~ x, data = df, weights = w))
+lmfit_wls
+```

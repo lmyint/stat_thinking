@@ -364,8 +364,8 @@ slope <- 0.5
 xstart <- 1
 xend <- 3
 yends <- yints + slope*xend
-plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Baseline odds of disease in unexposed", xaxt = "n")
-axis(side = 1, at = c(1,xend), labels = c("Unexposed", "Exposed"))
+plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Baseline odds of disease in controls", xaxt = "n")
+axis(side = 1, at = c(1,xend), labels = c("controls", "cases"))
 points(x = rep(xstart,n), y = yints)
 ```
 
@@ -374,8 +374,8 @@ points(x = rep(xstart,n), y = yints)
 - For matched case-control studies, a special type of logistic regression, **conditional logistic regression**, is more appropriate.
 
 ```{r}
-plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Odds of disease in exposed and unexposed", xaxt = "n")
-axis(side = 1, at = c(1,xend), labels = c("Unexposed", "Exposed"))
+plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Odds of disease in cases and controls", xaxt = "n")
+axis(side = 1, at = c(1,xend), labels = c("controls", "cases"))
 points(x = rep(xstart,n), y = yints)
 points(x = rep(xend, n), y = yends)
 ```
@@ -385,8 +385,8 @@ points(x = rep(xend, n), y = yends)
 - For matched case-control studies, a special type of logistic regression, **conditional logistic regression**, is more appropriate.
 
 ```{r}
-plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Odds of disease in exposed and unexposed\nPairing evident", xaxt = "n")
-axis(side = 1, at = c(1,xend), labels = c("Unexposed", "Exposed"))
+plot(1, type = "n", xlim = c(0, xend+1), ylim = range(yints, yends), xlab = "Exposure of interest", ylab = "Odds", main = "Odds of disease in cases and controls\nPairing evident", xaxt = "n")
+axis(side = 1, at = c(1,xend), labels = c("controls", "cases"))
 segments(x0 = xstart, y0 = yints, x1 = xend, y1 = yends)
 points(x = rep(xstart,n), y = yints)
 points(x = rep(xend, n), y = yends)
