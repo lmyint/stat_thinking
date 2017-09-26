@@ -2,7 +2,7 @@
 
 Please submit a PDF or Word document containing your write-up by Saturday, 10/21 at 9:00PM.
 
-For this module, Thursday classes will be heavily participation and discussion based. You will be helping yourselves and your peers understand these concepts by preparing explanations for select concepts. 
+For this module, Thursday classes will be heavily participation and discussion based. You will be helping yourselves and your peers understand these concepts by preparing explanations for select concepts. Because of this preparation and the importance of class participation for helping your fellow classmates, part of the grade for this assignment will be based on your participation in Thursday classes.
 
 ### Week 1: Foundational ideas in causal inference
 
