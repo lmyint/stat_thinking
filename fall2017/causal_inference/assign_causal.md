@@ -40,8 +40,7 @@ To prepare for Thursday: For these two articles, read enough of the abstract and
 
 You will be reading the following two papers (available on Blackboard):
 
-- Randomized trial: [The Oregon Experiment - Effects
-of Medicaid on Clinical Outcomes](http://www.nejm.org/doi/pdf/10.1056/NEJMsa1212321)
+- Randomized trial: [The Oregon Experiment - Effects of Medicaid on Clinical Outcomes](http://www.nejm.org/doi/pdf/10.1056/NEJMsa1212321)
 - Instrumental variables: [Evaluating short-term drug effects using a physician-specific prescribing preference as an instrumental variable](https://www.ncbi.nlm.nih.gov/pubmed/16617275)
 
 Your writing assignment will be to explain what is being done in the statisical methods sections and to evaluate the appropriate use of propensity score and interrupted time series methodology. There are specific points regarding these two methodologies that you should address. You will be helping each other understand these points by each focusing on specific points and explaining them to your peers in class on Thursday. Specifically your written assignment should include:
