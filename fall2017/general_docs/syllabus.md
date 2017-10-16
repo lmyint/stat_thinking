@@ -6,7 +6,7 @@
   ---------------------- ------------------------------------------------------------
   Meeting times:         TTh 4:30 - 5:45PM
   Room:                  Homewood Campus, Krieger 309
-  Office Hours:          Th 3:00 - 4:30PM. First floor - Brody Learning Commons
+  Office Hours:          TTh 3:45 - 4:30PM. First floor - Brody Learning Commons
   Instructor:            Leslie Myint
   Contact information:   <lmyint1@jhu.edu>
   Office:                Welch Medical Library, Room 117
@@ -68,7 +68,7 @@ point-and-click applications. The modules covered are as follows:
 5. Survival analysis
 6. Longitudinal data analysis
 
-Each module will have one associated assignment to be turned in for grading. 
+Most modules will have one associated assignment to be turned in for grading. 
 More information on these assignments is given in the following section.
 
 ## Grading
@@ -89,8 +89,7 @@ proposing/defending a study design to answer scientific questions.
 
 Assignments will be graded on content, clarity of writing, appropriate 
 use of statistical concepts and terminology, and thoughtful evaluation 
-of data quality issues. These will always be due 9 days after the end of 
-the module.
+of data quality issues.
 
 **Final project: Scientific topic synthesis – 20%**
 
@@ -99,8 +98,8 @@ will perform a detailed investigation into the state of knowledge
 regarding a broad scientific topic. Students can come up with this topic 
 on their own or choose from topics in a 2015 [Pew Research Center report](http://www.pewinternet.org/2015/01/29/public-and-scientists-views-on-science-and-society/).
 Teams will be required to read and evaluate a collection of news articles 
-and primary research articles. Deliverables include a group report and a group 
-presentation. More information will be given in a separate document.
+and primary research articles. Teams will give presentations during the 
+last week of class. More information will be given in a separate document.
 
 ## Late assignments
 
@@ -124,9 +123,8 @@ not related to what we are doing in class.
 
 ## Exams
 
-There will be no midterm or final examinations. The group report associated 
-with the final project will be due at the end of our final exam slot: 
-Tuesday, December 19 at 5:00PM.
+There will be no midterm or final examinations. Final project presentations 
+will take place during the last week of class.
 
 ## Academic Integrity
 
