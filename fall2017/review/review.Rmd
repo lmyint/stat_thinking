@@ -1,0 +1,108 @@
+---
+title: "Review worksheet"
+output: pdf_document
+---
+
+1. The sensitivity and specificity of a diagnostic test are both 80%. Calculate the positive and negative predictive value of this test for a prevalence of (a) 10% and (b) 1%. What do you notice? Can you come up with an analogy for hypothesis testing? In other words, can you translate type I error rate and power into this diagnostic testing context? What is an analogy for prevalence in the hypothesis testing setting?
+
+2. The following logistic regression model is used to obtain propensity scores:
+
+$$ \hbox{log odds of treatment} = -0.5 + 0.01\mathrm{age} + 0.05\mathrm{male} $$
+
+What is the propensity score for a 30 year old female and for a 25 year old male?
+
+3. What is going on in Parts 1-4 in the output below?
+
+Example 1
+
+```{r echo=FALSE}
+library(broom)
+set.seed(17)
+n <- 100
+x <- rbinom(n, size = 1, prob = 0.5)
+y <- ifelse(x==1, rbinom(n, size = 1, prob = 0.7), rbinom(n, size = 1, prob = 0.2))
+o <- rnorm(n)
+df <- data.frame(instrument = x, treatment = y, outcome = o)
+
+cat("Part 1: cross tabulation of receipt of instrument and treatment\n")
+table(instrument = x, treatment = y)
+prop.table(table(instrument = x, treatment = y), 1)
+lmfit <- lm(treatment ~ instrument, data = df)
+tidy(lmfit)
+
+cat("Part 2: linear regression of outcome on instrument\n")
+lmfit2 <- lm(outcome ~ instrument, data = df)
+tidy(lmfit2)
+
+cat("Part 3: linear regression of outcome on predicted treatment\n")
+df$predicted_trt <- predict(lmfit)
+lmfit3 <- lm(outcome ~ predicted_trt, data = df)
+tidy(lmfit3)
+
+cat("Part 4\n")
+a <- tidy(lmfit2)$estimate[2]
+b <- tidy(lmfit)$estimate[2]
+cat(a, "/", b, "=", a/b, "\n")
+```
+
+Example 2
+
+```{r echo=FALSE}
+set.seed(42)
+n <- 100
+x <- rbinom(n, size = 1, prob = 0.5)
+y <- ifelse(x==1, rbinom(n, size = 1, prob = 0.7), rbinom(n, size = 1, prob = 0.2))
+o <- rnorm(n)
+df <- data.frame(instrument = x, treatment = y, outcome = o)
+
+cat("Part 1: cross tabulation of receipt of instrument and treatment\n")
+table(instrument = x, treatment = y)
+prop.table(table(instrument = x, treatment = y), 1)
+lmfit <- lm(treatment ~ instrument, data = df)
+tidy(lmfit)
+
+cat("Part 2: linear regression of outcome on instrument\n")
+lmfit2 <- lm(outcome ~ instrument, data = df)
+tidy(lmfit2)
+
+cat("Part 3: linear regression of outcome on predicted treatment\n")
+df$predicted_trt <- predict(lmfit)
+lmfit3 <- lm(outcome ~ predicted_trt, data = df)
+tidy(lmfit3)
+
+cat("Part 4\n")
+a <- tidy(lmfit2)$estimate[2]
+b <- tidy(lmfit)$estimate[2]
+cat(a, "/", b, "=", a/b, "\n")
+```
+
+Example 3:
+
+```{r echo=FALSE}
+set.seed(76)
+n <- 100
+x <- rbinom(n, size = 1, prob = 0.5)
+y <- ifelse(x==1, rbinom(n, size = 1, prob = 0.7), rbinom(n, size = 1, prob = 0.2))
+o <- rnorm(n)
+df <- data.frame(instrument = x, treatment = y, outcome = o)
+
+cat("Part 1: cross tabulation of receipt of instrument and treatment\n")
+table(instrument = x, treatment = y)
+prop.table(table(instrument = x, treatment = y), 1)
+lmfit <- lm(treatment ~ instrument, data = df)
+tidy(lmfit)
+
+cat("Part 2: linear regression of outcome on instrument\n")
+lmfit2 <- lm(outcome ~ instrument, data = df)
+tidy(lmfit2)
+
+cat("Part 3: linear regression of outcome on predicted treatment\n")
+df$predicted_trt <- predict(lmfit)
+lmfit3 <- lm(outcome ~ predicted_trt, data = df)
+tidy(lmfit3)
+
+cat("Part 4\n")
+a <- tidy(lmfit2)$estimate[2]
+b <- tidy(lmfit)$estimate[2]
+cat(a, "/", b, "=", a/b, "\n")
+```
