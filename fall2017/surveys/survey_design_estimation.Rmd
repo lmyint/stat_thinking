@@ -1,0 +1,238 @@
+---
+title: "Surveys: design and estimation"
+output: pdf_document
+---
+
+# Probability and nonprobability samples
+
+We often describe samples as being "random". In fact, this is an unclear description. To see why, consider the following examples:
+
+1. A researcher selects 20 students with equal probability from the university registry and asks if they are content with the school's dining services.
+2. A researcher surveys the first 20 students he sees in the dining hall and askss if they are content with the school's dining services.
+
+Both researchers collected a "random" sample, but the situations are quite different. The first situation is called a **probability sample**. In a probability sample, each unit has a known (but not necessarily identical) probability of being selected into the sample. In this example, all students have probability $20/N$ of being selected where $N$ is the total number of students in the registry.
+
+Probability samples are *representative* in the sense that the known probabilities of selection into the sample can be used to compute unbiased estimates of population quantities. By unbiased, we can say that we *expect* (statistically) our estimate to equal the true value (the true percentage of content students). This will be explored further in the next section when we talk about the Horvitz-Thompson estimator.
+
+The second example is "random" in that the seating of students at tables is random, but it is a **nonprobability sample** because the students in the dining hall do not have a known probability of being selected into the sample. This nonprobability sample is *not representative* because we cannot compute unbiased estimates of the true value.
+
+# Horvitz-Thompson estimator
+
+In surveys, we are often interested in estimating means or totals. (Proportions are means of binary variables.) The Horvitz-Thompson (HT)estimator is a general procedure that uses both the surveyed values (responses from participants) and the selection probabilities.
+
+Let $S$ be the set of indices of units selected in the sample. For example, if there are 10 units in the population and units 1, 3, and 5 are selected, then $S = \{1,3,5\}$. Let $y_i$ be the response for unit $i$ and $p_i$ be the probability that unit $i$ is sampled. The Horvitz-Thompson estimate $\hat T$ of the population total is given by:
+
+$$ \hat T = \sum_{i \in S} \frac{y_i}{p_i} $$
+
+In other words, the estimate involves a sum over all sampled units of the responses weighted by the inverse probabilities. The **expected value** of this estimate is equal to the true population total that we could compute if we sampled everyone in the population. By expected value, we are referring to the weighted average value we would see over all possible scenarios of selecting a sample, acknowledging that some sample selections are more likely than others.
+
+## Worked example
+
+(Example courtesy of [Penn State](https://onlinecourses.science.psu.edu/stat506/node/17))
+
+Let's say that we have a total population of $N = 3$ farms in the county. We draw a sample of size $n = 2$ with replacement. The three farms, their individual selection probabilities, and their annual wheat production are given in the table below.
+
+ Unit ($i$)   Selection probability ($p_i$)   Wheat production ($y_i$)
+------------ ------------------------------- --------------------------
+     1                   0.3                            11
+     2                   0.2                            6
+     3                   0.5                            25
+
+Because sampling is done with replacement, there are 9 possible samples that can result, shown in the table below (first column). The probability of seeing a particular sample can be obtained by multiplying the individual unit selection probabilities.
+
+ Sample ($s$)   Probability of sample $s$ ($p_s$)   HT estimate ($T_s$)
+-------------- ----------------------------------- ---------------------
+    1,1              $0.3\times 0.3 = 0.09$
+    2,2              $0.2\times 0.2 = 0.04$
+    3,3              $0.5\times 0.5 = 0.25$
+    1,2              $0.3\times 0.2 = 0.06$
+    2,1              $0.2\times 0.3 = 0.06$
+    1,3              $0.3\times 0.5 = 0.15$
+    3,1              $0.5\times 0.3 = 0.15$
+    2,3              $0.2\times 0.5 = 0.10$
+    3,2              $0.5\times 0.2 = 0.10$
+
+To compute the Horvitz-Thompson (HT) estimate of the total, we need to calculate the probability of seeing unit 1 in any sample ($p_1$), the probability of seeing unit 2 in any sample ($p_2$), and the probability of seeing unit 3 in any sample ($p_3$).
+
+$$ p_1 = 0.09+0.06+0.06+0.15+0.15 = 0.51 $$
+$$ p_2 = 0.04+0.06+0.06+0.10+0.10 = 0.36 $$
+$$ p_2 = 0.25+0.15+0.15+0.10+0.10 = 0.75 $$
+
+When we collect the sample $(1,1)$, the HT estimate is
+
+$$ \frac{11}{0.51} = 21.57 $$
+
+When we collect the sample $(1,2)$, the HT estimate is
+
+$$ \frac{11}{0.51} + \frac{6}{0.36} = 38.24 $$
+
+When we collect the sample $(1,3)$, the HT estimate is
+
+$$ \frac{11}{0.51} + \frac{25}{0.75} = 54.90 $$
+
+We can work out the HT estimates similarly for the other possible samples to fill out the table:
+
+ Sample ($s$)   Probability of sample $s$ ($p_s$)   HT estimate ($T_s$)
+-------------- ----------------------------------- ---------------------
+    1,1               $0.3\times 0.3 = 0.09$              21.57
+    2,2               $0.2\times 0.2 = 0.04$              16.67
+    3,3               $0.5\times 0.5 = 0.25$              33.33
+    1,2               $0.3\times 0.2 = 0.06$              38.24
+    2,1               $0.2\times 0.3 = 0.06$              38.24
+    1,3               $0.3\times 0.5 = 0.15$              54.90
+    3,1               $0.5\times 0.3 = 0.15$              54.90
+    2,3               $0.2\times 0.5 = 0.10$              50.00
+    3,2               $0.5\times 0.2 = 0.10$              50.00
+
+We can calculate the mean (expected value) of the HT estimates over the different possible samples using the definition of expected value:
+
+$$
+\begin{aligned}
+\mathrm{Mean} = m &= \sum_s P(s)T_s \\
+&= 0.09(21.57)+0.04(16.67)+0.25(33.33) \\
+&\,\,\,\,\,+0.06(38.24)+0.06(38.24) \\
+&\,\,\,\,\,+0.15(54.90)+0.15(54.90) \\
+&\,\,\,\,\,+0.10(50.00)+0.10(50.00) \\
+&= 42
+\end{aligned}
+$$
+
+We can also calculate the variance of the HT estimates using the definition of variance (below $m$ is the mean from the step above):
+
+$$
+\begin{aligned}
+\mathrm{Variance} &= \sum_s P(s)(T_s-m)^2 \\
+&= 0.09(21.57-42)^2+0.04(16.67-42)^2+0.25(33.33-42)^2 \\
+&\,\,\,\,\,+0.06(38.24-42)^2+0.06(38.24-42)^2 \\
+&\,\,\,\,\,+0.15(54.90-42)^2+0.15(54.90-42)^2 \\
+&\,\,\,\,\,+0.10(50.00-42)^2+0.10(50.00-42)^2 \\
+&= 146.4407
+\end{aligned}
+$$
+
+The following code in R can do these calculations as well:
+
+```{r}
+ht <- c(21.57,16.67,33.33,38.24,38.24,54.90,54.90,50.00,50.00)
+p <- c(0.09,0.04,0.25,0.06,0.06,0.15,0.15,0.10,0.10)
+## Expected value:
+m <- sum(p*ht)
+m
+## Variance
+v <- sum(p*(ht-m)^2)
+v
+```
+
+Is the mean what you would expect?
+
+## Exercise for you to complete
+
+Perform similar calculations as in the example above with the following information. (The only information that has changed are the unit-level selection probabilities.)
+
+ Unit ($i$)   Selection probability ($p_i$)   Wheat production ($y_i$)
+------------ ------------------------------- --------------------------
+     1                   1/3                            11
+     2                   1/3                            6
+     3                   1/3                            25
+
+(1) Fill out the following table:
+
+ Sample ($s$)   Probability of sample $s$ ($p_s$)   HT estimate ($T_s$)
+-------------- ----------------------------------- ---------------------
+    1,1
+    2,2
+    3,3
+    1,2
+    2,1
+    1,3
+    3,1
+    2,3
+    3,2
+
+(2) Calculate the mean and variance of the HT estimates, and compare to the example above.
+
+(3) In which situation (this exercise or the worked example) are the unit level selection probabilities more related to the actual wheat production values? Thinking about this is key to understanding how selection probabilities should be picked in practical settings (to be discussed in class).
+
+# Sampling designs: probability samples
+
+A **sampling frame** is the object that we actually use to draw a sample, the metaphorical hat from which we can draw names. Typically, these are databases of some kind. Long ago phonebooks would be a likely source. Nowadays there are various government- or company-maintained databases. For example, the US Postal Service's Delivery Sequence File is a common modern basis for a sampling frame. The file itself only contains addresses, so companies make money by supplementing the frame with demographic information that can be useful in designing surveys with certain target population specifications.
+
+If the sampling frame is not representative of the population to which we want to generalize, then we have can have what is known as **representation or coverage error**. We will see later though that as long as the relative proportions of groups in both the sample and target population are known, this lack of representativeness can be corrected with **post-stratification weighting**.
+
+Sampling frames are the starting point for how units are selected in probability samples. We discuss next some common sampling designs.
+
+## Simple random sampling
+
+In simple random sampling (srs), each unit has an equal probability of being sampled. When we have a fixed sample size $n$, a total population size of $N$, and are sampling without replacement, this probability is $n/N$.
+
+## Probability proportional to size sampling
+
+In probability proportional to size (pps) sampling, the selection probabilities of each unit are proportional to some scale variable that is related to the survey quantity of interest. For example, in the farm example above, we might have information for all three farms on an **auxiliary variable** such as farm size in acres. We can construct the selection proabilities to be proportional to this size variable so that larger farms are more likely to be sampled. Looking back at the calculations you did for the farm example, what is the advantage of using pps sampling as opposed to an arbitrary set of selection probabilities? Hint: look at the variances of the estimates.
+
+## Stratified sampling
+
+In stratified sampling, we prespecify certain strata and use a sampling plan such as srs or pps within each stratum. This might be of use if:
+
+- We are interested in the stratum-specific estimates.
+- Strata define groups of units that are physically easy to sample. This can reduce overhead costs of actually conducting the survey.
+- Responses within strata are fairly uniform. The variance of our survey estimate in this case can be lower than using a simple random sample of the same size.
+
+## Multi-stage sampling
+
+Multi-stage sampling is often used in large national studies due to the nature of sampling frames available. For example, we might only have available a sampling frame of hospitals within states but not the patients within those hospitals. Here, **primary sampling units** would be hospitals and are sampled in the first stage. In subsequent stages, we would have access to more refined sampling frames such as doctors within those sampled hospitals and patients within those sampled doctors. These intermediate units are called **secondary, tertiary, etc sampling units**.
+
+## Recap
+
+There are certainly other types of sampling plans that we have not discussed here, but the key ideas you should remember are (1) why certain plans are amenable to certain scientific and budget situations and (2) that all of these plans are designed as probability samples, with known probabilities of sampling each unit. Reflect on the following before reading the next section on nonprobability sampling designs:
+
+- Why are probability samples nice as opposed to non-probability samples?
+- When might we want to conduct a nonprobability sample?
+
+# Nonprobability sampling designs
+
+Nonprobability samples are ones in which we do not know the probability of selection for each unit. Below are some general classes of nonprobability methods.
+
+## Convenience sampling
+
+In convenience sampling, the researcher simply surveys units that are convenient to reach.
+
+## Quota sampling
+
+In quota sampling, the researcher has certain quotas to fill in terms of the units surveyed. For example, a pollster may wish to poll 25 self-reported Democrats and 25 self-reported Republicans.
+
+## Purposive sampling
+
+This also called judgmental sampling. Here the researcher has certain inclusion/exclusion criteria in mind and will only survey units meeting those criteria.
+
+## Snowball sampling
+
+In snowball sampling, the researcher asks an initial **seed** unit the survey question(s) of interests and also asks that seed unit for a referral for someone else to survey. In this way, the researcher "snowballs" from unit to unit.
+
+A type of snowball sampling is **respondent-driven sampling** (RDS), which is used to study hidden or hard to reach populations, such as populations that perform illegal or taboo activities. In this design, seed units are given coupons containing researcher contact information. The seed units are incentivized (often monetarily) to give the coupons to other units that meet the study's criteria.
+
+## Recap
+
+Reflect on these nonprobability designs and think about how/to what extent they are not representative. In your other classes, have you come across certain application areas that might warrant these nonprobability designs?
+
+# Post-stratification weighting
+
+Sometimes despite our best efforts to plan a sample that is representative of the target population, our sample ends up not being representative (as defined by a mismatch of relative proportions of groups). If we have target population information on relative proportions of groups, we can use a technique called post-stratification weighting to reweight the sample to reflect the target population.
+
+For example, we may collect a sample in which 25% of the units are men and 75% are women, which is certainly not representative of the general US population. The data on our mean outcome in these groups is given in the table below. Assuming that the population proportions are each 50%, the post-stratification weight in the last column can be computed as the ratio of the population and sample proportions.
+
+ Group   Mean   Number sampled   Sample prop.   Population prop.   Weight
+------- ------ ---------------- -------------- ------------------ ----------------
+ Men      10          25            0.25              0.5          $0.5/0.25=2$
+ Women    20          75            0.75              0.5          $0.5/0.75=2/3$
+
+Using just the sample's data, the mean overall outcome is:
+
+$$ 0.25(10) + 0.75(20) = 17.5 $$
+
+Incorporating the post-stratification weights, the adjusted mean overall outcome is:
+
+$$ 0.25(10)(2) + 0.75(20)(2/3) = 15 $$
+
+This adjusted estimate is lower, which makes sense since we overcounted women who, on average, have higher outcome values.
+
+Reflect: Is this a panacea for generalizability? Can we "fix" an estimate from any non-representative sample to be representative with this approach?
