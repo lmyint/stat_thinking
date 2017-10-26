@@ -1,0 +1,67 @@
+---
+title: "Surveys: non-response, assessing sensitive issues, and questionnaire design"
+output: pdf_document
+---
+
+# Non-response
+
+Some people selected (sampled) to participate in the survey will decline to take it at all. This is called **unit non-response**. Often times, people who take a survey will not answer all of the questions, also called **items**. This lack of response to certain items is called **item non-response**. Because nonresponders can be systematically different from nonresponders in a way that is related to their potential survey responses, non-response is a form of selection bias. Statistical research aims to develop ways to adjust for non-response to reduce the bias that it induces in our estimates.
+
+## Weighting class methods
+
+There are a few traditional and emerging ways to deal with non-response. The first that we'll discuss has to do with adjusting survey **base weights**. Recall that the Horvitz-Thompson estimator for the population total has the form
+
+$$ \sum_{i \in S} \frac{y_i}{p_i} $$
+
+where $y_i$ is the survey response for unit $i$ and $p_i$ is the probability that unit $i$ is selected into the survey. If we write the HT estimator as below, it becomes more apparent that the inverse probabilities of selection into the survey are acting as weights. Specifically, these are called **base weights** in survey terminology.
+
+$$ \sum_{i \in S} y_i\frac{1}{p_i} $$
+
+**Weighting class methods** for dealing with non-response involve adjusting these base weights to "upweight" responders to make up for the lack of responses from non-responders. Classes need to be created in which, within a class, either (1) the probability of response is the same for all units or (2) the survey response value is the same for all units.
+
+We'll get into how we can try to achieve (1) and (2), but let's first assume that we had such classes. How do we adjust the base weights? Within a class, all units (both responders and non-responders) should have the same weight. Therefore, we take the sum of all base weights (responders and non-responders) and make this sum the total weight for responders.
+
+Example: The sum of base weights in all units in class 1 is 10. The sum of base weights in the responders in class 1 is 5. We want this sum to be 10. Therefore we upweight the responder weights by a factor of 2.
+
+Regarding (1): how do we create a class where responders and non-responders have the same probability of responding? If we have covariate information on both responders and non-responders, we can use propensity score modeling. Reflect: how would this work? What is "treatment" now?
+
+Regarding (2): how do we create a class where the survey response value is the same for all units? Often this needs to be guided by experts who know that the survey response is very strongly determined by certain covariates (which should be collected in the study). For example, an expert may know that the answer to an opinion question is strongly dictated by age and occupation. Then classes would be determined by all possible age-occupation categories.
+
+## Intstrumental variable methods
+
+A very new approach that is still being explored is the use of instruments as randomized vehicles of response. 
+
+Reflect: conceptually, how would these methods work? What is the big picture idea of these methods as applied in the survey analysis setting?
+
+## Imputation
+
+Imputation is a process that can be used to estimate what missing values are based on non-missing data. This can be useful for item non-response.
+
+
+
+# Sensitive questions
+
+Often times in surveys, we may wish to ask people about sensitive topics, regarding illegal or taboo activities. In such cases, people are likely to lie. Such information bias can drastically affect our estimates. Below we review some techniques for dealing with this.
+
+## Randomized response
+
+Example: Instead of the interviewer asking, "Are you a compulsive gambler?", the interviewer will turn away and ask the subject to spin a spinner. Slice 1 of the spinner is labeled "yes" and slice 2 is labeled "no". The subject is only asked to indicate if the spinner result agrees with their
+identity. It turns out that the data collected from such a process allows estimation of the true proportion of compulsive gamblers.
+
+## Item count methods
+
+Participants are randomly assigned to see one version of a list or a second version. In the first version, a number of innocuous behaviors are listed along with the sensitive behavior. In the second version, only the innocuous behaviors are listed. Subjects are asked to report how many behaviors on the list they have done. The prevalence of the sensitive behavior can be estimated by comparing the average counts between the two versions of the lists.
+
+
+
+# Questionnaire design
+
+Questionnaires that are administered in surveys are also called survey **instruments** (not to be confused with instrumental variables). Survey instruments include consent documentation, instructions, and the questionnaire itself. The individual components of questionnaire (not always questions) are called **items**.
+
+Substantial research efforts go into creating and validating the usefulness of survey instruments. Often in large surveys, a pilot study is conducted to test the instruments to ensure clarity and avoid educational or cultural biases. Substantial effort often has to go into wording, creation of answer choices and scales, and ordering of items.
+
+## Factor analysis
+
+Sometimes multiple items on a survey instrument get at the same idea. For example, the questions "Would you describe yourself as sociable?" and "Do you enjoy engaging in activities where there are many people?" could be considered to get at the same idea of extroversion. It may be of interest to study all such items systematically within a survey instrument in order to reduce the length of future instruments (to reduce survey fatigue) or just to create better items.
+
+**Factor analysis** is a technique that allows for the estimation of **factors** that underlie responses to items. This can provide a means for identifying related items, removing "duplicate" items, or creating composite items that combine information from a few related items. We will look at an R example in class.
