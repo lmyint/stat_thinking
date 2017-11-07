@@ -1,0 +1,79 @@
+---
+title: "Comparing survival, Cox models, biases"
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: ../styles/styles.css
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, fig.align="center")
+```
+
+## Comparing survival functions
+
+- Often we are interested in comparing survival trajectories in different subgroups. e.g. between treatment and placebo, genders, age groups
+- The **log-rank test** can be used to test for a difference between two or more survival curves
+    - $H_0$: no difference between the survival curves
+    - How does the test work?
+        - Recall chi-squared and Fisher's exact test for testing if two factors are independent.
+        - We want to see if group indicator is independent of survival status at each time point.
+        - Relation to Cochran-Mantel-Haenszel test from homework 1?
+
+## Cox models
+
+- Log-rank tests are useful if there is only one covariate that could explain surivival.
+- If there are more, then some sort of regression is desired.
+- Cox models come in two forms: 
+    - **Proportional hazards models**: when there are no time-dependent covariates
+    - **Extended Cox model**: when there are time-dependent covariates
+- With Cox models, we model the log hazard function as the outcome on the left. A baseline hazard ($\log h_0(t)$) and covariates ($x_1, \ldots, x_p$) appear on the right hand side of the regression equation.
+
+## Cox models
+
+**Proportional hazards models**: no time-dependent covariates
+
+$$ \log h(t \mid x_1, \ldots, x_p) = \log h_0(t) + \beta_1 x_1 + \cdots + \beta_p x_p $$
+
+**Proportional hazards models**: time-dependent covariates
+
+$$ \log h(t \mid x_1, \ldots, x_p, x_1(t), \ldots, x_p(t)) = \log h_0(t) + \beta_1 x_1 + \cdots + \beta_p x_p + \alpha_1 x_1(t) + \cdots + \alpha_p x_p(t) $$
+
+## Time (in)dependent covariates
+
+- Time independent
+    - Sex
+    - Race
+    - Age at study entry
+- Time dependent
+    - Age
+    - Weight
+    - Marital status
+
+## Lead time bias
+
+- Lead time bias occurs if a screening procedure tends to occur before the usual time of diagnosis.
+- e.g. Differential screening between treatment arms
+    - Failure event of interest: death
+    - Say that all individuals die 10 years after disease onset. There is no difference in survival between treatment arms.
+    - If time from disease detection until death is used and if the treatment group tends to be screened more aggressively, the treatment group will have longer perceived survival (longer time from detection to death).
+- Avoid this by selecting a suitable time metric and standardizing screening procedures
+
+## Length bias
+
+- Conditions that have slower progression or longer duration are more likely to be detected with the follow-up structure of long term studies.
+- Can be a concern if comparing survival among different conditions.
+- Hard to avoid but be aware when designing the study and reporting results
+
+## Immortal time bias
+
+- Immortal time bias occurs when there is a time span for which a set of individuals could not possibly have experienced the failure event and are thus not comparable with other individuals.
+
+- e.g. Comparing transplantation to no transplantation
+    - Failure event of interest: death
+    - 80 patients originally. 40 die before having access to organs. Of the 40 remaining, 20 gain access to organ donations and have the transplant.
+    - If we group the initial 40 who die before access with the "no transplant" group, we could overestimate the effect of transplantation.
+- Can avoid this bias by carefully considering/defining the time variable and only comparing individuals who remain at given time points of interest.
+- Can also avoid by treating exposures/treatments as time-dependent vs time-independent
+
+
