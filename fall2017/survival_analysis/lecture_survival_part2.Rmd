@@ -72,7 +72,8 @@ $$ \log h(t \mid x_1, \ldots, x_p, x_1(t), \ldots, x_p(t)) = \log h_0(t) + \beta
 - e.g. Comparing transplantation to no transplantation
     - Failure event of interest: death
     - 80 patients originally. 40 die before having access to organs. Of the 40 remaining, 20 gain access to organ donations and have the transplant.
-    - If we group the initial 40 who die before access with the "no transplant" group, we could overestimate the effect of transplantation.
+    - Say that transplantation actually has no effect on prolonging survival.
+    - If we group the initial 40 who die before access with the "no transplant" group, we estimate that the transplantation actually has a positive effect on survival when there really is none.
 - Can avoid this bias by carefully considering/defining the time variable and only comparing individuals who remain at given time points of interest.
 - Can also avoid by treating exposures/treatments as time-dependent vs time-independent
 
