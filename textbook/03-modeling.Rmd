@@ -45,11 +45,13 @@ tidy(lmfit)
 The regression coefficients in front of the covariates ($\beta_1,\beta_2,\beta_3$) have the nice interpretation of being the *expected change in outcome per 1 unit increase in the predictor, holding all other variables constant*. To see this, let's look at age ($x_1$). We will compare two people who are identical in terms of sex and ART dosage but who differ in age by 1.
 
 Person 1: Age = $a$, sex = $s$, ART dosage = $d$
+
 Person 2: Age = $a+1$, sex = $s$, ART dosage = $d$
 
 We can write the expected HIV particle concentration for each of them:
 
 Person 1: $E[Y_1] = \beta_0 + \beta_1a + \beta_2s + \beta_3d$
+
 Person 2: $E[Y_2] = \beta_0 + \beta_1(a+1) + \beta_2s + \beta_3d$
 
 The expected change in outcome comparing person 2 to person 1 is $E[Y_2] - E[Y_1]$:

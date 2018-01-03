@@ -147,9 +147,11 @@
 <div id="interpreting-coefficients" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Interpreting coefficients</h3>
 <p>The regression coefficients in front of the covariates (<span class="math inline">\(\beta_1,\beta_2,\beta_3\)</span>) have the nice interpretation of being the <em>expected change in outcome per 1 unit increase in the predictor, holding all other variables constant</em>. To see this, let’s look at age (<span class="math inline">\(x_1\)</span>). We will compare two people who are identical in terms of sex and ART dosage but who differ in age by 1.</p>
-<p>Person 1: Age = <span class="math inline">\(a\)</span>, sex = <span class="math inline">\(s\)</span>, ART dosage = <span class="math inline">\(d\)</span> Person 2: Age = <span class="math inline">\(a+1\)</span>, sex = <span class="math inline">\(s\)</span>, ART dosage = <span class="math inline">\(d\)</span></p>
+<p>Person 1: Age = <span class="math inline">\(a\)</span>, sex = <span class="math inline">\(s\)</span>, ART dosage = <span class="math inline">\(d\)</span></p>
+<p>Person 2: Age = <span class="math inline">\(a+1\)</span>, sex = <span class="math inline">\(s\)</span>, ART dosage = <span class="math inline">\(d\)</span></p>
 <p>We can write the expected HIV particle concentration for each of them:</p>
-<p>Person 1: <span class="math inline">\(E[Y_1] = \beta_0 + \beta_1a + \beta_2s + \beta_3d\)</span> Person 2: <span class="math inline">\(E[Y_2] = \beta_0 + \beta_1(a+1) + \beta_2s + \beta_3d\)</span></p>
+<p>Person 1: <span class="math inline">\(E[Y_1] = \beta_0 + \beta_1a + \beta_2s + \beta_3d\)</span></p>
+<p>Person 2: <span class="math inline">\(E[Y_2] = \beta_0 + \beta_1(a+1) + \beta_2s + \beta_3d\)</span></p>
 <p>The expected change in outcome comparing person 2 to person 1 is <span class="math inline">\(E[Y_2] - E[Y_1]\)</span>:</p>
 <p><span class="math display">\[ E[Y_2] - E[Y_1] = \beta_1 \]</span></p>
 <p>Thus, we see that <span class="math inline">\(\beta_1\)</span> is the expected change in HIV concentration per year increase in age, holding sex and ART dosage constant.</p>
